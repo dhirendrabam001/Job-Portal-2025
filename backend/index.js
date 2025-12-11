@@ -7,6 +7,7 @@ const connectDB = require("./config/connection");
 // all route require
 const useRoute = require("./routes/user.routes");
 const companyRoute = require("./routes/company.routes");
+const postJobsRoute = require("./routes/jobs.routes");
 const app = express();
 // middleware
 app.use(express.json());
@@ -21,7 +22,8 @@ app.use(cors(corsOption));
 
 // Apis
 app.use("/api/user", useRoute);
-app.use("/api/user", companyRoute);
+app.use("/api/company", companyRoute);
+app.use("/api/jobs", postJobsRoute);
 
 const PORT = process.env.PORT;
 
