@@ -3,10 +3,18 @@ const { Jobs } = require("../models/job.model");
 
 const applicationData = async (req, res) => {
   try {
-    const userId = req.body;
+    const userId = req.user._id;
+    console.log("UserId", userId);
+
     const jobId = req.params.id;
+    console.log("body", req.body);
 
     // Check jobs id find or not
+    if (!userId) {
+      return res
+        .status(400)
+        .json({ success: false, message: "User Id Does Not Found" });
+    }
     if (!jobId) {
       return res
         .status(400)
@@ -18,6 +26,8 @@ const applicationData = async (req, res) => {
       job: jobId,
       applicant: userId,
     });
+    console.log("Existing", existingApplication);
+
     if (existingApplication) {
       return res
         .status(400)
@@ -25,7 +35,8 @@ const applicationData = async (req, res) => {
     }
 
     // Check the jobs exits or not
-    const jobs = await Application.findById(jobId);
+    const jobs = await Jobs.findById(jobId);
+    console.log("Jobs Here", jobs);
     if (!jobs) {
       return res
         .status(400)
@@ -39,8 +50,8 @@ const applicationData = async (req, res) => {
     });
 
     // new jobs push
-    Jobs.application.push(newApplication);
-    await Jobs.save();
+    jobs.application.push(newApplication._id);
+    await jobs.save();
 
     return res.status(200).json({
       success: true,
@@ -49,14 +60,15 @@ const applicationData = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    re.status(500).json({ success: false, message: "Server Error" });
+    res.status(500).json({ success: false, message: "Server Error" });
   }
 };
 
 // GET ALL APPLIED JOBS HERE
 const getAppliedJobs = async (req, res) => {
   try {
-    const userId = req.body;
+    // const userId = req.body;
+    const userId = req.user._id;
     const application = await Application.find({ applicant: userId })
       .sort({ createdAt: -1 })
       .populate({
@@ -103,11 +115,51 @@ const getAdminApplicant = async (req, res) => {
 
     return res
       .status(200)
-      .josn({ success: true, jobs, message: "All Admin Jobs Fetched" });
+      .json({ success: true, jobs, message: "All Admin Jobs Fetched" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
+// STATUS CHECK
+const updateStatus = async (req, res) => {
+  try {
+    const { status } = req.body;
+    const applicationId = req.params.id;
+
+    // Check status find or not
+    if (!status) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Status Can Not Found" });
+    }
+
+    // find application id by application
+    const application = await Application.findOne({ _id: applicationId });
+    if (!application) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Application Id Can Not Found" });
+    }
+
+    // UPDATE STATUS
+    application.status = status.toLowerCase();
+    await application.save();
+
+    return res.status(200).json({
+      success: true,
+      application,
+      message: "Application Status Updated Successfully",
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
 
-module.exports = { applicationData, getAppliedJobs, getAdminApplicant };
+module.exports = {
+  applicationData,
+  getAppliedJobs,
+  getAdminApplicant,
+  updateStatus,
+};

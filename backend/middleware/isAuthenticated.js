@@ -15,7 +15,9 @@ const isAuthenticates = async (req, res, next) => {
     }
 
     // if all complete check id
-    req.id = decoded.userId;
+
+    req.id = decoded.userId; // Old methods
+    req.user = { _id: decoded.userId }; //New Methods
     next();
   } catch (error) {
     console.error(error);

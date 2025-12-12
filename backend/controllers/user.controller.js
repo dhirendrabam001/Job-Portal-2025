@@ -138,7 +138,7 @@ const updateProfile = async (req, res) => {
       arraySkills = skills.split(",");
     }
     const userId = req.id; // middleware authentication
-
+    // req.user._id;
     // check userid
     let user = await User.findById(userId);
 
