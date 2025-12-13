@@ -1,26 +1,26 @@
 import "./App.css";
 import "./styles/colors.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import HomePage from "./HomePages/HomePage";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import HomePages from "./Pages/HomePage";
 import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom";
-import Header from "./Components/Header";
+import Login from "./Components/Auth/Login";
+import SignUp from "./Components/Auth/SignUp";
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="homePage-main">
-        <Header />
-        {/* <HomePage /> */}
-        {/* <Routes>
-          <Route path="/" element={<HomePage />}></Route>
-          <Route path="/find-jobs" element={<FindJobs />}></Route>
-          <Route path="/find-talent" element={<FindTalent />}></Route>
-          <Route path="/upload-jobs" element={<UploadJobs />}></Route>
-          <Route path="/about-us" element={<AboutUs />}></Route>
-        </Routes>
-        <Footer />
-        <FooterLast /> */}
-      </div>
+      <Routes>
+        <Route path="/" element={<HomePages />}></Route>
+        {/* <Route path="Browser" element={<Browsers />}></Route>
+        <Route path="/find-talent" element={<FindTalent />}></Route>
+        <Route path="/upload-jobs" element={<UploadJobs />}></Route>
+        <Route path="/about-us" element={<AboutUs />}></Route> */}
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/signup" element={<SignUp />}></Route>
+      </Routes>
+      {/* <Footer />
+      <FooterLast /> */}
     </BrowserRouter>
   );
 }

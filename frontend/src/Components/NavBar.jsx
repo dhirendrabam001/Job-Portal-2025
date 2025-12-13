@@ -2,10 +2,12 @@ import { Link, useLocation } from "react-router-dom";
 const NavBar = () => {
   const linkRoutes = [
     { name: "Home", url: "/" },
-    { name: "Find Jobs", url: "/find-jobs" },
-    { name: "Find Talent", url: "/find-talent" },
+    { name: "Jobs", url: "/jobs" },
+    { name: "Browser", url: "/Browser" },
     { name: "Upload Jobs", url: "/upload-jobs" },
     { name: "About Us", url: "/about-us" },
+    { name: "Login", url: "/login" },
+    { name: "SignUp", url: "/signup" },
   ];
 
   const location = useLocation();

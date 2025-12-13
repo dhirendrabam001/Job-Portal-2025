@@ -1,6 +1,8 @@
-import Marquee from "react-fast-marquee";
+import MarqueeLib from "react-fast-marquee";
+const Marquee = MarqueeLib.default || MarqueeLib;
 import { companyInfo } from "../DataStore/Data";
-const Company = () => {
+
+const CompanyDetails = () => {
   return (
     <div className="company-info py-4 mt-4">
       <div className="container">
@@ -9,16 +11,14 @@ const Company = () => {
         </h2>
         <Marquee pauseOnHover={true}>
           <div className="marquee-info">
-            {companyInfo.map((items, key) => {
-              return (
-                <img
-                  key={key}
-                  src={`${items}.webp`}
-                  className="mx-5"
-                  alt={companyInfo}
-                />
-              );
-            })}
+            {companyInfo.map((company, index) => (
+              <img
+                key={index}
+                src={`/${company}.webp`}
+                className="mx-5"
+                alt={company}
+              />
+            ))}
           </div>
         </Marquee>
       </div>
@@ -26,4 +26,4 @@ const Company = () => {
   );
 };
 
-export default Company;
+export default CompanyDetails;

@@ -3,6 +3,13 @@ body {
   margin: 0;
   padding: 0;
 }
+
+/* modal */
+#profileModal {
+  margin-left: 30%;
+  margin-top: -12%;
+}
+
 .homePage-main {
   width: 100%;
   min-height: 100vh;
@@ -409,3 +416,28 @@ a.nav-link:hover {
   background: var(--mine-shaft-900);
   width: 100%;
 } */
+
+/* LOGIN FORM */
+.loginInfo {
+  height: 100vh;
+  background: #fffefe;
+}
+
+.containerInfo {
+  width: 40%;
+  margin: auto;
+}
+.login-btn .btn {
+  background: rgb(2, 2, 78);
+}
+.main-select {
+  width: 100%;
+}
+.radio-btn {
+  width: 50%;
+}
+.main-left {
+  width: 50%;
+}
+
+/* END */
