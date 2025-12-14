@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Header from "../Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { USER_API_END_POINT } from "../../utils/constantUrl";
@@ -15,6 +15,7 @@ const Login = () => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
+  const navigate = useNavigate();
   const submitEvent = async (e) => {
     e.preventDefault();
 
@@ -28,6 +29,7 @@ const Login = () => {
 
       console.log("Login response:", res.data);
       toast.success(res.data.message || "User Login Successfully");
+      navigate("/");
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
     }

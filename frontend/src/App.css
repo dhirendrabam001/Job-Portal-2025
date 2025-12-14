@@ -161,7 +161,19 @@ a.nav-link:hover {
   z-index: 0;
 }
 
+/* LatestJobs start */
+/* .latestJobs-main {
+  width: 100%;
+  height: 100vh;
+}
+.latestJobs-main span {
+  color: var(--bright-sun-400);
+} */
+
+/* Latest Jobs end */
+
 /* Company list */
+
 .company-info {
   width: 100%;
 }
@@ -183,6 +195,13 @@ a.nav-link:hover {
 }
 
 /* job-category */
+
+/* Swiper */
+.swiper-button-prev,
+.swiper-button-next {
+  display: none !important;
+}
+
 .job-category {
   width: 100%;
 }
