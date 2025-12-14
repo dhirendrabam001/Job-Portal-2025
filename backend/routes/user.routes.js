@@ -1,4 +1,5 @@
 const express = require("express");
+const upload = require("../middleware/multer");
 const router = express.Router();
 
 const {
@@ -9,7 +10,7 @@ const {
 } = require("../controllers/user.controller");
 const isAuthenticates = require("../middleware/isAuthenticated");
 
-router.post("/register", register);
+router.post("/register", upload.single("file"), register);
 router.post("/login", login);
 router.post("/updateProfile", isAuthenticates, updateProfile);
 router.get("/logout", logout);

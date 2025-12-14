@@ -1,6 +1,38 @@
+import { useState } from "react";
 import Header from "../Header";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { USER_API_END_POINT } from "../../utils/constantUrl";
 const Login = () => {
+  const [input, setInput] = useState({
+    email: "",
+    password: "",
+    role: "",
+  });
+
+  const changeEventHandler = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
+
+  const submitEvent = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
+
+      console.log("Login response:", res.data);
+      toast.success(res.data.message || "User Login Successfully");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Something went wrong");
+    }
+  };
+
   return (
     <>
       <Header />
@@ -10,13 +42,16 @@ const Login = () => {
           <h2 className="fs-bold fs-3 mb-3">
             Log<span className="text-danger">in</span>
           </h2>
-          <form action={"/login"} method="POST" className="">
+          <form onSubmit={submitEvent} className="">
             <div className="mb-3">
               <label htmlFor="exampleInputEmail1" className="form-label">
                 Email Address
               </label>
               <input
-                type="email"
+                type="text"
+                name="email"
+                value={input.email}
+                onChange={changeEventHandler}
                 className="form-control"
                 placeholder="Enter Your Email Address..."
               />
@@ -28,6 +63,9 @@ const Login = () => {
               </label>
               <input
                 type="password"
+                name="password"
+                value={input.password}
+                onChange={changeEventHandler}
                 placeholder="Enter Your Password..."
                 className="form-control"
               />
@@ -36,8 +74,11 @@ const Login = () => {
               <div className="form-check">
                 <input
                   className="form-check-input"
+                  value="student"
+                  checked={input.role === "student"}
+                  onChange={changeEventHandler}
                   type="radio"
-                  name="flexRadioDefault"
+                  name="role"
                 />
                 <label className="form-check-label" htmlFor="flexRadioDefault1">
                   Student
@@ -46,8 +87,11 @@ const Login = () => {
               <div className="form-check">
                 <input
                   className="form-check-input"
+                  value="recruiter"
+                  checked={input.role === "recruiter"}
+                  onChange={changeEventHandler}
                   type="radio"
-                  name="flexRadioDefault"
+                  name="role"
                 />
                 <label className="form-check-label" htmlFor="flexRadioDefault2">
                   Recruiter

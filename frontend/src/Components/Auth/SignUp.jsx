@@ -1,6 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios, { Axios } from "axios";
+import toast from "react-hot-toast";
 import Header from "../Header";
 import { useState } from "react";
+import { USER_API_END_POINT } from "../../utils/constantUrl";
 const SignUp = () => {
   const [input, setInput] = useState({
     fullName: "",
@@ -13,11 +16,39 @@ const SignUp = () => {
 
   //   GET TARGET VALUE
   const changeEventHandler = (e) => {
-    setInput({ ...input, [e.target.value]: e.target.value });
+    setInput({ ...input, [e.target.name]: e.target.value });
   };
 
   const changeFileHandler = (e) => {
     setInput({ ...input, file: e.target.files?.[0] });
+  };
+
+  const navigate = useNavigate();
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("fullName", input.fullName);
+    formData.append("email", input.email);
+    formData.append("phoneNumber", input.phoneNumber);
+    formData.append("password", input.password);
+    formData.append("role", input.role);
+    if (input.file) {
+      formData.append("file", input.file);
+    }
+    try {
+      const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true,
+      });
+
+      toast.success(res.data.message || "User Register Successfully");
+      navigate("/login");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Something went wrong");
+    }
   };
   return (
     <>
@@ -28,15 +59,15 @@ const SignUp = () => {
           <h2 className="fs-bold fs-3 mb-3">
             Sign<span className="text-danger">Up</span>
           </h2>
-          <form action={"/register"} method="POST" className="">
+          <form onSubmit={submitHandler} className="">
             <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label">
+              <label htmlFor="exampleInputFullName" className="form-label">
                 Full Name
               </label>
               <input
                 type="text"
                 value={input.fullName}
-                name="fullname"
+                name="fullName"
                 onChange={changeEventHandler}
                 className="form-control"
                 placeholder="Enter Your Full Name..."
@@ -62,7 +93,7 @@ const SignUp = () => {
               <input
                 type="text"
                 value={input.phoneNumber}
-                name="phonenumber"
+                name="phoneNumber"
                 onChange={changeEventHandler}
                 className="form-control"
                 placeholder="Enter Your Phone Number..."
@@ -86,11 +117,11 @@ const SignUp = () => {
                 <div className="form-check">
                   <input
                     className="form-check-input"
-                    value={input.role}
+                    value="student"
                     checked={input.role === "student"}
                     onChange={changeEventHandler}
                     type="radio"
-                    name="student"
+                    name="role"
                   />
                   <label
                     className="form-check-label"
@@ -102,11 +133,11 @@ const SignUp = () => {
                 <div className="form-check">
                   <input
                     className="form-check-input"
-                    value={input.role}
+                    value="recruiter"
                     checked={input.role === "recruiter"}
                     onChange={changeEventHandler}
                     type="radio"
-                    name="recruiter"
+                    name="role"
                   />
                   <label
                     className="form-check-label"

@@ -6,8 +6,6 @@ const NavBar = () => {
     { name: "Browser", url: "/Browser" },
     { name: "Upload Jobs", url: "/upload-jobs" },
     { name: "About Us", url: "/about-us" },
-    { name: "Login", url: "/login" },
-    { name: "SignUp", url: "/signup" },
   ];
 
   const location = useLocation();
