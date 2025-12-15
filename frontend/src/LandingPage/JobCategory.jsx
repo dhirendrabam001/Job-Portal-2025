@@ -14,7 +14,7 @@ import "swiper/css/navigation";
 
 const JobCategory = () => {
   return (
-    <div className="job-category py-4 mt-3">
+    <div className="job-category py-4 mt-3 mt-md-0">
       <div className="container">
         <div className="text-center mb-5">
           <h2 className="fw-bold fs-1 text-white">
@@ -23,7 +23,9 @@ const JobCategory = () => {
           <p>
             Explore a wide range of job categories from IT and engineering to
             marketing, finance, healthcare, and more.
-            <br />
+            <span className="break">
+              <br />
+            </span>
             Find the right role that matches your skills, interests, and goals,
             and take the next step toward building your future.
           </p>

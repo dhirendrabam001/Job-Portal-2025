@@ -4,7 +4,7 @@ import { companyInfo } from "../DataStore/Data";
 
 const CompanyDetails = () => {
   return (
-    <div className="company-info py-4 mt-4">
+    <div className="company-info py-4 mt-4 mt-md-0 py-md-2">
       <div className="container">
         <h2 className="fw-bold text-white fs-1 text-center">
           Trusted By <span>1500+</span> Companies

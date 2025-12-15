@@ -1,0 +1,102 @@
+@media (max-width: 768px) {
+  .navbar {
+    background: navy;
+  }
+  button.navbar-toggler {
+    background: white;
+    color: black;
+  }
+  .navbar-toggler:focus {
+    text-decoration: none;
+    outline: 0;
+    box-shadow: none !important;
+  }
+  .dreamjob-main {
+    width: 100%;
+    padding: 20px;
+  }
+  .dreamjob-main h1 {
+    font-size: 45px;
+  }
+  .search-box {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0px;
+  }
+  .search-box .forminfo {
+    padding: 10px;
+  }
+  .search-box .forminfo {
+    padding: 6px;
+    margin-left: -10px;
+  }
+  .search-box-one label {
+    margin-left: 2px;
+  }
+  .search-box-one label {
+    margin-left: -4px;
+  }
+  .img-section img {
+    width: 100%;
+  }
+  .content-card {
+    padding: 10px;
+    margin-left: -14px;
+    margin-top: 8px;
+  }
+  .content-card img {
+    width: 55px;
+    margin-top: -7px;
+  }
+  .avtar-content {
+    padding: 13px;
+    margin-left: -9%;
+  }
+  .avtar-group {
+    gap: 11px;
+  }
+  .job-category {
+    width: 100%;
+    padding: 10px;
+    margin-top: 0px;
+  }
+  .job-category h2 {
+    padding: 5px 0px;
+  }
+  .job-category p {
+    text-align: center;
+  }
+  .job-category .card {
+    padding: 20px;
+    height: 100vh;
+  }
+  .testimonials {
+    height: 100vh;
+    text-align: center;
+  }
+  .testmonial-content {
+    margin-left: 30%;
+    margin-top: 15%;
+  }
+  .testimonials p {
+    margin-top: 20px;
+  }
+  .subscriber-main {
+    padding: 10px;
+  }
+  .subscriber-info h2 {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .footer-content {
+    text-align: center;
+  }
+  .footer-content .footer-img {
+    margin-left: 27%;
+  }
+  .social-media {
+    margin-left: 32%;
+  }
+}

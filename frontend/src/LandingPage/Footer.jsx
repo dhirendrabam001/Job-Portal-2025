@@ -4,12 +4,12 @@ const Footer = () => {
     <footer className="footer-main py-5">
       <div className="container">
         <div className="row align-items-center justify-content-center g-4">
-          <div className="col-12 col-md-3 col-lg-3 text-white">
+          <div className="col-12 col-md-3 col-lg-3 text-white footer-content">
             <a
               href="/"
               className="d-flex align-items-center mb-3 link-dark text-decoration-none"
             >
-              <img src="/output.webp" alt="output" />
+              <img src="/output.webp" className="footer-img" alt="output" />
             </a>
             <p>
               Job portal with user profiles, skill updates, certifications, work
