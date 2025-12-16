@@ -18,7 +18,7 @@ const Testimonials = () => {
         <div className="row align-items-center justify-content-center">
           {TestimonialsList.map((items, index) => {
             return (
-              <div className="col-12 col-md-3 col-lg-3" key={index}>
+              <div className="col-12 col-md-6 col-lg-3" key={index}>
                 <div className="testimonials">
                   <div className="testmonial-content d-flex align-items-center gap-3">
                     <div className="testimonial-avtar">

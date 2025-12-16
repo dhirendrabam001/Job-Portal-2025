@@ -14,28 +14,25 @@ export const CategoryList = [
   {
     img: "iocns-1.webp",
     title: "Web Developer",
-    description:
-      "Build and maintain websites for clients with improvments business",
+    description: "Build and maintain websites for clients business",
     jobs: "2k+ new jobs posted",
   },
   {
     img: "iocns-2.webp",
     title: "Finance",
-    description: "Manage financial records and transactions for businessman",
+    description: "Manage financial records and transactions",
     jobs: "1k+ new jobs posted",
   },
   {
     img: "iocns-3.webp",
     title: "Arts & Design",
-    description:
-      "Create visual content for branding and media also social media platforms",
+    description: "Create visual content for branding and media",
     jobs: "800+ new jobs posted",
   },
   {
     img: "iocns-4.webp",
     title: "Content Writting",
-    description:
-      "Write and edit content for various platforms and content writing website",
+    description: "Write and edit content for various platforms",
     jobs: "700+ new jobs posted",
   },
   {

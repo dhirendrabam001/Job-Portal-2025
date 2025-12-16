@@ -1,4 +1,44 @@
-@media (max-width: 768px) {
+/* 992 */
+@media (min-width: 992px) {
+  .dreamjob-main {
+    margin-left: 50px;
+    margin-top: 50px;
+  }
+
+  .navbar img {
+    width: 100px;
+    margin-left: 32px;
+  }
+  .search-box {
+    width: 100%;
+    gap: 20px;
+  }
+  .search-box-one {
+    width: 40%;
+  }
+  .avtar-content {
+    margin-left: -15%;
+    padding: 20px;
+  }
+  .search-btn {
+    border-radius: 10px;
+    width: 60px;
+    height: 60px;
+  }
+  .company-info h2 {
+    margin-top: 40px;
+  }
+  .swiper-pagination {
+    margin-top: 20px;
+    position: relative !important;
+  }
+  .containerInfo {
+    width: 50%;
+  }
+}
+
+/* 768px */
+@media (min-width: 768px) {
   .navbar {
     background: navy;
   }
@@ -13,90 +53,99 @@
   }
   .dreamjob-main {
     width: 100%;
-    padding: 20px;
+    padding: 10px 0px;
+    margin-top: 20px;
   }
-  .dreamjob-main h1 {
-    font-size: 45px;
+  .content-left h1 {
+    font-size: 40px;
+  }
+  .content-right img {
+    width: 100%;
   }
   .search-box {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 0px;
+    gap: 10px;
+  }
+  .search-box-one {
+    width: 45%;
   }
   .search-box .forminfo {
-    padding: 10px;
+    width: 125px;
+    margin-left: -3px;
   }
-  .search-box .forminfo {
-    padding: 6px;
-    margin-left: -10px;
-  }
-  .search-box-one label {
-    margin-left: 2px;
-  }
-  .search-box-one label {
-    margin-left: -4px;
-  }
-  .img-section img {
-    width: 100%;
+  .search-btn {
+    width: 50px;
+    height: 50px;
   }
   .content-card {
-    padding: 10px;
-    margin-left: -14px;
-    margin-top: 8px;
+    margin-top: -50px;
   }
   .content-card img {
-    width: 55px;
-    margin-top: -7px;
+    width: 40px;
   }
   .avtar-content {
-    padding: 13px;
-    margin-left: -9%;
+    margin-left: -22%;
   }
-  .avtar-group {
-    gap: 11px;
+  .swiper-pagination {
+    margin-top: 30px;
+    position: relative !important;
   }
-  .job-category {
-    width: 100%;
-    padding: 10px;
-    margin-top: 0px;
+  .work-content-info {
+    width: 170px;
+    margin-top: 45px;
   }
-  .job-category h2 {
-    padding: 5px 0px;
+  .footer-content img {
+    width: 100px;
   }
-  .job-category p {
-    text-align: center;
+  .social-media a {
+    padding: 4px 7px;
+    font-size: 15px;
   }
-  .job-category .card {
-    padding: 20px;
-    height: 100vh;
+}
+
+/* for mobile device maxx-width:767px */
+@media (max-width: 767px) {
+  .navbar {
+    background: navy;
   }
-  .testimonials {
-    height: 100vh;
-    text-align: center;
+  button.navbar-toggler {
+    background: white;
+    color: black;
   }
-  .testmonial-content {
-    margin-left: 30%;
-    margin-top: 15%;
+  .navbar-toggler:focus {
+    text-decoration: none;
+    outline: 0;
+    box-shadow: none !important;
   }
-  .testimonials p {
-    margin-top: 20px;
+  .dreamjob-main {
+    margin-top: 15px;
   }
-  .subscriber-main {
-    padding: 10px;
+  .dreamjob-main h1 {
+    font-size: 38px;
+  }
+  .search-box-one .forminfo {
+    margin-left: -8px;
+  }
+  .search-box-one label {
+    margin-left: -5px;
+  }
+  .swiper-pagination {
+    margin-top: 30px;
+    position: relative !important;
   }
   .subscriber-info h2 {
-    text-align: center;
-    margin-top: 20px;
+    font-size: 28px !important;
   }
   .footer-content {
+    margin-left: 5%;
+  }
+  .footer-content p {
     text-align: center;
   }
-  .footer-content .footer-img {
-    margin-left: 27%;
+  .footer-content img {
+    margin-left: 26%;
   }
   .social-media {
-    margin-left: 32%;
+    margin-left: 28%;
   }
 }

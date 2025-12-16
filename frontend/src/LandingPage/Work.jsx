@@ -3,7 +3,7 @@ import { MdOutlineAssignmentInd } from "react-icons/md";
 import { MdVerified } from "react-icons/md";
 const Work = () => {
   return (
-    <div className="work-info py-4 mt-5">
+    <div className="work-info py-4 mt-5 mt-md-2 mt-sm-2">
       <div className="container">
         <div className="text-center mb-2">
           <h2 className="text-white fs-1 fw-bold">How It Works</h2>

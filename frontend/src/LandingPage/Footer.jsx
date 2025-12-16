@@ -51,7 +51,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="col-12 col-md-3 col-lg-3 footer-info">
-            <h5>Company</h5>
+            <h5 className="mt-md-4">Company</h5>
             <ul className="nav flex-column text-center">
               <li className="nav-item mb-2">
                 <a href="#" className="nav-link p-0 text-muted">
