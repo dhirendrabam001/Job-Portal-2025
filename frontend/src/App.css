@@ -58,12 +58,11 @@ a.nav-link:hover {
   display: flex;
   align-items: center;
   gap: 15px;
-  flex-wrap: wrap;
 }
 .search-box-one {
   border-radius: 10px;
   background: #333;
-  padding: 10px;
+  padding: 8px 20px;
   width: 33%;
 }
 
@@ -74,6 +73,7 @@ a.nav-link:hover {
   padding: 2px;
   outline: none;
   width: 168px;
+  margin-left: -4px;
 }
 
 .search-btn {
@@ -213,7 +213,7 @@ a.nav-link:hover {
   line-height: 30px;
   margin-top: 10px;
 }
-.card {
+.job-category .card {
   border: 1px solid var(--bright-sun-300) !important;
   padding: 10px;
   background: var(--mine-shaft-900) !important;
@@ -221,12 +221,12 @@ a.nav-link:hover {
   transition: 0.5s ease;
   border-radius: 12px;
 }
-.card:hover {
+.job-category .card:hover {
   border: 2px solid var(--bright-sun-300) !important;
   box-shadow: 0px 0px 10px var(--bright-sun-300) !important;
   border-radius: 12px;
 }
-.card-body h5 {
+.job-category .card-body h5 {
   color: white;
   font-weight: bold;
   font-size: 22px;
@@ -460,3 +460,35 @@ a.nav-link:hover {
 }
 
 /* END */
+
+/* JobsInfo */
+.jobs-container {
+  width: 100%;
+  background: var(--mine-shaft-950);
+  min-height: 100vh;
+}
+.job-card .card {
+  background: #525050 !important;
+  border-radius: 12px;
+  padding: 10px;
+}
+.job-card .card-body {
+  padding: 2px !important;
+}
+
+.card-img {
+  width: 100%;
+}
+.card-imges img {
+  padding: 0 !important;
+  margin-left: -5px;
+}
+
+.card-img-content h5 {
+  font-size: 18px;
+  font-weight: bold;
+}
+.card-img img {
+  width: 40px;
+  height: 40px;
+}

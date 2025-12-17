@@ -2,19 +2,19 @@
 @media (min-width: 992px) {
   .dreamjob-main {
     margin-left: 50px;
-    margin-top: 50px;
+    margin-top: 40px;
   }
 
   .navbar img {
     width: 100px;
     margin-left: 32px;
   }
-  .search-box {
-    width: 100%;
-    gap: 20px;
-  }
   .search-box-one {
-    width: 40%;
+    width: 45%;
+  }
+
+  .search-box .forminfo {
+    width: 140px;
   }
   .avtar-content {
     margin-left: -15%;
@@ -33,12 +33,13 @@
     position: relative !important;
   }
   .containerInfo {
-    width: 50%;
+    width: 60%;
   }
 }
 
-/* 768px */
-@media (min-width: 768px) {
+/* 768 -991 */
+
+@media (min-width: 768px) and (max-width: 991px) {
   .navbar {
     background: navy;
   }
@@ -52,7 +53,6 @@
     box-shadow: none !important;
   }
   .dreamjob-main {
-    width: 100%;
     padding: 10px 0px;
     margin-top: 20px;
   }
@@ -62,20 +62,27 @@
   .content-right img {
     width: 100%;
   }
+
   .search-box {
-    width: 100%;
-    gap: 10px;
+    gap: 12px;
   }
+
   .search-box-one {
     width: 45%;
   }
+
   .search-box .forminfo {
-    width: 125px;
-    margin-left: -3px;
+    width: 140px;
   }
+
   .search-btn {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .swiper-pagination {
+    margin-top: 30px;
+    position: relative !important;
   }
   .content-card {
     margin-top: -50px;
@@ -86,20 +93,8 @@
   .avtar-content {
     margin-left: -22%;
   }
-  .swiper-pagination {
-    margin-top: 30px;
-    position: relative !important;
-  }
-  .work-content-info {
-    width: 170px;
-    margin-top: 45px;
-  }
-  .footer-content img {
-    width: 100px;
-  }
-  .social-media a {
-    padding: 4px 7px;
-    font-size: 15px;
+  .containerInfo {
+    width: 70%;
   }
 }
 
@@ -147,5 +142,8 @@
   }
   .social-media {
     margin-left: 28%;
+  }
+  .containerInfo {
+    width: 70%;
   }
 }
