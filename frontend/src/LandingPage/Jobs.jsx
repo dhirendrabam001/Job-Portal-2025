@@ -1,4 +1,4 @@
-import Header from "../Components/Header";
+import Header from "../Components/Auth/Header";
 import FilterJobs from "../Pages/FilterJobs";
 import OneJob from "../Pages/OneJob";
 const jobsArray = [1, 2, 3, 4, 5, 6, 7, 8];

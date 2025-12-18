@@ -1,4 +1,4 @@
-import Header from "../Components/Header";
+import Header from "../Components/Auth/Header";
 import DreamJobs from "../LandingPage/DreamJobs";
 import CompanyDetails from "../LandingPage/Company";
 import JobCategory from "../LandingPage/JobCategory";

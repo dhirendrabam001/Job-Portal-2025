@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Header from "../Header";
+import Header from "./Header";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";

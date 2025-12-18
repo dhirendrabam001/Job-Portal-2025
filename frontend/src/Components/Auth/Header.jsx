@@ -1,6 +1,6 @@
 import { MdOutlineNotificationsOff } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
-import Navbar from "./Navbar";
+import Navbar from "../NavBar";
 import { Link } from "react-router-dom";
 
 const users = false;

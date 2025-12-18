@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import axios, { Axios } from "axios";
 import toast from "react-hot-toast";
-import Header from "../Header";
+import Header from "./Header";
 import { useState } from "react";
 import { USER_API_END_POINT } from "../../utils/constantUrl";
 const SignUp = () => {
