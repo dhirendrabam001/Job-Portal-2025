@@ -1,9 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
-const NavBar = () => {
+const Navbar = () => {
   const linkRoutes = [
     { name: "Home", url: "/" },
     { name: "Jobs", url: "/jobs" },
-    { name: "Browser", url: "/Browser" },
+    { name: "Browsers", url: "/browsers" },
     { name: "Upload Jobs", url: "/upload-jobs" },
     { name: "About Us", url: "/about-us" },
   ];
@@ -32,4 +32,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default Navbar;

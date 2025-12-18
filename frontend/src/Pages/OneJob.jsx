@@ -37,7 +37,7 @@ const OneJob = () => {
                     type="button"
                     className="btn btn-outline-success text-white fw-bold"
                   >
-                    Success
+                    Details
                   </button>
                 </div>
                 <div className="later-btn">
@@ -45,7 +45,7 @@ const OneJob = () => {
                     type="button"
                     className="btn btn-outline-primary text-white fw-bold"
                   >
-                    Success
+                    Save Later
                   </button>
                 </div>
               </div>

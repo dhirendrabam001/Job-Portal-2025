@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom";
 import Login from "./Components/Auth/Login";
 import SignUp from "./Components/Auth/SignUp";
 import Jobs from "./LandingPage/Jobs";
+import Browsers from "./LandingPage/Browsers";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePages />}></Route>
         <Route path="/jobs" element={<Jobs />}></Route>
+        <Route path="/browsers" element={<Browsers />}></Route>
         {/* <Route path="Browser" element={<Browsers />}></Route>
         <Route path="/find-talent" element={<FindTalent />}></Route>
         <Route path="/upload-jobs" element={<UploadJobs />}></Route>

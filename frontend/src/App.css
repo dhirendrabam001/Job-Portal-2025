@@ -468,9 +468,16 @@ a.nav-link:hover {
   min-height: 100vh;
 }
 .job-card .card {
-  background: #525050 !important;
+  background: #181818;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid #2a2a2a !important;
   border-radius: 12px;
   padding: 10px;
+  transition: 0.5s ease-in-out;
+}
+.job-card .card:hover {
+  transform: scale(0.9);
+  opacity: 0.8;
 }
 .job-card .card-body {
   padding: 2px !important;

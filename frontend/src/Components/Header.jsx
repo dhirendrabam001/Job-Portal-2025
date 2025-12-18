@@ -1,6 +1,6 @@
 import { MdOutlineNotificationsOff } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
-import NavBar from "./Navbar";
+import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
 
 const users = false;
@@ -24,7 +24,7 @@ const Header = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <NavBar />
+          <Navbar />
 
           {!users && (
             <div className="d-flex gap-3 btn-info mt-2 fw-bold">
