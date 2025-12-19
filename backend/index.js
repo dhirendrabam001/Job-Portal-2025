@@ -15,14 +15,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use(cors({
-  origin: [
-    "https://job-portal-bi00.onrender.com"
-  ],
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
+const cors = require("cors");
+
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://job-portal-bi00.onrender.com"
+    ],
+    credentials: true,
+  })
+);
+
 
 app.options("*", cors());
 
