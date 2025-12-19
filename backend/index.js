@@ -15,11 +15,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-const corsOption = {
-  origin: true,
+app.use(cors({
+  origin: [
+    "https://job-portal-bi00.onrender.com"
+  ],
   credentials: true,
-};
-app.use(cors(corsOption));
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
+app.options("*", cors());
+
 
 // Apis
 app.use("/api/user", useRoute);
