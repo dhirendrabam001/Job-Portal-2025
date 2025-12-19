@@ -147,3 +147,49 @@
     width: 70%;
   }
 }
+
+/* 420 */
+@media (max-width: 420px) {
+  .search-box {
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .search-box-one {
+    width: 50%;
+    padding: 10px 14px;
+  }
+
+  .search-box-one label {
+    font-size: 16px;
+  }
+
+  .search-box .forminfo {
+    width: 100%;
+    margin-left: -8px;
+    font-size: 16px;
+  }
+
+  .search-btn {
+    width: 184px;
+    border-radius: 12px;
+  }
+
+  .search-icons {
+    font-size: 22px;
+  }
+  .content-card {
+    margin-left: 20%;
+    margin-top: 2%;
+  }
+  .avtar-content {
+    margin-left: -59%;
+    width: 220px;
+    margin-top: 30px;
+    text-align: center;
+  }
+  .avtar-content img {
+    margin-left: 10px;
+  }
+}
