@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 const corsOption = {
-  origin: "https://job-portal-bi00.onrender.com",
+  origin: true,
   credentials: true,
 };
 app.use(cors(corsOption));
@@ -27,7 +27,7 @@ app.use("/api/company", companyRoute);
 app.use("/api/jobs", postJobsRoute);
 app.use("/api/application", applicationRoute);
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   connectDB();
