@@ -28,8 +28,6 @@ app.use(
 );
 
 
-app.options("*", cors());
-
 
 // Apis
 app.use("/api/user", useRoute);
