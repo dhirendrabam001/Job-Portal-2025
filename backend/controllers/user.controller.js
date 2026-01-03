@@ -92,12 +92,12 @@ const login = async (req, res) => {
       role: user.role,
       profile: user.profile,
     };
-    const isProduction = process.env.SECRET_KEY === "production";
+    const isProduction = process.env.NODE_ENV === "production";
 
     res
       .cookie("token", token, {
         httpOnly: true,
-        sameSite: isProduction ? "None" : "Lax",
+        sameSite: isProduction ? "none" : "lax",
         secure: isProduction,
         maxAge: 24 * 60 * 60 * 1000,
       })
