@@ -160,9 +160,17 @@ const updateProfile = async (req, res) => {
     }
 
     // Convert string to array
-    let arraySkills = [];
+    const arraySkills = [];
     if (skills) {
-      arraySkills = JSON.parse(skills);
+      if (typeof skills === "string") {
+        try {
+          arraySkills = JSON.parse(skills);
+        } catch (error) {
+          arraySkills = skills.split(",").map((s) => s.trim());
+        }
+      } else if (Array.isArray(skills)) {
+        arraySkills = skills;
+      }
     }
 
     // req.user._id;
