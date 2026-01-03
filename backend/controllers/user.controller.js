@@ -97,7 +97,7 @@ const login = async (req, res) => {
     res
       .cookie("token", token, {
         httpOnly: true,
-        sameSite: isProduction ? "None" : "Lax",
+        sameSite: isProduction ? "none" : "lax",
         secure: isProduction,
         maxAge: 24 * 60 * 60 * 1000,
       })
@@ -181,7 +181,9 @@ const updateProfile = async (req, res) => {
     if (email) user.email = email;
     if (phoneNumber) user.phoneNumber = phoneNumber;
     if (bio) user.profile.bio = bio;
-    if (arraySkills) user.profile.skills = arraySkills;
+    if (arraySkills.length > 0) {
+      user.profile.skills = arraySkills;
+    }
     if (file) user.profile.file = file.path;
 
     //   Resume Comes Here Later
