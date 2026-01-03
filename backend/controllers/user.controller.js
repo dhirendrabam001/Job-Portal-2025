@@ -160,7 +160,7 @@ const updateProfile = async (req, res) => {
     }
 
     // Convert string to array
-    const arraySkills = [];
+    let arraySkills = [];
     if (skills) {
       if (typeof skills === "string") {
         try {
