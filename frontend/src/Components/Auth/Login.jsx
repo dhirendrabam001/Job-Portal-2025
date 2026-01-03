@@ -16,6 +16,7 @@ const Login = () => {
   };
 
   const navigate = useNavigate();
+
   const submitEvent = async (e) => {
     e.preventDefault();
 
@@ -26,9 +27,8 @@ const Login = () => {
         },
         withCredentials: true,
       });
-
-      console.log("Login response:", res.data);
-      toast.success(res.data.message || "User Login Successfully");
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      toast.success(res.data.message || "Login Successful");
       navigate("/");
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
@@ -100,6 +100,7 @@ const Login = () => {
                 </label>
               </div>
             </div>
+
             <div className="login-btn text-center py-3 mt-2">
               <button type="submit" className="btn btn-danger fw-bold w-100">
                 Login

@@ -12,7 +12,12 @@ const isAuthenticates = require("../middleware/isAuthenticated");
 
 router.post("/register", upload.single("file"), register);
 router.post("/login", login);
-router.post("/updateProfile", isAuthenticates, updateProfile);
+router.put(
+  "/updateProfile",
+  isAuthenticates,
+  upload.single("file"),
+  updateProfile
+);
 router.get("/logout", logout);
 
 module.exports = router;

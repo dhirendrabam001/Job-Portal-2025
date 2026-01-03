@@ -92,15 +92,26 @@ const login = async (req, res) => {
       role: user.role,
       profile: user.profile,
     };
-    return res
-      .status(200)
+    const isProduction = process.env.SECRET_KEY === "production";
+
+    res
       .cookie("token", token, {
-        maxAge: 1 * 24 * 60 * 60 * 1000,
         httpOnly: true,
-        sameSite: "none",
-        secure: true,
+        sameSite: isProduction ? "None" : "Lax",
+        secure: isProduction,
+        maxAge: 24 * 60 * 60 * 1000,
       })
       .json({ success: true, user, message: `Welcome Back ${user.fullName}` });
+
+    // return res
+    //   .status(200)
+    //   .cookie("token", token, {
+    //     maxAge: 1 * 24 * 60 * 60 * 1000,
+    //     httpOnly: true,
+    //     sameSite: "None",
+    //     secure: true,
+    //   })
+    //   .json({ success: true, user, message: `Welcome Back ${user.fullName}` });
   } catch (error) {
     console.error(error);
   }
@@ -122,7 +133,17 @@ const logout = async (req, res) => {
 const updateProfile = async (req, res) => {
   try {
     const file = req.file;
+    const userId = req.id; // middleware authentication
     const { fullName, email, phoneNumber, bio, skills } = req.body;
+
+    // check userid
+    let user = await User.findById(userId);
+
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: "User Not Found" });
+    }
 
     // check all field are required or not
     // if (!fullName || !email || !phoneNumber || !bio || !skills) {
@@ -133,21 +154,19 @@ const updateProfile = async (req, res) => {
 
     // Cloudnoury file comes here lates
 
+    // 🔥 Ensure profile exists
+    if (!user.profile) {
+      user.profile = {};
+    }
+
     // Convert string to array
     let arraySkills;
     if (skills) {
-      arraySkills = skills.split(",");
+      arraySkills = skills.split(",").map((skills) => skills.trim());
     }
-    const userId = req.id; // middleware authentication
-    // req.user._id;
-    // check userid
-    let user = await User.findById(userId);
 
-    if (!user) {
-      return res
-        .status(400)
-        .json({ success: false, message: "User Not Found" });
-    }
+    // req.user._id;
+
     //  Updated Data Information user if only one field can updated
 
     if (fullName) user.fullName = fullName;
@@ -155,6 +174,7 @@ const updateProfile = async (req, res) => {
     if (phoneNumber) user.phoneNumber = phoneNumber;
     if (bio) user.profile.bio = bio;
     if (arraySkills) user.profile.skills = arraySkills;
+    if (file) user.profile.file = file.path;
 
     //   Resume Comes Here Later
 
@@ -173,7 +193,11 @@ const updateProfile = async (req, res) => {
       .status(200)
       .json({ success: true, user, message: "Profile Updated Successfully" });
   } catch (error) {
-    console.error(error);
+    console.error("Update Profile Error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
   }
 };
 

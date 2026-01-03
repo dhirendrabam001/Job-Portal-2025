@@ -9,6 +9,8 @@ import Login from "./Components/Auth/Login";
 import SignUp from "./Components/Auth/SignUp";
 import Jobs from "./LandingPage/Jobs";
 import Browsers from "./LandingPage/Browsers";
+import Profile from "./LandingPage/Profile";
+import DetailsJob from "./LandingPage/DetailsJob";
 
 function App() {
   return (
@@ -17,12 +19,14 @@ function App() {
         <Route path="/" element={<HomePages />}></Route>
         <Route path="/jobs" element={<Jobs />}></Route>
         <Route path="/browsers" element={<Browsers />}></Route>
+        <Route path="/details/:id" element={<DetailsJob />}></Route>
         {/* <Route path="Browser" element={<Browsers />}></Route>
         <Route path="/find-talent" element={<FindTalent />}></Route>
         <Route path="/upload-jobs" element={<UploadJobs />}></Route>
         <Route path="/about-us" element={<AboutUs />}></Route> */}
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
+        <Route path="/profile" element={<Profile />}></Route>
       </Routes>
       {/* <Footer />
       <FooterLast /> */}

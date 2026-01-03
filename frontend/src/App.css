@@ -2,7 +2,7 @@ body {
   width: 100%;
   height: auto;
   min-height: 100%;
-  overflow-x:hidden;
+  overflow-x: hidden;
   overflow-y: auto;
   font-family: "Poppins", sans-serif;
   margin: 0;
@@ -13,6 +13,52 @@ body {
 #profileModal {
   margin-left: 30%;
   margin-top: -12%;
+}
+.profile-avtag img {
+  border-radius: 50%;
+  padding: 4px 25px;
+  height: 50px;
+  margin-left: -14px !important;
+}
+.modal-body button {
+  border: none !important;
+}
+
+/* View profile section */
+.profile-main {
+  background: var(--mine-shaft-950);
+  width: 100%;
+  height: 100vh;
+}
+.profile-info {
+  border: 1px double #999595;
+  padding: 10px;
+  width: 80%;
+  margin: auto;
+}
+.profile-section {
+  display: flex;
+  gap: 20px;
+}
+.profile-info img {
+  width: 50px;
+  height: 50px;
+}
+.profile-content p {
+  margin-bottom: 2px !important;
+}
+.application-table {
+  width: 80%;
+  margin: auto;
+}
+.applied-jobs .table-select {
+  background: #181818;
+  padding: 9px 10px;
+  border-radius: 13px;
+  width: 20px;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
 }
 
 .homePage-main {
@@ -470,7 +516,7 @@ a.nav-link:hover {
 .jobs-container {
   width: 100%;
   background: var(--mine-shaft-950);
-  min-height: 100vh;
+  min-height: auto;
 }
 .job-card .card {
   background: #181818;
@@ -503,4 +549,11 @@ a.nav-link:hover {
 .card-img img {
   width: 40px;
   height: 40px;
+}
+
+/* Browser Routes */
+.browser-jobs {
+  width: 100%;
+  min-height: auto;
+  background: var(--mine-shaft-950);
 }

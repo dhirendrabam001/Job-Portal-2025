@@ -1,6 +1,9 @@
 import { BsBookmark } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const OneJob = () => {
+  const navigate = useNavigate();
+  const jobId = "dhirendra";
   return (
     <>
       <div className="container">
@@ -34,6 +37,7 @@ const OneJob = () => {
               <div className="jobs-btn d-flex justify-content-between mt-3">
                 <div className="details-btn">
                   <button
+                    onClick={() => navigate(`/details/${jobId}`)}
                     type="button"
                     className="btn btn-outline-success text-white fw-bold"
                   >

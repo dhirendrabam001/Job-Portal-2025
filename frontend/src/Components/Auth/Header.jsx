@@ -2,10 +2,17 @@ import { MdOutlineNotificationsOff } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import Navbar from "../NavBar";
 import { Link } from "react-router-dom";
-
-const users = false;
+import { useEffect, useState } from "react";
 
 const Header = () => {
+  const [users, setUsers] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUsers(JSON.parse(storedUser));
+    }
+  }, []);
   return (
     <nav className="navbar navbar-expand-lg navbar-info">
       <div className="container-fluid mx-3">
@@ -40,20 +47,22 @@ const Header = () => {
           )}
           {users && (
             <div className="d-flex text-white align-items-center gap-md-2 gap-0">
-              <div className="d-flex align-items-center gap-md-2">
-                <div>Dhirendra</div>
-                <img
-                  src="/avtar.webp"
-                  alt="avtar"
-                  width="30"
-                  height="30"
-                  className="rounded-circle cursor-pointer"
+              <div className="d-flex align-items-center profile-avtag">
+                <span className="">{users.fullName}</span>
+
+                <img src="/avtar.webp" alt="avtar" width="40" />
+
+                <div
+                  className="setting-btn rounded-circle"
                   data-bs-toggle="modal"
                   data-bs-target="#profileModal"
                   style={{ cursor: "pointer" }}
-                />
+                >
+                  <IoSettingsOutline />
+                </div>
               </div>
-              {/* modal */}
+
+              {/* {* modal */}
 
               <div
                 className="modal fade"
@@ -82,8 +91,18 @@ const Header = () => {
 
                       <hr />
 
-                      <p className="mb-2 cursor-pointer">👤 View Profile</p>
-                      <p className="mb-0 text-danger cursor-pointer">
+                      <Link to={"/profile"}>
+                        <button className="mb-2">👤 View Profile</button>
+                      </Link>
+
+                      <p
+                        className="mb-0 text-danger cursor-pointer"
+                        onClick={() => {
+                          localStorage.removeItem("user");
+                          setUsers(null);
+                          window.location.href = "/login";
+                        }}
+                      >
                         🚪 Logout
                       </p>
                     </div>
@@ -92,15 +111,13 @@ const Header = () => {
               </div>
 
               {/* End */}
-              <div className="setting-btn rounded-circle">
-                <IoSettingsOutline />
-              </div>
-              <div className="setting-btn rounded-circle position-relative align-items-center justify-content-center">
+
+              {/* <div className="setting-btn rounded-circle position-relative align-items-center justify-content-center">
                 <MdOutlineNotificationsOff />
                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                   1+
                 </span>
-              </div>
+              </div> */}
             </div>
           )}
         </div>
