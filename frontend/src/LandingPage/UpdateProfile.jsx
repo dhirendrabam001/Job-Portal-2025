@@ -35,10 +35,7 @@ const UpdateProfile = ({ open, setOpen }) => {
     formData.append("email", input.email);
     formData.append("phoneNumber", input.phoneNumber);
     formData.append("bio", input.bio);
-    formData.append(
-      "skills",
-      JSON.stringify(input.skills.split(",").map((s) => s.trim()))
-    );
+    formData.append("skills", input.skills);
 
     if (input.file) {
       formData.append("file", input.file);
