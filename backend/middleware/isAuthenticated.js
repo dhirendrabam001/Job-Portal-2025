@@ -13,7 +13,7 @@ const isAuthenticates = async (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
     // ✅ SUPPORT ALL POSSIBLE TOKEN SHAPES
-    const userId = decoded.userId || decoded.id || decoded._id;
+    // const userId = decoded.userId || decoded.id || decoded._id;
     if (!decoded) {
       return res.status(400).json({ success: false, message: "Invalid Token" });
     }

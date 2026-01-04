@@ -92,26 +92,27 @@ const login = async (req, res) => {
       role: user.role,
       profile: user.profile,
     };
-    const isProduction = process.env.NODE_ENV === "production";
+    // const isProduction = process.env.NODE_ENV === "production";
 
-    res
-      .cookie("token", token, {
-        httpOnly: true,
-        sameSite: isProduction ? "none" : "lax",
-        secure: isProduction,
-        maxAge: 24 * 60 * 60 * 1000,
-      })
-      .json({ success: true, user, message: `Welcome Back ${user.fullName}` });
-
-    // return res
-    //   .status(200)
+    // res
     //   .cookie("token", token, {
-    //     maxAge: 1 * 24 * 60 * 60 * 1000,
     //     httpOnly: true,
-    //     sameSite: "None",
-    //     secure: true,
+    //     sameSite: isProduction ? "none" : "lax",
+    //     secure: isProduction,
+    //     maxAge: 24 * 60 * 60 * 1000,
     //   })
     //   .json({ success: true, user, message: `Welcome Back ${user.fullName}` });
+
+    return res
+      .status(200)
+      .cookie("token", token, {
+        maxAge: 24 * 60 * 60 * 1000,
+        httpOnly: true,
+        sameSite: "none",
+        path: "/",
+        secure: true,
+      })
+      .json({ success: true, user, message: `Welcome Back ${user.fullName}` });
   } catch (error) {
     console.error(error);
   }
