@@ -16,6 +16,11 @@ const register = async (req, res) => {
         .json({ success: false, message: "Please All Field Are Required" });
     }
 
+    // CLOUDINARY ATTACHED HERE.....
+    const file = req.file;
+    const fileUri = getDataUri(file);
+    const cloudResponse = cloudinary.uploader.upload(fileUri.content);
+
     // Check email already register or not
     const user = await User.findOne({ email });
     if (user) {
@@ -33,6 +38,9 @@ const register = async (req, res) => {
       phoneNumber,
       password: hashPassword,
       role,
+      profile: {
+        profilePhoto: (await cloudResponse).secure_url, // CLOUD PHOTO SAVE HERE..
+      },
     });
     return res.status(201).json({
       success: true,
@@ -138,7 +146,6 @@ const logout = async (req, res) => {
 const updateProfile = async (req, res) => {
   try {
     const file = req.file;
-    console.log("reqfile", file);
 
     const userId = req.id; // middleware authentication
     const { fullName, email, phoneNumber, bio, skills } = req.body;
