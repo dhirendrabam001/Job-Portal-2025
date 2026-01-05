@@ -1,6 +1,9 @@
 const { User } = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const dataUriParser = require("../utils/dataUriParser");
+const cloudinary = require("../utils/cloudinary");
+const getDataUri = require("../utils/dataUriParser");
 
 const register = async (req, res) => {
   try {
@@ -92,27 +95,28 @@ const login = async (req, res) => {
       role: user.role,
       profile: user.profile,
     };
-    // const isProduction = process.env.NODE_ENV === "production";
+    const isProduction = process.env.NODE_ENV === "production";
 
-    // res
-    //   .cookie("token", token, {
-    //     httpOnly: true,
-    //     sameSite: isProduction ? "none" : "lax",
-    //     secure: isProduction,
-    //     maxAge: 24 * 60 * 60 * 1000,
-    //   })
-    //   .json({ success: true, user, message: `Welcome Back ${user.fullName}` });
-
-    return res
-      .status(200)
+    res
       .cookie("token", token, {
-        maxAge: 24 * 60 * 60 * 1000,
         httpOnly: true,
-        sameSite: "none",
+        sameSite: isProduction ? "none" : "lax",
+        secure: isProduction,
+        maxAge: 24 * 60 * 60 * 1000,
         path: "/",
-        secure: true,
       })
       .json({ success: true, user, message: `Welcome Back ${user.fullName}` });
+
+    // return res
+    //   .status(200)
+    //   .cookie("token", token, {
+    //     maxAge: 24 * 60 * 60 * 1000,
+    //     httpOnly: true,
+    //     sameSite: "none",
+    //     path: "/",
+    //     secure: true,
+    //   })
+    //   .json({ success: true, user, message: `Welcome Back ${user.fullName}` });
   } catch (error) {
     console.error(error);
   }
@@ -134,6 +138,8 @@ const logout = async (req, res) => {
 const updateProfile = async (req, res) => {
   try {
     const file = req.file;
+    console.log("reqfile", file);
+
     const userId = req.id; // middleware authentication
     const { fullName, email, phoneNumber, bio, skills } = req.body;
 
@@ -154,6 +160,8 @@ const updateProfile = async (req, res) => {
     // }
 
     // Cloudnoury file comes here lates
+    const fileUri = getDataUri(file);
+    const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
     // 🔥 Ensure profile exists
     if (!user.profile) {
@@ -185,9 +193,26 @@ const updateProfile = async (req, res) => {
     if (arraySkills.length > 0) {
       user.profile.skills = arraySkills;
     }
-    if (file) user.profile.file = file.path;
 
-    //   Resume Comes Here Later
+    // ✅ RESUME UPLOAD (ONLY IF FILE EXISTS)
+    if (file) {
+      const fileUri = getDataUri(file);
+
+      const cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
+        folder: "job-portal/resumes",
+        resource_type: "raw", // 🔥 REQUIRED FOR PDF
+      });
+
+      user.profile.resume = cloudResponse.secure_url;
+      user.profile.resumeOriginalName = file.originalname;
+    }
+    // if (file) user.profile.file = file.path;
+
+    // //   Resume Comes Here Later
+    // if (cloudResponse) {
+    //   user.profile.resume = cloudResponse.secure_url; // save the cloudinary url
+    //   user.profile.resumeOriginalName = file.originalname; // save the resume original name
+    // }
 
     await user.save();
 
