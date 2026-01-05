@@ -166,10 +166,6 @@ const updateProfile = async (req, res) => {
     //     .json({ success: false, message: "Please All Field Are Required" });
     // }
 
-    // Cloudnoury file comes here lates
-    const fileUri = getDataUri(file);
-    const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
-
     // 🔥 Ensure profile exists
     if (!user.profile) {
       user.profile = {};
@@ -202,6 +198,7 @@ const updateProfile = async (req, res) => {
     }
 
     // ✅ RESUME UPLOAD (ONLY IF FILE EXISTS)
+    // Cloudnoury file comes here lates
     if (file) {
       const fileUri = getDataUri(file);
 
