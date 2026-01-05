@@ -200,7 +200,9 @@ const updateProfile = async (req, res) => {
 
       const cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
         folder: "job-portal/resumes",
-        resource_type: "raw", // 🔥 REQUIRED FOR PDF
+        resource_type: "raw",
+        use_filename: true,
+        unique_filename: false,
       });
 
       user.profile.resume = cloudResponse.secure_url;
