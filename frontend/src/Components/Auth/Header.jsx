@@ -1,11 +1,37 @@
-import { MdOutlineNotificationsOff } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import Navbar from "../NavBar";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Header = () => {
+  // LOGOUT HANDLER
+  const handleLogOut = async () => {
+    try {
+      const res = await axios.get(
+        "https://job-portal-backend-xnmw.onrender.com/api/user/logout",
+
+        { withCredentials: true }
+      );
+
+      if (res.data.success) {
+        toast.success(res.data.message || "Profile Logout Successfully");
+        localStorage.removeItem("user");
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 800);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(
+        error?.response?.data?.message ||
+          "Logout Failed Please Try Again Later.."
+      );
+    }
+  };
   const [users, setUsers] = useState(null);
+  const [openMenu, setOpenMenu] = useState(false);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -13,111 +39,63 @@ const Header = () => {
       setUsers(JSON.parse(storedUser));
     }
   }, []);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-info">
       <div className="container-fluid mx-3">
-        <a className="navbar-brand" href="#">
+        <Link className="navbar-brand" to="/">
           <img src="/output.webp" width="150" height="50" />
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        </Link>
+
+        <div className="collapse navbar-collapse">
           <Navbar />
 
           {!users && (
-            <div className="d-flex gap-3 btn-info mt-2 fw-bold">
-              <Link to={"/login"}>
+            <div className="d-flex gap-3">
+              <Link to="/login">
                 <button className="btn btn-outline-light">Login</button>
               </Link>
-              <Link to={"/signup"}>
+              <Link to="/signup">
                 <button className="btn btn-outline-primary text-white">
                   SignUp
                 </button>
               </Link>
             </div>
           )}
+
           {users && (
-            <div className="d-flex text-white align-items-center gap-md-2 gap-0">
-              <div className="d-flex align-items-center profile-avtag">
-                <span className="">{users.fullName}</span>
+            <div className="position-relative d-flex align-items-center gap-2 profile-img">
+              <span className="text-white">{users.fullName}</span>
 
-                <img src="/avtar.webp" alt="avtar" width="40" />
+              <img
+                src={users?.profile?.profilePhoto}
+                alt="avatar"
+                className="rounded-circle"
+              />
 
-                <div
-                  className="setting-btn rounded-circle"
-                  data-bs-toggle="modal"
-                  data-bs-target="#profileModal"
-                  style={{ cursor: "pointer" }}
-                >
-                  <IoSettingsOutline />
-                </div>
-              </div>
-
-              {/* {* modal */}
-
-              <div
-                className="modal fade"
-                id="profileModal"
-                tabIndex="-1"
-                aria-hidden="true"
+              <button
+                className="setting-btn border-0 bg-transparent text-white"
+                onClick={() => setOpenMenu(!openMenu)}
               >
-                <div className="modal-dialog modal-dialog-centered modal-sm modal-dialog-end">
-                  <div className="modal-content">
-                    <div className="modal-body">
-                      <div className="d-flex align-items-center gap-3 mb-3">
-                        <img
-                          src="/avtar.webp"
-                          alt="profile"
-                          width="45"
-                          height="45"
-                          className="rounded-circle"
-                        />
-                        <div>
-                          <h6 className="mb-0">Dhirendra Bam</h6>
-                          <small className="text-muted">
-                            Full Stack Developer
-                          </small>
-                        </div>
-                      </div>
+                <IoSettingsOutline className="fs-3 fw-bold" />
+              </button>
 
-                      <hr />
-
-                      <Link to={"/profile"}>
-                        <button className="mb-2">👤 View Profile</button>
-                      </Link>
-
-                      <p
-                        className="mb-0 text-danger cursor-pointer"
-                        onClick={() => {
-                          localStorage.removeItem("user");
-                          setUsers(null);
-                          window.location.href = "/login";
-                        }}
-                      >
-                        🚪 Logout
-                      </p>
-                    </div>
-                  </div>
+              {/* Dropdown */}
+              {openMenu && (
+                <div className="position-absolute bg-white p-3 rounded end-0 top-100 mt-2">
+                  <Link
+                    to="/profile"
+                    className="text-black fw-bold text-decoration-none"
+                    onClick={() => setOpenMenu(false)}
+                  >
+                    👤 View Profile
+                  </Link>
+                  <hr />
+                  <button className="fw-bold logout-btn" onClick={handleLogOut}>
+                    🚪 Logout
+                  </button>
                 </div>
-              </div>
-
-              {/* End */}
-
-              {/* <div className="setting-btn rounded-circle position-relative align-items-center justify-content-center">
-                <MdOutlineNotificationsOff />
-                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                  1+
-                </span>
-              </div> */}
+              )}
             </div>
           )}
         </div>

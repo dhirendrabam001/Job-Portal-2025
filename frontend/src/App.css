@@ -25,6 +25,17 @@ body {
 }
 
 /* View profile section */
+.profile-img img {
+  width: 40px !important;
+}
+.logout-btn {
+  background: white;
+  border: none;
+  color: black;
+  padding: 10px;
+  font-size: 17px;
+}
+
 .profile-main {
   background: var(--mine-shaft-950);
   width: 100%;
@@ -213,15 +224,13 @@ a.nav-link:hover {
 }
 
 /* LatestJobs start */
-/* .latestJobs-main {
-  width: 100%;
-  height: 100vh;
+.job-card p {
+  margin-top: -8px !important;
+  font-size: 14px;
 }
-.latestJobs-main span {
-  color: var(--bright-sun-400);
-} */
-
-/* Latest Jobs end */
+.main-card-content {
+  margin-top: -12px;
+}
 
 /* Company list */
 

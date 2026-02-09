@@ -23,17 +23,6 @@ app.use(
   })
 );
 
-// app.use(
-//   cors({
-//     origin: ["http://localhost:5173", "https://job-portal-bi00.onrender.com"],
-//     credentials: true,
-//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-//     allowedHeaders: ["Content-Type", "Authorization"],
-//   })
-// );
-
-// app.options("*", cors());
-
 // Apis
 app.use("/api/user", userRoute);
 app.use("/api/company", companyRoute);

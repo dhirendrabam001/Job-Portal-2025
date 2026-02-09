@@ -7,8 +7,10 @@ import Testimonials from "../LandingPage/Testimonials";
 import Subscriber from "../LandingPage/Subscriber";
 import Footer from "../LandingPage/Footer";
 import FooterLast from "../LandingPage/FooterLast";
+import useGetAllJobs from "../Hooks/useGetAllJobs";
 
 const HomePages = () => {
+  useGetAllJobs();
   return (
     <div className="homePage-main">
       <Header />

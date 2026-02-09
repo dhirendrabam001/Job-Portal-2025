@@ -1,13 +1,14 @@
 import axios from "axios";
-import { useReducer, useState } from "react";
+axios.defaults.withCredentials = true;
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { USER_API_END_POINT } from "../utils/constantUrl";
 
-const UpdateProfile = ({ open, setOpen }) => {
+const UpdateProfile = ({ open, setOpen, setUser, user }) => {
   // 👇 if modal is closed, render nothing
   if (!open) return null;
 
-  const user = JSON.parse(localStorage.getItem("user")) || {};
+  // const user = JSON.parse(localStorage.getItem("user")) || {};
 
   const [input, setInput] = useState({
     fullName: user.fullName || "",
@@ -25,17 +26,28 @@ const UpdateProfile = ({ open, setOpen }) => {
 
   const fileChangeHandler = (e) => {
     const file = e.target.files?.[0];
+    if (file && file.type !== "application/pdf") {
+      toast.error("Only PDF files allowed");
+      return;
+    }
     setInput({ ...input, file });
   };
 
   const submitHandler = async (e) => {
     e.preventDefault();
+
+    // ✅ convert string → array
+    const skillsArray = input.skills
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+
     const formData = new FormData();
     formData.append("fullName", input.fullName);
     formData.append("email", input.email);
-    formData.append("phoneNumber", input.phoneNumber);
+    formData.append("phoneNumber", Number(input.phoneNumber));
     formData.append("bio", input.bio);
-    formData.append("skills", input.skills);
+    formData.append("skills", JSON.stringify(skillsArray));
 
     if (input.file) {
       formData.append("file", input.file);
@@ -48,19 +60,19 @@ const UpdateProfile = ({ open, setOpen }) => {
         formData,
         {
           withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
         }
       );
 
-      console.log("res data", res);
+      if (res.data.success) {
+        // ✅ UPDATE STATE
+        setUser(res.data.user);
 
-      // Update localStorage
-      localStorage.setItem("user", JSON.stringify(res.data.user));
+        // ✅ UPDATE LOCAL STORAGE
+        localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      toast.success(res.data.message || "Profile Updated Successfully");
-      setOpen(false);
+        toast.success("Profile updated successfully");
+        setOpen(false);
+      }
     } catch (error) {
       console.error(error);
       toast.error(error.response?.data?.message || "Something went wrong");

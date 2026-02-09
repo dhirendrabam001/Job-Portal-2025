@@ -3,16 +3,15 @@ const { Jobs } = require("../models/job.model");
 
 const applicationData = async (req, res) => {
   try {
-    const userId = req.user._id;
-    console.log("UserId", userId);
+    const userId = req.id;
 
     const jobId = req.params.id;
-    console.log("body", req.body);
 
     // Check jobs id find or not
     if (!userId) {
       return res
         .status(400)
+
         .json({ success: false, message: "User Id Does Not Found" });
     }
     if (!jobId) {
@@ -26,7 +25,6 @@ const applicationData = async (req, res) => {
       job: jobId,
       applicant: userId,
     });
-    console.log("Existing", existingApplication);
 
     if (existingApplication) {
       return res
@@ -36,7 +34,7 @@ const applicationData = async (req, res) => {
 
     // Check the jobs exits or not
     const jobs = await Jobs.findById(jobId);
-    console.log("Jobs Here", jobs);
+
     if (!jobs) {
       return res
         .status(400)
@@ -56,6 +54,7 @@ const applicationData = async (req, res) => {
     return res.status(200).json({
       success: true,
       jobs,
+      isApplied: true,
       message: "Job Applied Successfully",
     });
   } catch (error) {

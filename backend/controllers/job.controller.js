@@ -1,4 +1,5 @@
 const { Jobs } = require("../models/job.model");
+const { Application } = require("../models/application.model");
 
 // JOBS CREATED BY ADMIN
 const postJobs = async (req, res) => {
@@ -112,18 +113,31 @@ const getJobsByAdmin = async (req, res) => {
 // GET JOBS BY PARTICULAR ID FOR STUDENT
 const getJobById = async (req, res) => {
   try {
-    const userId = req.params.id;
+    const jobId = req.params.id;
+    // const userId = req.user._id;
+    const userId = req.id; // auth middleware;
+
     // find userid validate or not
-    const jobs = await Jobs.findById(userId);
-    if (!jobs) {
+    let job = await Jobs.findById(jobId).populate({
+      path: "application",
+      select: "applicant",
+    });
+    if (!job) {
       return res
         .status(400)
         .json({ success: false, message: "Jobs Are Not Found Particular Id" });
     }
+    //  CHECK ISAPPLIED USER OR NOT
+    const isApplied = job.application.some(
+      (app) => app.applicant.toString() === userId.toString(),
+    );
 
-    return res
-      .status(200)
-      .json({ success: true, jobs, message: "Jobs Fetched By Particular Id" });
+    return res.status(200).json({
+      success: true,
+      jobs: job,
+      isApplied,
+      message: "Jobs Fetched By Particular Id",
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: "Server Error" });
