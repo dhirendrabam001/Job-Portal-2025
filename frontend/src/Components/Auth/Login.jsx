@@ -4,7 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { USER_API_END_POINT } from "../../utils/constantUrl";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading, setUser } from "../../redux/authSlice";
+import Loading from "../Loading";
 const Login = () => {
+  const dispatch = useDispatch();
+  const { loading } = useSelector((store) => store.auth);
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -19,6 +24,7 @@ const Login = () => {
 
   const submitEvent = async (e) => {
     e.preventDefault();
+    dispatch(setLoading(true));
 
     try {
       const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
@@ -27,11 +33,16 @@ const Login = () => {
         },
         withCredentials: true,
       });
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-      toast.success(res.data.message || "Login Successful");
+
+      if (res.data.success) {
+        dispatch(setUser(res.data.user)); // redux find user
+        toast.success(res.data.message || "Login Successful");
+      }
       navigate("/");
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
+    } finally {
+      dispatch(setLoading(false));
     }
   };
 
@@ -41,6 +52,7 @@ const Login = () => {
 
       <div className="loginInfo py-4">
         <div className="containerInfo">
+          {loading && <Loading />}
           <h2 className="fs-bold fs-3 mb-3">
             Log<span className="text-danger">in</span>
           </h2>

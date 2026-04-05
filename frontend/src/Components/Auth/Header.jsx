@@ -1,18 +1,21 @@
 import { IoSettingsOutline } from "react-icons/io5";
-import Navbar from "../NavBar";
+// import Navbar from "./NavBar";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Navbar from "../Navbar";
+import { useDispatch, useSelector } from "react-redux";
 
 const Header = () => {
+  const { user } = useSelector((store) => store.auth);
+
   // LOGOUT HANDLER
   const handleLogOut = async () => {
     try {
       const res = await axios.get(
         "https://job-portal-backend-xnmw.onrender.com/api/user/logout",
 
-        { withCredentials: true }
+        { withCredentials: true },
       );
 
       if (res.data.success) {
@@ -26,19 +29,10 @@ const Header = () => {
       console.error(error);
       toast.error(
         error?.response?.data?.message ||
-          "Logout Failed Please Try Again Later.."
+          "Logout Failed Please Try Again Later..",
       );
     }
   };
-  const [users, setUsers] = useState(null);
-  const [openMenu, setOpenMenu] = useState(false);
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUsers(JSON.parse(storedUser));
-    }
-  }, []);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-info">
@@ -49,8 +43,7 @@ const Header = () => {
 
         <div className="collapse navbar-collapse">
           <Navbar />
-
-          {!users && (
+          {!user ? (
             <div className="d-flex gap-3">
               <Link to="/login">
                 <button className="btn btn-outline-light">Login</button>
@@ -61,41 +54,46 @@ const Header = () => {
                 </button>
               </Link>
             </div>
-          )}
-
-          {users && (
-            <div className="position-relative d-flex align-items-center gap-2 profile-img">
-              <span className="text-white">{users.fullName}</span>
-
-              <img
-                src={users?.profile?.profilePhoto}
-                alt="avatar"
-                className="rounded-circle"
-              />
-
-              <button
-                className="setting-btn border-0 bg-transparent text-white"
-                onClick={() => setOpenMenu(!openMenu)}
+          ) : (
+            <div className="dropdown">
+              <a
+                href="#"
+                className="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                id="dropdownUser1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
               >
-                <IoSettingsOutline className="fs-3 fw-bold" />
-              </button>
-
-              {/* Dropdown */}
-              {openMenu && (
-                <div className="position-absolute bg-white p-3 rounded end-0 top-100 mt-2">
-                  <Link
-                    to="/profile"
-                    className="text-black fw-bold text-decoration-none"
-                    onClick={() => setOpenMenu(false)}
-                  >
-                    👤 View Profile
+                <img
+                  src={user?.profile?.profilePhoto}
+                  alt=""
+                  style={{ width: "32px", height: "32px" }}
+                  className="rounded-circle me-2"
+                />
+                <strong>{user?.fullName}</strong>
+              </a>
+              <ul
+                className="dropdown-menu dropdown-menu-dark text-small shadow"
+                aria-labelledby="dropdownUser1"
+              >
+                <li>
+                  <Link to="/profile" className="dropdown-item">
+                    View Profile
                   </Link>
-                  <hr />
-                  <button className="fw-bold logout-btn" onClick={handleLogOut}>
-                    🚪 Logout
-                  </button>
-                </div>
-              )}
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Settings
+                  </a>
+                </li>
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Sign out
+                  </a>
+                </li>
+              </ul>
             </div>
           )}
         </div>
@@ -105,3 +103,7 @@ const Header = () => {
 };
 
 export default Header;
+
+//  {users && (
+
+// )}

@@ -8,12 +8,11 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { useSelector } from "react-redux";
 import LatestJobs from "../Pages/LatestJobs";
 
-const JobCategory = () => {
-  const { allJobs } = useSelector((store) => store.job);
+const allJobs = [1, 2, 3, 4];
 
+const JobCategory = () => {
   return (
     <div className="job-category py-4 mt-3 mt-md-0">
       <div className="container">
@@ -51,9 +50,9 @@ const JobCategory = () => {
               0: { slidesPerView: 1 },
             }}
           >
-            {allJobs.map((job) => (
-              <SwiperSlide key={job._id}>
-                <LatestJobs job={job} />
+            {allJobs.map((job, index) => (
+              <SwiperSlide key={index}>
+                <LatestJobs />
               </SwiperSlide>
             ))}
           </Swiper>

@@ -1,10 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
-import axios, { Axios } from "axios";
+import axios from "axios";
 import toast from "react-hot-toast";
 import Header from "./Header";
 import { useState } from "react";
 import { USER_API_END_POINT } from "../../utils/constantUrl";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "../../redux/authSlice";
+import Loading from "../Loading";
+
 const SignUp = () => {
+  const dispatch = useDispatch();
+  const { loading } = useSelector((store) => store.auth);
+
   const [input, setInput] = useState({
     fullName: "",
     email: "",
@@ -27,6 +34,7 @@ const SignUp = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    dispatch(setLoading(true));
     const formData = new FormData();
     formData.append("fullName", input.fullName);
     formData.append("email", input.email);
@@ -48,6 +56,8 @@ const SignUp = () => {
       navigate("/login");
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
+    } finally {
+      dispatch(setLoading(true));
     }
   };
   return (
@@ -56,6 +66,7 @@ const SignUp = () => {
 
       <div className="loginInfo py-4">
         <div className="containerInfo">
+          {loading && <Loading />}
           <h2 className="fs-bold fs-3 mb-3">
             Sign<span className="text-danger">Up</span>
           </h2>

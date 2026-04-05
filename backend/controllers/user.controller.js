@@ -149,6 +149,7 @@ const updateProfile = async (req, res) => {
 
     const userId = req.id; // middleware authentication
     const { fullName, email, phoneNumber, bio, skills } = req.body;
+    console.log(req.body);
 
     // check userid
     let user = await User.findById(userId);
@@ -159,33 +160,10 @@ const updateProfile = async (req, res) => {
         .json({ success: false, message: "User Not Found" });
     }
 
-    // check all field are required or not
-    // if (!fullName || !email || !phoneNumber || !bio || !skills) {
-    //   return res
-    //     .status(400)
-    //     .json({ success: false, message: "Please All Field Are Required" });
-    // }
-
     // 🔥 Ensure profile exists
     if (!user.profile) {
       user.profile = {};
     }
-
-    // Convert string to array
-    let arraySkills = [];
-    if (skills) {
-      if (typeof skills === "string") {
-        try {
-          arraySkills = JSON.parse(skills);
-        } catch (error) {
-          arraySkills = skills.split(",").map((s) => s.trim());
-        }
-      } else if (Array.isArray(skills)) {
-        arraySkills = skills;
-      }
-    }
-
-    // req.user._id;
 
     //  Updated Data Information user if only one field can updated
 
@@ -193,12 +171,13 @@ const updateProfile = async (req, res) => {
     if (email) user.email = email;
     if (phoneNumber) user.phoneNumber = phoneNumber;
     if (bio) user.profile.bio = bio;
-    if (arraySkills.length > 0) {
-      user.profile.skills = arraySkills;
+
+    // skils
+    if (skills) {
+      user.profile.skills = skills.split("").map((s = s.trim()));
     }
 
     // ✅ RESUME UPLOAD (ONLY IF FILE EXISTS)
-    // Cloudnoury file comes here lates
     if (file) {
       const fileUri = getDataUri(file);
 
@@ -212,24 +191,17 @@ const updateProfile = async (req, res) => {
       user.profile.resume = cloudResponse.secure_url;
       user.profile.resumeOriginalName = file.originalname;
     }
-    // if (file) user.profile.file = file.path;
-
-    // //   Resume Comes Here Later
-    // if (cloudResponse) {
-    //   user.profile.resume = cloudResponse.secure_url; // save the cloudinary url
-    //   user.profile.resumeOriginalName = file.originalname; // save the resume original name
-    // }
 
     await user.save();
 
-    user = {
-      id: user._id,
-      fullName: user.fullName,
-      email: user.email,
-      phoneNumber: user.phoneNumber,
-      role: user.role,
-      profile: user.profile,
-    };
+    // user = {
+    //   id: user._id,
+    //   fullName: user.fullName,
+    //   email: user.email,
+    //   phoneNumber: user.phoneNumber,
+    //   role: user.role,
+    //   profile: user.profile,
+    // };
 
     return res
       .status(200)

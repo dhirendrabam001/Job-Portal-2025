@@ -2,9 +2,9 @@ import { useSelector } from "react-redux";
 import Header from "../Components/Auth/Header";
 import FilterJobs from "../Pages/FilterJobs";
 import OneJob from "../Pages/OneJob";
-// const jobsArray = [1, 2, 3, 4, 5, 6, 7, 8];
+const allJobs = [1, 2, 3, 4, 5, 6, 7, 8];
 const Jobs = () => {
-  const { allJobs } = useSelector((store) => store.job);
+  // const { allJobs } = useSelector((store) => store.job);
 
   return (
     <>
@@ -24,9 +24,9 @@ const Jobs = () => {
                   {allJobs.length <= 0 ? (
                     <span>Jobs Does Not Found</span>
                   ) : (
-                    allJobs.map((job) => (
-                      <div className="col-12 col-md-4 col-lg-4" key={job?._id}>
-                        <OneJob job={job} />
+                    allJobs.map((job, index) => (
+                      <div className="col-12 col-md-4 col-lg-4" key={index}>
+                        <OneJob />
                       </div>
                     ))
                   )}

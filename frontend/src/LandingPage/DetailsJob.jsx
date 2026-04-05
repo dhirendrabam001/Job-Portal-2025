@@ -4,7 +4,7 @@ import axios from "axios";
 import { APPLICATION_API_POINT, JOBS_API_POINT } from "../utils/constantUrl";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import { setIsApplied, setSingleJob } from "../Components/redux/jobSlice";
+// import { setIsApplied, setSingleJob } from "../Components/re";
 
 const DetailsJob = () => {
   const { singleJob, isApplied } = useSelector((store) => store.job);

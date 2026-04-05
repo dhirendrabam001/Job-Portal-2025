@@ -6,8 +6,8 @@ import AppliedJobs from "./AppliedJobs";
 import { useState, useEffect } from "react";
 import UpdateProfile from "./UpdateProfile";
 
-// const skillsInfo = ["NodeJs", "Express", "MongoDB", "ReactJs"];
-// const isResume = true;
+const skillsInfo = ["NodeJs", "Express", "MongoDB", "ReactJs"];
+const isResume = true;
 const Profile = () => {
   const [open, setOpen] = useState(false);
 
@@ -34,12 +34,10 @@ const Profile = () => {
               <div className="col-12 col-md-10 col-lg-10">
                 <div className="profile-section">
                   <img src={user?.profile?.profilePhoto} alt="profile" />
-                  {/* <div className="profile-content-left d-flex justify-content-between"> */}
                   <div className="profile-content">
                     <h4 className="fs-5 fw-bold">{user?.fullName}</h4>
                     <p>{user?.profile?.bio}</p>
                   </div>
-                  {/* </div> */}
                 </div>
               </div>
               <div className="col-12 col-md-2 col-lg-2">
@@ -50,20 +48,6 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-            {/* <div className="profile-section">
-              <img src="avatar.webp" alt="profile" />
-              <div className="profile-content-left d-flex justify-content-between">
-                <div className="profile-content">
-                  <h4 className="fs-5 fw-bold">{user?.fullName}</h4>
-                  <p>{user?.profile?.bio}</p>
-                </div>
-                <div className="right-icons">
-                  <button onClick={() => setOpen(true)} className="border-0">
-                    <SlPencil />
-                  </button>
-                </div>
-              </div>
-            </div> */}
 
             {/* Content Info */}
             <div className="profile-content d-flex align-items-center gap-2 mt-3">
@@ -83,19 +67,39 @@ const Profile = () => {
             {/* Skills */}
             <div className="skills-info my-2">
               <h4 className="fs-5">Skills</h4>
-              {user?.profile?.skills?.map((items, index) => {
-                return (
-                  <span key={index} className="badge bg-primary me-2">
-                    {items}
-                  </span>
-                );
-              })}
+
+              {skillsInfo.length !== 0 ? (
+                skillsInfo.map((item, index) => {
+                  return (
+                    <span key={index} className="badge bg-primary me-2">
+                      {item}
+                    </span>
+                  );
+                })
+              ) : (
+                <span>NA</span>
+              )}
             </div>
+
             {/* Resume */}
             <div className="resume my-2">
               <label>Resume</label>
               <div className="resume-info">
-                {user?.profile?.resume ? (
+                {isResume ? (
+                  <a
+                    href="https://dhirendrabam.com.np"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="fw-bold text-info text-white my-2"
+                  >
+                    Dhirendra
+                  </a>
+                ) : (
+                  <span className="text-muted fw-medium text-white">
+                    No resume uploaded
+                  </span>
+                )}
+                {/* {user?.profile?.resume ? (
                   <a
                     href={user.profile.resume}
                     target="_blank"
@@ -108,7 +112,7 @@ const Profile = () => {
                   <span className="text-muted text-white fw-medium">
                     No resume uploaded
                   </span>
-                )}
+                )} */}
               </div>
             </div>
           </div>

@@ -20,10 +20,10 @@ function App() {
         <Route path="/jobs" element={<Jobs />}></Route>
         <Route path="/browsers" element={<Browsers />}></Route>
         <Route path="/details/:id" element={<DetailsJob />}></Route>
-        {/* <Route path="Browser" element={<Browsers />}></Route>
-        <Route path="/find-talent" element={<FindTalent />}></Route>
-        <Route path="/upload-jobs" element={<UploadJobs />}></Route>
-        <Route path="/about-us" element={<AboutUs />}></Route> */}
+        {/* <Route path="Browser" element={<Browsers />}></Route> */}
+        {/* <Route path="/find-talent" element={<FindTalent />}></Route> */}
+        {/* <Route path="/upload-jobs" element={<UploadJobs />}></Route> */}
+        {/* <Route path="/about-us" element={<AboutUs />}></Route> */}
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/profile" element={<Profile />}></Route>

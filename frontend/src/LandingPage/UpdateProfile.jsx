@@ -3,23 +3,27 @@ axios.defaults.withCredentials = true;
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { USER_API_END_POINT } from "../utils/constantUrl";
+import { useDispatch, useSelector } from "react-redux";
+import Loading from "../Components/Loading";
+import { setLoading } from "../redux/authSlice";
 
-const UpdateProfile = ({ open, setOpen, setUser, user }) => {
-  // 👇 if modal is closed, render nothing
-  if (!open) return null;
-
-  // const user = JSON.parse(localStorage.getItem("user")) || {};
+const UpdateProfile = ({ open, setOpen }) => {
+  const { user, loading } = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
 
   const [input, setInput] = useState({
-    fullName: user.fullName || "",
-    email: user.email || "",
-    phoneNumber: user.phoneNumber || "",
-    bio: user.profile?.bio || "",
-    skills: user.profile?.skills?.join(",") || "",
+    fullName: user?.fullName || "",
+    email: user?.email || "",
+    phoneNumber: user?.phoneNumber || "",
+    bio: user?.profile?.bio || "",
+    skills: user?.profile?.skills?.join(",") || "",
     file: null,
   });
 
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  // 👇 if modal is closed, render nothing
+  if (!open) return null;
+
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
@@ -35,19 +39,14 @@ const UpdateProfile = ({ open, setOpen, setUser, user }) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
-    // ✅ convert string → array
-    const skillsArray = input.skills
-      .split(",")
-      .map((s) => s.trim())
-      .filter(Boolean);
+    dispatch(setLoading(true));
 
     const formData = new FormData();
     formData.append("fullName", input.fullName);
     formData.append("email", input.email);
     formData.append("phoneNumber", Number(input.phoneNumber));
     formData.append("bio", input.bio);
-    formData.append("skills", JSON.stringify(skillsArray));
+    formData.append("skills", input.skills);
 
     if (input.file) {
       formData.append("file", input.file);
@@ -60,16 +59,10 @@ const UpdateProfile = ({ open, setOpen, setUser, user }) => {
         formData,
         {
           withCredentials: true,
-        }
+        },
       );
 
       if (res.data.success) {
-        // ✅ UPDATE STATE
-        setUser(res.data.user);
-
-        // ✅ UPDATE LOCAL STORAGE
-        localStorage.setItem("user", JSON.stringify(res.data.user));
-
         toast.success("Profile updated successfully");
         setOpen(false);
       }
@@ -77,7 +70,7 @@ const UpdateProfile = ({ open, setOpen, setUser, user }) => {
       console.error(error);
       toast.error(error.response?.data?.message || "Something went wrong");
     } finally {
-      setLoading(false);
+      dispatch(setLoading(false));
     }
   };
 
@@ -85,6 +78,7 @@ const UpdateProfile = ({ open, setOpen, setUser, user }) => {
     <>
       <div className="modal fade show d-block" tabIndex="-1">
         <div className="modal-dialog">
+          {loading && <Loading />}
           <div className="modal-content">
             {/* HEADER */}
             <div className="modal-header">
@@ -189,8 +183,6 @@ const UpdateProfile = ({ open, setOpen, setUser, user }) => {
           </div>
         </div>
       </div>
-
-      {/* BACKDROP */}
     </>
   );
 };

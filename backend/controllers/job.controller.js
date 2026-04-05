@@ -120,7 +120,7 @@ const getJobById = async (req, res) => {
     // find userid validate or not
     let job = await Jobs.findById(jobId).populate({
       path: "application",
-      select: "applicant",
+      // select: "applicant",
     });
     if (!job) {
       return res

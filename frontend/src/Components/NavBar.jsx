@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 const Navbar = () => {
   const linkRoutes = [
     { name: "Home", url: "/" },
@@ -9,6 +10,14 @@ const Navbar = () => {
   ];
 
   const location = useLocation();
+  const [users, setUsers] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUsers(JSON.parse(storedUser));
+    }
+  }, []);
 
   return (
     <ul className="navbar-nav mx-auto mb-2 mb-lg-0 gap-0 gap-md-4">
