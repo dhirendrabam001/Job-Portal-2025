@@ -174,16 +174,19 @@ const updateProfile = async (req, res) => {
 
     // skils
     if (skills) {
-      user.profile.skills = skills.split("").map((s = s.trim()));
+      user.profile.skills = skills.split(",").map((s = s.trim()));
     }
 
-    // ✅ RESUME UPLOAD (ONLY IF FILE EXISTS)
+    // RESUME UPLOAD
     if (file) {
       const fileUri = getDataUri(file);
+
+      const uniqueFileName = `${Date.now()}-${file.originalname}`;
 
       const cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
         folder: "job-portal/resumes",
         resource_type: "raw",
+        public_id: uniqueFileName,
         use_filename: true,
         unique_filename: false,
       });
@@ -191,7 +194,6 @@ const updateProfile = async (req, res) => {
       user.profile.resume = cloudResponse.secure_url;
       user.profile.resumeOriginalName = file.originalname;
     }
-
     await user.save();
 
     // user = {

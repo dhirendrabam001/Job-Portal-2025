@@ -3,26 +3,14 @@ import { SlPencil } from "react-icons/sl";
 import { MdEmail } from "react-icons/md";
 import { IoCall } from "react-icons/io5";
 import AppliedJobs from "./AppliedJobs";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import UpdateProfile from "./UpdateProfile";
+import { useSelector } from "react-redux";
 
-const skillsInfo = ["NodeJs", "Express", "MongoDB", "ReactJs"];
-const isResume = true;
 const Profile = () => {
+  const { user } = useSelector((store) => store.auth);
+
   const [open, setOpen] = useState(false);
-
-  // USER IN STATE
-  const [user, setUser] = useState(() => {
-    return JSON.parse(localStorage.getItem("user")) || {};
-  });
-
-  // keep in sync with localStorage
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    if (storedUser) {
-      setUser(storedUser);
-    }
-  }, []);
 
   return (
     <>
@@ -68,8 +56,8 @@ const Profile = () => {
             <div className="skills-info my-2">
               <h4 className="fs-5">Skills</h4>
 
-              {skillsInfo.length !== 0 ? (
-                skillsInfo.map((item, index) => {
+              {user?.profile?.skills.length !== 0 ? (
+                user?.profile?.skills[0].split(" ").map((item, index) => {
                   return (
                     <span key={index} className="badge bg-primary me-2">
                       {item}
@@ -85,14 +73,16 @@ const Profile = () => {
             <div className="resume my-2">
               <label>Resume</label>
               <div className="resume-info">
-                {isResume ? (
+                {user?.profile?.resume ? (
                   <a
-                    href="https://dhirendrabam.com.np"
+                    href={user.profile.resume.replace(
+                      "/upload/",
+                      "/upload/fl_attachment/",
+                    )}
                     target="_blank"
-                    rel="noopener noreferrer"
-                    className="fw-bold text-info text-white my-2"
+                    className="fw-bold text-info text-primary my-2"
                   >
-                    Dhirendra
+                    {user?.profile?.resumeOriginalName}
                   </a>
                 ) : (
                   <span className="text-muted fw-medium text-white">
@@ -124,12 +114,7 @@ const Profile = () => {
           </div>
 
           {/* UpdateProfile */}
-          <UpdateProfile
-            open={open}
-            setOpen={setOpen}
-            setUser={setUser}
-            user={user}
-          />
+          <UpdateProfile open={open} setOpen={setOpen} />
         </div>
       </div>
     </>

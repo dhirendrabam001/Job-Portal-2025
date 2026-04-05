@@ -8,7 +8,7 @@ import Loading from "../Components/Loading";
 import { setLoading } from "../redux/authSlice";
 
 const UpdateProfile = ({ open, setOpen }) => {
-  const { user, loading } = useSelector((store) => store.auth);
+  const { user, loading } = useSelector((store) => store.auth); //user get using redux toolkit
   const dispatch = useDispatch();
 
   const [input, setInput] = useState({
@@ -20,7 +20,6 @@ const UpdateProfile = ({ open, setOpen }) => {
     file: null,
   });
 
-  // const [loading, setLoading] = useState(false);
   // 👇 if modal is closed, render nothing
   if (!open) return null;
 

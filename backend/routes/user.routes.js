@@ -16,7 +16,7 @@ router.put(
   "/updateProfile",
   isAuthenticates,
   upload.single("file"),
-  updateProfile
+  updateProfile,
 );
 router.get("/logout", logout);
 
