@@ -72,14 +72,13 @@ const Profile = () => {
             {/* Resume */}
             <div className="resume my-2">
               <label>Resume</label>
+
               <div className="resume-info">
                 {user?.profile?.resume ? (
                   <a
-                    href={user.profile.resume.replace(
-                      "/upload/",
-                      "/upload/fl_attachment/",
-                    )}
+                    href={user?.profile?.resume}
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="fw-bold text-info text-primary my-2"
                   >
                     {user?.profile?.resumeOriginalName}
@@ -89,20 +88,6 @@ const Profile = () => {
                     No resume uploaded
                   </span>
                 )}
-                {/* {user?.profile?.resume ? (
-                  <a
-                    href={user.profile.resume}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="fw-bold text-info"
-                  >
-                    {user.profile.resumeOriginalName}
-                  </a>
-                ) : (
-                  <span className="text-muted text-white fw-medium">
-                    No resume uploaded
-                  </span>
-                )} */}
               </div>
             </div>
           </div>

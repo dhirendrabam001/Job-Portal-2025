@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { USER_API_END_POINT } from "../utils/constantUrl";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../Components/Loading";
-import { setLoading } from "../redux/authSlice";
+import { setLoading, setUser } from "../redux/authSlice";
 
 const UpdateProfile = ({ open, setOpen }) => {
   const { user, loading } = useSelector((store) => store.auth); //user get using redux toolkit
@@ -28,19 +28,22 @@ const UpdateProfile = ({ open, setOpen }) => {
   };
 
   const fileChangeHandler = (e) => {
-    const file = e.target.files?.[0];
-    if (file && file.type !== "application/pdf") {
-      toast.error("Only PDF files allowed");
-      return;
-    }
-    setInput({ ...input, file });
+    const file = e.target.files[0];
+    console.log("Selected file:", file);
+
+    setInput((prev) => ({
+      ...prev,
+      file: file,
+    }));
   };
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    console.log("Submitting file:", input.file);
     dispatch(setLoading(true));
 
     const formData = new FormData();
+
     formData.append("fullName", input.fullName);
     formData.append("email", input.email);
     formData.append("phoneNumber", Number(input.phoneNumber));
@@ -52,16 +55,19 @@ const UpdateProfile = ({ open, setOpen }) => {
     }
 
     try {
-      setLoading(true);
       const res = await axios.put(
         `${USER_API_END_POINT}/updateProfile`,
         formData,
         {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
           withCredentials: true,
         },
       );
 
       if (res.data.success) {
+        dispatch(setUser(res.data.user));
         toast.success("Profile updated successfully");
         setOpen(false);
       }
