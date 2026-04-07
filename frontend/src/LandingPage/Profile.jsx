@@ -78,7 +78,6 @@ const Profile = () => {
                   <a
                     href={user?.profile?.resume}
                     target="_blank"
-                    rel="noopener noreferrer"
                     className="fw-bold text-info text-primary my-2"
                   >
                     {user?.profile?.resumeOriginalName}

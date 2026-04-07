@@ -1,9 +1,9 @@
-const LatestJobs = () => {
+const LatestJobs = ({ job }) => {
   return (
     <>
       <div className="container">
         <div className="job-card">
-          <div className="card shadow py-4">
+          {/* <div className="card shadow py-4">
             <div className="card-img-content text-white">
               <h5>Company Name</h5>
               <p>Company Location</p>
@@ -18,13 +18,12 @@ const LatestJobs = () => {
                 <span className="badge bg-success">Job Salary</span>
               </div>
             </div>
-          </div>
-          {/* <div className="card shadow py-4">
+          </div> */}
+          <div className="card shadow py-4">
             <div className="card-img-content text-white">
               <h5>{job?.company?.companyName}</h5>
               <p>{job?.locations}</p>
             </div>
-
             <div className="main-card-content">
               <h4 className="text-white fw-bold fs-5">{job?.title}</h4>
               <p className="text-white">{job?.description}</p>
@@ -34,7 +33,7 @@ const LatestJobs = () => {
                 <span className="badge bg-success">{job?.salary}</span>
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </>

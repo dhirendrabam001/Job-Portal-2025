@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { JOBS_API_POINT } from "../utils/constantUrl";
 import { useDispatch } from "react-redux";
-import { setAllJobs } from "../Components/redux/jobSlice";
+import { setAllJob } from "../redux/jobSlice";
+
 const useGetAllJobs = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -13,7 +14,7 @@ const useGetAllJobs = () => {
           withCredentials: true,
         });
         if (res.data.success) {
-          dispatch(setAllJobs(res.data.jobs));
+          dispatch(setAllJob(res.data.jobs));
           toast.success("All Jobs Are Fetched");
         }
       } catch (error) {

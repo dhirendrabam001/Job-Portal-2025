@@ -1,29 +1,29 @@
 import { IoSettingsOutline } from "react-icons/io5";
 // import Navbar from "./NavBar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Navbar from "../Navbar";
 import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../redux/authSlice";
 
 const Header = () => {
   const { user } = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // LOGOUT HANDLER
   const handleLogOut = async () => {
     try {
       const res = await axios.get(
-        "https://job-portal-backend-xnmw.onrender.com/api/user/logout",
+        "http://localhost:5000/api/user/logout",
 
         { withCredentials: true },
       );
-
       if (res.data.success) {
+        dispatch(setUser(null));
+        navigate("/");
         toast.success(res.data.message || "Profile Logout Successfully");
-        localStorage.removeItem("user");
-        setTimeout(() => {
-          window.location.href = "/";
-        }, 800);
       }
     } catch (error) {
       console.error(error);
@@ -89,7 +89,7 @@ const Header = () => {
                   <hr className="dropdown-divider" />
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#" onClick={handleLogOut}>
                     Sign out
                   </a>
                 </li>

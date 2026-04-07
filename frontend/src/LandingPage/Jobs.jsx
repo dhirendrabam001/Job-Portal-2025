@@ -2,9 +2,9 @@ import { useSelector } from "react-redux";
 import Header from "../Components/Auth/Header";
 import FilterJobs from "../Pages/FilterJobs";
 import OneJob from "../Pages/OneJob";
-const allJobs = [1, 2, 3, 4, 5, 6, 7, 8];
+// const allJobs = [1, 2, 3, 4, 5, 6, 7, 8];
 const Jobs = () => {
-  // const { allJobs } = useSelector((store) => store.job);
+  const { allJobs } = useSelector((store) => store.jobs);
 
   return (
     <>
@@ -26,7 +26,7 @@ const Jobs = () => {
                   ) : (
                     allJobs.map((job, index) => (
                       <div className="col-12 col-md-4 col-lg-4" key={index}>
-                        <OneJob />
+                        <OneJob key={job._id} job={job} />
                       </div>
                     ))
                   )}

@@ -144,15 +144,22 @@ const logout = async (req, res) => {
 // UpdatedProfile
 const updateProfile = async (req, res) => {
   try {
-    const file = req.file;
-
     const userId = req.id; // middleware authentication
     const { fullName, email, phoneNumber, bio, skills } = req.body;
-    console.log("BODY:", req.body);
-    console.log("FILE:", req.file);
+    const file = req.file;
+    const fileUri = getDataUri(file);
+    const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+    // const cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
+    //   resource_type: "auto", // handle non-image files
+    //   type: "upload", // make it publicly accessible
+    // });
 
     // check userid
     let user = await User.findById(userId);
+    // skils
+    if (skills) {
+      user.profile.skills = skills.split(",").map((s) => s.trim());
+    }
 
     if (!user) {
       return res
@@ -172,32 +179,15 @@ const updateProfile = async (req, res) => {
     if (phoneNumber) user.phoneNumber = phoneNumber;
     if (bio) user.profile.bio = bio;
 
-    // skils
-    if (skills) {
-      user.profile.skills = skills.split(",").map((s) => s.trim());
+    //  cloudinary
+    if (cloudResponse) {
+      user.profile.resume = cloudResponse.secure_url;
+      user.profile.resumeOriginalName = file.originalname;
     }
 
-    // RESUME UPLOAD
-    // RESUME UPLOAD
-    if (file && file.buffer) {
-      const fileUri = getDataUri(file);
-      console.log("file info", fileUri);
-
-      const cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
-        folder: "job-portal/resumes",
-        resource_type: "raw",
-      });
-
-      console.log("cloudinary response:", cloudResponse);
-
-      if (cloudResponse) {
-        user.profile.resume = cloudResponse.secure_url;
-        user.profile.resumeOriginalName = file.originalname;
-      }
-    }
     await user.save();
 
-    userUpdate = {
+    user = {
       id: user._id,
       fullName: user.fullName,
       email: user.email,
@@ -206,18 +196,15 @@ const updateProfile = async (req, res) => {
       profile: user.profile,
     };
 
-    return res
-      .status(200)
-      .json({
-        success: true,
-        user: userUpdate,
-        message: "Profile Updated Successfully",
-      });
+    return res.status(200).json({
+      success: true,
+      user,
+      message: "Profile Updated Successfully",
+    });
   } catch (error) {
-    console.error("Update Profile Error:", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error",
+      message: error.message || "Internal Server Error",
     });
   }
 };

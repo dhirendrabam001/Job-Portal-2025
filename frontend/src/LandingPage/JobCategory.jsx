@@ -9,10 +9,13 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import LatestJobs from "../Pages/LatestJobs";
+import { useSelector } from "react-redux";
 
-const allJobs = [1, 2, 3, 4];
+// const allJobs = [1, 2, 3, 4];
 
 const JobCategory = () => {
+  const { allJobs } = useSelector((store) => store.jobs);
+
   return (
     <div className="job-category py-4 mt-3 mt-md-0">
       <div className="container">
@@ -52,7 +55,7 @@ const JobCategory = () => {
           >
             {allJobs.map((job, index) => (
               <SwiperSlide key={index}>
-                <LatestJobs />
+                <LatestJobs key={job._id} job={job} />
               </SwiperSlide>
             ))}
           </Swiper>

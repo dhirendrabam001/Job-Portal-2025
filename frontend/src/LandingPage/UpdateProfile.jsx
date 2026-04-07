@@ -29,17 +29,12 @@ const UpdateProfile = ({ open, setOpen }) => {
 
   const fileChangeHandler = (e) => {
     const file = e.target.files[0];
-    console.log("Selected file:", file);
-
-    setInput((prev) => ({
-      ...prev,
-      file: file,
-    }));
+    setInput({ ...input, file });
   };
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log("Submitting file:", input.file);
+    // console.log("Submitting file:", input.file);
     dispatch(setLoading(true));
 
     const formData = new FormData();
@@ -55,14 +50,12 @@ const UpdateProfile = ({ open, setOpen }) => {
     }
 
     try {
-      const res = await axios.put(
+      const res = await axios.post(
         `${USER_API_END_POINT}/updateProfile`,
         formData,
         {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
           withCredentials: true,
+          // headers: { "Content-Type": "multipart/form-data" },
         },
       );
 
@@ -73,6 +66,7 @@ const UpdateProfile = ({ open, setOpen }) => {
       }
     } catch (error) {
       console.error(error);
+      // console.error("Axios error:", error.response || error.message);
       toast.error(error.response?.data?.message || "Something went wrong");
     } finally {
       dispatch(setLoading(false));
