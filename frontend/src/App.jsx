@@ -12,6 +12,9 @@ import Browsers from "./LandingPage/Browsers";
 import Profile from "./LandingPage/Profile";
 import DetailsJob from "./LandingPage/DetailsJob";
 
+// company routes
+import Company from "./Components/CompanyPage/Company";
+
 function App() {
   return (
     <BrowserRouter>
@@ -27,6 +30,9 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
+
+        {/* company routes */}
+        <Route path="admin/company" element={<Company />}></Route>
       </Routes>
       {/* <Footer />
       <FooterLast /> */}

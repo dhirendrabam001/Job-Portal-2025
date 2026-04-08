@@ -75,11 +75,14 @@ const Header = () => {
                 className="dropdown-menu dropdown-menu-dark text-small shadow"
                 aria-labelledby="dropdownUser1"
               >
-                <li>
-                  <Link to="/profile" className="dropdown-item">
-                    View Profile
-                  </Link>
-                </li>
+                {user && user.role === "student" && (
+                  <li>
+                    <Link to="/profile" className="dropdown-item">
+                      View Profile
+                    </Link>
+                  </li>
+                )}
+
                 <li>
                   <a className="dropdown-item" href="#">
                     Settings

@@ -37,8 +37,8 @@ const Login = () => {
       if (res.data.success) {
         dispatch(setUser(res.data.user)); // redux find user
         toast.success(res.data.message || "Login Successful");
+        navigate("/");
       }
-      navigate("/");
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
     } finally {
@@ -52,7 +52,7 @@ const Login = () => {
 
       <div className="loginInfo py-4">
         <div className="containerInfo">
-          {loading && <Loading />}
+          {/* {loading && <Loading />} */}
           <h2 className="fs-bold fs-3 mb-3">
             Log<span className="text-danger">in</span>
           </h2>
@@ -115,7 +115,7 @@ const Login = () => {
 
             <div className="login-btn text-center py-3 mt-2">
               <button type="submit" className="btn btn-danger fw-bold w-100">
-                Login
+                {loading && <Loading /> ? "Logging in..." : "Login"}
               </button>
             </div>
             <span className="text-muted mb-2 fs-6">

@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 const Navbar = () => {
+  const { user } = useSelector((store) => store.auth);
   const linkRoutes = [
     { name: "Home", url: "/" },
     { name: "Jobs", url: "/jobs" },
@@ -9,19 +10,18 @@ const Navbar = () => {
     { name: "About Us", url: "/about-us" },
   ];
 
-  const location = useLocation();
-  const [users, setUsers] = useState(null);
+  const recruiterRoutes = [
+    { name: "Companies", url: "admin/company" },
+    { name: "Jobs", url: "admin/jobs" },
+  ];
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUsers(JSON.parse(storedUser));
-    }
-  }, []);
+  const location = useLocation();
+  const routes =
+    user && user.role === "recruiter" ? recruiterRoutes : linkRoutes;
 
   return (
     <ul className="navbar-nav mx-auto mb-2 mb-lg-0 gap-0 gap-md-4">
-      {linkRoutes.map((items) => {
+      {routes.map((items) => {
         const isActive = location.pathname === items.url;
 
         return (
