@@ -1,56 +1,77 @@
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
-import axios from "axios";
+// import { useEffect } from "react";
+
 import { APPLICATION_API_POINT, JOBS_API_POINT } from "../utils/constantUrl";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { getSingleJob } from "../redux/jobSlice";
 import toast from "react-hot-toast";
-// import { setIsApplied, setSingleJob } from "../Components/re";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const DetailsJob = () => {
-  const { singleJob, isApplied } = useSelector((store) => store.job);
+  const { singleJob } = useSelector((store) => store.jobs);
+  const { user } = useSelector((store) => store.auth);
+
+  // check user apply or not particular job
+
+  const isFirstApplied = singleJob?.application?.some(
+    (application) => application.applicant === user?._id || false,
+  );
+  const [isApplied, setIsApplied] = useState(isFirstApplied);
 
   const params = useParams();
   const jobId = params.id;
-
   const dispatch = useDispatch();
-
-  //APPLY JOB HALDLEER
-
   useEffect(() => {
-    const fetchJob = async () => {
+    const fetchSingleJob = async () => {
       try {
         const res = await axios.get(
           `${JOBS_API_POINT}/getJobByIdStudent/${jobId}`,
-          { withCredentials: true },
+          {
+            withCredentials: true,
+          },
         );
-
         if (res.data.success) {
-          dispatch(setSingleJob(res.data.jobs));
-          dispatch(setIsApplied(res.data.isApplied)); // MOST IMPORTANT
+          dispatch(getSingleJob(res.data.jobs));
+          setIsApplied(
+            res.data.jobs.application.some(
+              (application) => application.applicant === user?._id,
+            ),
+          ); // ensure the state in fetch data
+
+          toast.success("All Jobs Are Fetched");
         }
       } catch (error) {
-        toast.error("Job not found");
+        console.error(error);
+        toast.error(error?.response?.data?.message || "Job Can Not Found");
       }
     };
+    fetchSingleJob();
+  }, [jobId, dispatch, user?._id]);
 
-    fetchJob();
-  }, [jobId, dispatch]);
+  //APPLY JOB HALDLEER
 
-  // 🔥 APPLY JOB
   const applyJobHandler = async () => {
     try {
       const res = await axios.get(
         `${APPLICATION_API_POINT}/applyJobs/${jobId}`,
-        { withCredentials: true },
+        {
+          withCredentials: true,
+        },
       );
-
       if (res.data.success) {
+        setIsApplied(true);
+        const updateSingleJob = {
+          ...singleJob,
+          application: [...singleJob.application, { applicant: user?._id }],
+        };
+        dispatch(getSingleJob(updateSingleJob)); // helps us to real time to ui
         toast.success("Job Applied Successfully");
-        dispatch(setIsApplied(true)); // INSTANT UI UPDATE
       }
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Already applied");
-      dispatch(setIsApplied(true)); //  EVEN IF ALREADY APPLIED
+      console.error(error);
+      toast.error(error?.response?.data?.message || "Job Can Not Applied");
     }
   };
 

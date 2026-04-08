@@ -2,5 +2,4 @@ export const USER_API_END_POINT = "http://localhost:5000/api/user";
 
 export const JOBS_API_POINT = "http://localhost:5000/api/jobs";
 
-export const APPLICATION_API_POINT =
-  "https://job-portal-backend-xnmw.onrender.com/api/application";
+export const APPLICATION_API_POINT = "http://localhost:5000/api/application";
