@@ -1,9 +1,7 @@
-import { IoSettingsOutline } from "react-icons/io5";
-// import Navbar from "./NavBar";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-import Navbar from "../Navbar";
+// import Navbar from "../Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/authSlice";
 
@@ -16,7 +14,7 @@ const Header = () => {
   const handleLogOut = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/user/logout",
+        "https://backend-job-portal-66jc.onrender.com/api/user/logout",
 
         { withCredentials: true },
       );
@@ -106,7 +104,3 @@ const Header = () => {
 };
 
 export default Header;
-
-//  {users && (
-
-// )}
