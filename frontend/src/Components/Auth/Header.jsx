@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-// import Navbar from "../Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/authSlice";
+import Navbar from "./Navbar";
 
 const Header = () => {
   const { user } = useSelector((store) => store.auth);
@@ -38,7 +38,6 @@ const Header = () => {
         <Link className="navbar-brand" to="/">
           <img src="/output.webp" width="150" height="50" />
         </Link>
-
         <div className="collapse navbar-collapse">
           <Navbar />
           {!user ? (
