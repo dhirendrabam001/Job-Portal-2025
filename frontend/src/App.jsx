@@ -14,6 +14,8 @@ import DetailsJob from "./LandingPage/DetailsJob";
 
 // company routes
 import Company from "./Components/CompanyPage/Company";
+import CreateCompany from "./Components/CompanyPage/CreateCompany";
+import CompanySetup from "./Components/CompanyPage/CompanySetup";
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
 
         {/* company routes */}
         <Route path="admin/company" element={<Company />}></Route>
+        <Route path="/admin/company/create" element={<CreateCompany />}></Route>
+        <Route path="/admin/company/:id" element={<CompanySetup />}></Route>
       </Routes>
       {/* <Footer />
       <FooterLast /> */}

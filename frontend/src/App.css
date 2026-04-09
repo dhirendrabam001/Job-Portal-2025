@@ -716,5 +716,199 @@ a.nav-link:hover {
   background: linear-gradient(135deg, #0b5ed7, #2563eb);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
+.company-table-main {
+  margin-top: 30px;
+}
+/* Table container */
+.company-table {
+  background-color: #383838 !important;
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.company-table thead th {
+  background-color: #383838 !important;
+  color: #cfcfcf;
+  border-bottom: 1px solid #444;
+  padding: 15px;
+}
+
+.company-table tbody td {
+  background-color: #383838 !important;
+  color: #e5e5e5;
+  border-bottom: 1px solid #444;
+  padding: 15px;
+}
+
+.company-table tbody tr:hover td {
+  background-color: #444 !important;
+}
+
+/* Row hover */
+.company-table tbody tr:hover {
+  background: #444444;
+  transition: 0.3s ease;
+}
+
+/* Logo */
+.company-logo {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Action icon */
+.action-icon {
+  font-size: 20px;
+  cursor: pointer;
+  color: #cfcfcf;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.action-icon:hover {
+  color: #ffffff;
+  transform: scale(1.2);
+}
+.custom-popover {
+  position: absolute;
+  right: 30px;
+  top: 25px;
+  padding: 10px;
+  border-radius: 6px;
+  width: 80px;
+  z-index: 100;
+  top: 1px;
+}
+
+.create-company-info {
+  background: #383838;
+  padding: 40px;
+  border-radius: 10px;
+  width: 100%;
+  margin: auto;
+  max-width: 950px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
+.create-heading h5 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.create-heading p {
+  font-size: 14px;
+  color: #cfcfcf;
+  margin-bottom: 25px;
+}
+.input-field label {
+  color: #d1d1d1;
+  font-weight: 500;
+}
+.input-field .form-control {
+  background: #404040;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 6px;
+}
+.input-field .form-control:focus {
+  background: #2d2d2d;
+  color: #fff;
+  border-color: #4da3ff;
+  box-shadow: 0 0 0 0.15rem rgba(77, 163, 255, 0.3);
+}
+/* button container */
+.create-button {
+  margin-top: 25px;
+}
+
+/* cancel button */
+.cancel-btn button {
+  padding: 8px 20px;
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+}
+
+.continue-btn button {
+  padding: 8px 20px;
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+}
+
+.btn-outline-warning:hover {
+  background: #ffc107;
+  color: #000;
+}
+
+.btn-outline-success:hover {
+  background: #198754;
+  color: #fff;
+}
+.company-setup-info {
+  background: #383838;
+  padding: 40px;
+  border-radius: 10px;
+  width: 100%;
+  margin: auto;
+  max-width: 950px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
+.company-setup-heading h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+.company-setup-btn button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+.company-form label {
+  color: #d1d1d1;
+  font-weight: 500;
+}
+.company-form .form-control {
+  background: #404040;
+  border: 1px solid #444;
+  color: #fff;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+/* input focus */
+.company-form .form-control:focus {
+  background: #2d2d2d;
+  border-color: #4da3ff;
+  color: #fff;
+  box-shadow: 0 0 0 0.15rem rgba(77, 163, 255, 0.3);
+}
+
+/* textarea */
+.company-form textarea {
+  resize: none;
+}
+
+/* update button */
+.company-form button {
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
+
+/* hover effect */
+.company-form button:hover {
+  background: #198754;
+  color: #fff;
+}
 
 /* company home pagess admin css end */
