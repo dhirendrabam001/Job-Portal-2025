@@ -18,9 +18,12 @@ const applicationRoute = require("./routes/application.routes");
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://job-portal-bi00.onrender.com"],
+    origin: [
+      "http://localhost:5173",
+      "https://backend-job-portal-66jc.onrender.com",
+    ],
     credentials: true,
-  })
+  }),
 );
 
 // Apis
