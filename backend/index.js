@@ -18,10 +18,7 @@ const applicationRoute = require("./routes/application.routes");
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://backend-job-portal-66jc.onrender.com",
-    ],
+    origin: ["http://localhost:5173", "https://hirehub-portal.vercel.app"],
     credentials: true,
   }),
 );
