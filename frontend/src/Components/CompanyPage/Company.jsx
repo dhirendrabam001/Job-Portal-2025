@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import Header from "../Auth/Header";
 import CompanyTable from "./CompanyTable";
+import useGetAllCompanyJobs from "../../Hooks/useGetAllCompanyJobs";
 
 const Company = () => {
+  useGetAllCompanyJobs();
   const navigate = useNavigate();
   return (
     <>

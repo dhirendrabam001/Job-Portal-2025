@@ -4,17 +4,20 @@ import axios from "axios";
 import { COMPANY_API_POINT } from "../../utils/constantUrl";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSingleCompany } from "../../redux/companySlice";
+import { setLoading } from "../../redux/authSlice";
+import Loading from "../Loading";
 
 const CreateCompany = () => {
-  //   const {} = useSelector((store) => store.company); // store redux
+  const { loading } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [companyName, setCompanyName] = useState(); // get user input
 
   const registerNewCompany = async () => {
     try {
+      dispatch(setLoading(true));
       const res = await axios.post(
         `${COMPANY_API_POINT}/companyInfo`,
         { companyName },
@@ -34,6 +37,8 @@ const CreateCompany = () => {
     } catch (error) {
       console.error(error);
       toast.error(error.response?.data?.message || "Something went wrong");
+    } finally {
+      dispatch(setLoading(false));
     }
   };
   return (
@@ -41,6 +46,7 @@ const CreateCompany = () => {
       <Header />
       <div className="homePage-main">
         <div className="create-company-info">
+          {loading && <Loading />}
           <div className="create-heading">
             <h5>Your Company Name</h5>
             <p>

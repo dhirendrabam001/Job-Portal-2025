@@ -36,7 +36,6 @@ const CompanySetup = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     dispatch(setLoading(true));
-    console.log("input Data", input);
     const formData = new FormData();
     formData.append("companyName", input.companyName);
     formData.append("location", input.location);
