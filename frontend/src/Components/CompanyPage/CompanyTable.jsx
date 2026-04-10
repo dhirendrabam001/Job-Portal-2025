@@ -12,7 +12,7 @@ const CompanyTable = () => {
           <thead>
             <tr>
               <th>Logo</th>
-              <th>Name</th>
+              <th>Company Name</th>
               <th>Date</th>
               <th className="text-center">Action</th>
             </tr>

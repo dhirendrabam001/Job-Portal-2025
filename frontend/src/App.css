@@ -7,6 +7,7 @@ body {
   font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
+  background: var(--mine-shaft-950) !important;
 }
 .loading-overlay {
   position: fixed;
@@ -860,6 +861,7 @@ a.nav-link:hover {
   max-width: 950px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
   color: #fff;
+  margin-top: 50px;
 }
 .company-setup-heading h2 {
   font-size: 24px;
@@ -910,5 +912,7 @@ a.nav-link:hover {
   background: #198754;
   color: #fff;
 }
-
+.company-top {
+  margin-top: 40px;
+}
 /* company home pagess admin css end */

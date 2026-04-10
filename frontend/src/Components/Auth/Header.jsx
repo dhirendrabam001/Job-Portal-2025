@@ -14,7 +14,7 @@ const Header = () => {
   const handleLogOut = async () => {
     try {
       const res = await axios.get(
-        "https://backend-job-portal-66jc.onrender.com/api/user/logout",
+        "http://localhost:5000/api/user/logout",
 
         { withCredentials: true },
       );

@@ -15,11 +15,11 @@ const useGetAllJobs = () => {
         });
         if (res.data.success) {
           dispatch(setAllJob(res.data.jobs));
-          toast.success("All Jobs Are Fetched");
+          toast.success(res.data.message);
         }
       } catch (error) {
         console.error(error);
-        toast.error(error?.response?.data?.message || "Job Can Not Found");
+        toast.error(error?.response?.data?.message);
       }
     };
     fetchAllJobs();

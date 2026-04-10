@@ -1,4 +1,6 @@
 const { Company } = require("../models/company.model");
+const getDataUri = require("../utils/dataUriParser");
+const cloudinary = require("../utils/cloudinary");
 
 const companyDataRegister = async (req, res) => {
   try {
@@ -84,15 +86,17 @@ const getCompanyById = async (req, res) => {
 const updateCompany = async (req, res) => {
   try {
     const { companyName, description, website, locations } = req.body;
-    const file = req.body;
+
+    const file = req.file;
 
     //Comes here cloudnauray later
+    const fileUri = getDataUri(file);
 
     const updateDataInfo = { companyName, description, website, locations };
     let company = await Company.findByIdAndUpdate(
       req.params.id,
       updateDataInfo,
-      { new: true }
+      { new: true },
     );
 
     // check the company here or not
