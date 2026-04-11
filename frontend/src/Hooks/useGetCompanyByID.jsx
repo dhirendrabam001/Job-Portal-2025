@@ -3,8 +3,7 @@ import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { COMPANY_API_POINT, JOBS_API_POINT } from "../utils/constantUrl";
 import { useDispatch } from "react-redux";
-import { setSingleCompany } from "../redux/companySlice";
-// import { useParams } from "react-router-dom";
+import { setCompany } from "../redux/companySlice";
 
 const useGetCompanyByID = (userId) => {
   //   const params = useParams();
@@ -20,7 +19,7 @@ const useGetCompanyByID = (userId) => {
           },
         );
         if (res.data.success) {
-          dispatch(setSingleCompany(res.data.company));
+          dispatch(setCompany(res.data.company));
         }
       } catch (error) {
         console.error(error);

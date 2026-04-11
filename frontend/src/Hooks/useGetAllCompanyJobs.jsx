@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { COMPANY_API_POINT } from "../utils/constantUrl";
 import { useDispatch } from "react-redux";
-import { setAllCompanyJobs } from "../redux/companySlice";
+import { setCompany } from "../redux/companySlice";
 
 const useGetAllCompanyJobs = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const useGetAllCompanyJobs = () => {
           withCredentials: true,
         });
         if (res.data.success) {
-          dispatch(setAllCompanyJobs(res.data.company));
+          dispatch(setCompany(res.data.company));
         }
       } catch (error) {
         console.error(error);

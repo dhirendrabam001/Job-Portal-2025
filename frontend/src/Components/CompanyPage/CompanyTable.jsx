@@ -1,12 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaEllipsisH } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const CompanyTable = () => {
+  const { company, searchCompanyText } = useSelector((store) => store.company);
   const [showpPopover, setShowPopover] = useState(false);
-  const { allCompanyJob = [] } = useSelector((store) => store.company || {});
+  const [filterCompany, setFilterCompany] = useState(company);
 
+  useEffect(() => {
+    const filterCompany =
+      company.length >= 0 &&
+      company.filter((company) => {
+        if (!searchCompanyText) {
+          return true;
+        }
+        return company?.companyName
+          ?.toLowerCase()
+          .includes(searchCompanyText.toLowerCase());
+      });
+    setFilterCompany(filterCompany);
+  }, [company, searchCompanyText]);
   return (
     <>
       <div className="table-responsive">
@@ -20,14 +34,14 @@ const CompanyTable = () => {
             </tr>
           </thead>
           <tbody>
-            {allCompanyJob.length === 0 ? (
+            {filterCompany.length === 0 ? (
               <tr>
                 <td colSpan="4" className="text-center">
                   Company Not Found
                 </td>
               </tr>
             ) : (
-              allCompanyJob.map((company) => {
+              filterCompany.map((company) => {
                 return (
                   <tr key={company?._id}>
                     <td>
