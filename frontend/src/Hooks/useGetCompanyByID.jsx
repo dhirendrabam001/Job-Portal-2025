@@ -21,7 +21,6 @@ const useGetCompanyByID = (userId) => {
         );
         if (res.data.success) {
           dispatch(setSingleCompany(res.data.company));
-          toast.success(res.data.message);
         }
       } catch (error) {
         console.error(error);

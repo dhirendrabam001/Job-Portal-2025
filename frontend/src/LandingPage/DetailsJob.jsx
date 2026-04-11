@@ -39,8 +39,6 @@ const DetailsJob = () => {
               (application) => application.applicant === user?._id,
             ),
           ); // ensure the state in fetch data
-
-          toast.success("All Jobs Are Fetched");
         }
       } catch (error) {
         console.error(error);

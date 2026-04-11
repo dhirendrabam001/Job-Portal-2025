@@ -15,7 +15,6 @@ const useGetAllJobs = () => {
         });
         if (res.data.success) {
           dispatch(setAllJob(res.data.jobs));
-          toast.success(res.data.message);
         }
       } catch (error) {
         console.error(error);
