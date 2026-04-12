@@ -4,6 +4,12 @@ const { Application } = require("../models/application.model");
 // JOBS CREATED BY ADMIN
 const postJobs = async (req, res) => {
   try {
+    const role = req.role;
+    if (role !== "recruiter") {
+      return res
+        .status(404)
+        .json({ success: false, message: "Only Admin Can Post Jobs" });
+    }
     const {
       title,
       description,
@@ -93,17 +99,31 @@ const getAllJobPost = async (req, res) => {
 // HOW MANY JOBS POST BY ADMIN
 const getJobsByAdmin = async (req, res) => {
   try {
+    const role = req.role;
+
+    if (role !== "recruiter") {
+      return res
+        .status(404)
+        .json({ success: false, message: "Only Recruiter Can Accessed Jobs" });
+    }
     const adminId = req.id; //logged id
-    const jobs = await Jobs.find({ created_by: adminId });
+
+    const jobs = await Jobs.find({ created_by: adminId }).populate({
+      path: "company",
+      createdAt: -1,
+    });
     if (!jobs) {
       return res
         .status(400)
         .json({ success: false, message: "Jobs Not Found By Admin" });
     }
 
-    return res
-      .status(200)
-      .json({ success: true, jobs, message: "All Posted Jobs Admin Fetched" });
+    return res.status(200).json({
+      success: true,
+      totalJobs: jobs.length,
+      jobs,
+      message: "All Posted Jobs Admin Fetched",
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: "Server Error" });

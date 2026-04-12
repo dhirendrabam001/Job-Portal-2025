@@ -11,8 +11,8 @@ const Navbar = () => {
   ];
 
   const recruiterRoutes = [
-    { name: "Companies", url: "admin/company" },
-    { name: "Jobs", url: "admin/jobs" },
+    { name: "Companies", url: "/admin/company" },
+    { name: "Jobs", url: "/admin/jobs" },
   ];
 
   const location = useLocation();

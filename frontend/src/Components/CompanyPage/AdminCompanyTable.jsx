@@ -1,32 +1,33 @@
 import { useEffect, useState } from "react";
 import { MdEdit } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { setCompany, setSearchCompanyText } from "../../redux/companySlice";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { COMPANY_API_POINT } from "../../utils/constantUrl";
 import {} from "react-redux";
+import { setAdminJobs } from "../../redux/jobSlice";
 
-const CompanyTable = () => {
+const AdminCompanyTable = () => {
   const dispatch = useDispatch();
-  const { company, searchCompanyText } = useSelector((store) => store.company);
-  const [filterCompany, setFilterCompany] = useState([]);
+  //   const { company, searchCompanyText } = useSelector((store) => store.company);
+  const { adminJobs, searchJobByText } = useSelector((store) => store.jobs);
+  const [filterJobs, setFilterJobs] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const filterd = Array.isArray(company)
-      ? company.filter((company) => {
-          if (!searchCompanyText) {
+    const filterd = Array.isArray(adminJobs)
+      ? adminJobs.filter((job) => {
+          if (!searchJobByText) {
             return true;
           }
-          return company?.companyName
+          return job?.company?.companyName
             ?.toLowerCase()
-            .includes(searchCompanyText.toLowerCase());
+            .includes(searchJobByText.toLowerCase());
         })
       : [];
-    setFilterCompany(filterd);
-  }, [company, searchCompanyText]);
+    setFilterJobs(filterd);
+  }, [adminJobs, searchJobByText]);
 
   const deleteHandler = async (id) => {
     const confirmDelete = window.confirm(
@@ -44,8 +45,8 @@ const CompanyTable = () => {
         toast.success(res.data.message || "Company Deleted Successfully");
 
         // delete from redux also
-        const updatedCompany = company.filter((c) => c._id !== id);
-        dispatch(setCompany(updatedCompany));
+        const updatedCompany = filterJobs.filter((c) => c._id !== id);
+        dispatch(setAdminJobs(updatedCompany));
       }
     } catch (error) {
       console.error(error);
@@ -59,45 +60,36 @@ const CompanyTable = () => {
         <table className="table company-table">
           <thead>
             <tr>
-              <th>Logo</th>
               <th>Company Name</th>
+              <th>Role</th>
               <th>Date</th>
               <th className="text-center">Action</th>
             </tr>
           </thead>
           <tbody>
-            {filterCompany.length === 0 ? (
+            {filterJobs.length === 0 ? (
               <tr>
                 <td colSpan="4" className="text-center">
                   Company Not Found
                 </td>
               </tr>
             ) : (
-              filterCompany.map((company) => {
+              filterJobs.map((job) => {
                 return (
-                  <tr key={company?._id}>
-                    <td>
-                      <img
-                        src={company.logo}
-                        className="company-logo"
-                        alt="logo"
-                      />
-                    </td>
-
-                    <td>{company.companyName}</td>
-                    <td>{company.createdAt.split("T")[0]}</td>
+                  <tr key={job?._id}>
+                    <td>{job?.company?.companyName}</td>
+                    <td>{job?.title}</td>
+                    <td>{job?.createdAt.split("T")[0]}</td>
                     <td className="text-center d-flex align-items-center gap-3 custom-btn justify-content-center">
                       <button
                         className="btn btn-sm btn-primary fw-bold mb-1"
-                        onClick={() =>
-                          navigate(`/admin/company/${company?._id}`)
-                        }
+                        onClick={() => navigate(`/admin/company/${job?._id}`)}
                       >
                         <MdEdit className="mb-1" /> Edit
                       </button>
                       <button
                         className="btn btn-sm btn-danger fw-bold mb-1"
-                        onClick={() => deleteHandler(company?._id)}
+                        onClick={() => deleteHandler(job?._id)}
                       >
                         <MdEdit className="mb-1" /> Delete
                       </button>
@@ -113,4 +105,4 @@ const CompanyTable = () => {
   );
 };
 
-export default CompanyTable;
+export default AdminCompanyTable;

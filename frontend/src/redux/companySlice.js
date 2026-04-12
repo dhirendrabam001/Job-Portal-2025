@@ -11,6 +11,7 @@ const companySlice = createSlice({
     setCompany: (state, action) => {
       state.company = action.payload;
     },
+
     setSingleCompany: (state, action) => {
       state.singleCompany = action.payload;
     },

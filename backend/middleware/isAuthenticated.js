@@ -20,7 +20,11 @@ const isAuthenticates = async (req, res, next) => {
     // if all complete check id
 
     req.id = decoded.userId; // Old methods
+    req.role = decoded.role; // important based on user role
     req.user = { _id: decoded.userId }; //New Methods
+    // console.log("Decoded token:", decoded);
+    // console.log("req.id:", req.id, "req.role:", req.role);
+
     next();
   } catch (error) {
     console.error(error);
