@@ -892,17 +892,9 @@ body {
   color: #ffffff;
   transform: scale(1.2);
 }
-.custom-popover {
-  position: absolute;
-  right: 30px;
-  top: 25px;
-  padding: 10px;
-  border-radius: 6px;
-  width: 80px;
-  z-index: 100;
-  top: 1px;
+.custom-btn button {
+  width: 80px !important;
 }
-
 .create-company-info {
   background: #383838;
   padding: 40px;

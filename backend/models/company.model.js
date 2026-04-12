@@ -13,7 +13,7 @@ const companySchema = new mongoose.Schema(
     website: {
       type: String,
     },
-    locations: {
+    location: {
       type: String,
     },
     logo: {
@@ -25,7 +25,7 @@ const companySchema = new mongoose.Schema(
       required: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const Company = mongoose.model("Company", companySchema);

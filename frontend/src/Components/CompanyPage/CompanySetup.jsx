@@ -8,12 +8,17 @@ import { COMPANY_API_POINT } from "../../utils/constantUrl";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../Loading";
 import { setLoading } from "../../redux/authSlice";
+import useGetCompanyByID from "../../Hooks/useGetCompanyByID";
 
 const CompanySetup = () => {
   const { loading } = useSelector((store) => store.auth);
   const { singleCompany } = useSelector((store) => store.company);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const params = useParams();
+  const userId = params.id;
+
+  useGetCompanyByID(userId);
   const [input, setInput] = useState({
     companyName: "",
     location: "",
@@ -29,9 +34,6 @@ const CompanySetup = () => {
     const file = e.target.files?.[0];
     setInput({ ...input, file });
   };
-
-  const params = useParams();
-  const userId = params.id;
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -72,13 +74,15 @@ const CompanySetup = () => {
 
   // first call useeffect
   useEffect(() => {
-    setInput({
-      companyName: singleCompany.companyName || "",
-      location: singleCompany.location || "",
-      website: singleCompany.website || "",
-      file: singleCompany.file || null,
-      description: singleCompany.description || "",
-    });
+    if (singleCompany) {
+      setInput({
+        companyName: singleCompany?.companyName || "",
+        location: singleCompany?.location || "",
+        website: singleCompany?.website || "",
+        file: singleCompany?.file || null,
+        description: singleCompany?.description || "",
+      });
+    }
   }, [singleCompany]);
 
   return (

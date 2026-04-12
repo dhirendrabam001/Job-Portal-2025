@@ -85,22 +85,27 @@ const getCompanyById = async (req, res) => {
 // UpdatedCompany
 const updateCompany = async (req, res) => {
   try {
-    const { companyName, description, website, locations } = req.body;
+    const { companyName, description, website, location } = req.body;
 
     const file = req.file;
-
-    //Comes here cloudnauray later
-    const fileUri = getDataUri(file);
-    const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
-    const logo = cloudResponse.secure_url;
+    let logo;
+    if (req.file) {
+      //Comes here cloudnauray later
+      const fileUri = getDataUri(file);
+      const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+      logo = cloudResponse.secure_url;
+    }
 
     const updateDataInfo = {
       companyName,
       description,
       website,
-      locations,
-      logo,
+      location,
     };
+
+    if (logo) {
+      updateDataInfo.logo = logo; //update logo;
+    }
     let company = await Company.findByIdAndUpdate(
       req.params.id,
       updateDataInfo,
@@ -124,9 +129,30 @@ const updateCompany = async (req, res) => {
   }
 };
 
+const deleteCompanyById = async (req, res) => {
+  try {
+    const companyId = req.params.id;
+    console.log(companyId);
+
+    const company = await Company.findByIdAndDelete(companyId);
+    if (!company) {
+      return res
+        .status(404)
+        .json({ succes: false, message: "Company Does Not Found" });
+    }
+    return res
+      .status(200)
+      .json({ success: true, message: "Company Deleted Successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+};
+
 module.exports = {
   companyDataRegister,
   getCompany,
   getCompanyById,
   updateCompany,
+  deleteCompanyById,
 };

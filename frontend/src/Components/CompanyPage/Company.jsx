@@ -9,7 +9,7 @@ import { setSearchCompanyText } from "../../redux/companySlice";
 const Company = () => {
   useGetAllCompanyJobs();
   const navigate = useNavigate();
-  const [input, setInput] = useState("false");
+  const [input, setInput] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {

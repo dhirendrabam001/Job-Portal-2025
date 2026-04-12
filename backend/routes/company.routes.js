@@ -7,6 +7,7 @@ const {
   getCompany,
   getCompanyById,
   updateCompany,
+  deleteCompanyById,
 } = require("../controllers/company.controller");
 const isAuthenticates = require("../middleware/isAuthenticated");
 
@@ -19,5 +20,6 @@ router.put(
   upload.single("file"),
   updateCompany,
 );
+router.delete("/deleteCompany/:id", isAuthenticates, deleteCompanyById);
 
 module.exports = router;

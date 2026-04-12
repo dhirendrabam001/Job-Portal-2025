@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
-import { COMPANY_API_POINT, JOBS_API_POINT } from "../utils/constantUrl";
+import { COMPANY_API_POINT } from "../utils/constantUrl";
 import { useDispatch } from "react-redux";
-import { setCompany } from "../redux/companySlice";
+import { setSingleCompany } from "../redux/companySlice";
+// import { useParams } from "react-router-dom";
 
 const useGetCompanyByID = (userId) => {
-  //   const params = useParams();
-  //   const userId = params.id;
+  // const params = useParams();
+  // const userId = params.id;
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchSingleCompany = async () => {
@@ -19,7 +20,7 @@ const useGetCompanyByID = (userId) => {
           },
         );
         if (res.data.success) {
-          dispatch(setCompany(res.data.company));
+          dispatch(setSingleCompany(res.data.company));
         }
       } catch (error) {
         console.error(error);
