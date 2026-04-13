@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
   auth: authSlice,
   jobs: jobSlice,
   company: companySlice,
-  applicant: applicationSlice,
+  application: applicationSlice,
 });
 
 const persistConfig = {

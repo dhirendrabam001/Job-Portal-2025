@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
 const AdminApplicantTable = () => {
-  const { allApplicant } = useSelector((store) => store.applicant);
+  const { allApplicant } = useSelector((store) => store.application);
+  const isArr = Array.isArray(allApplicant);
+  console.log("check array", isArr);
 
   return (
     <>
@@ -25,7 +27,11 @@ const AdminApplicantTable = () => {
                     <td>{item?.applicant?.email}</td>
                     <td>{item?.applicant?.phoneNumber}</td>
                     <td>
-                      <a href={item?.applicant?.resume} target="_blank">
+                      <a
+                        href={item?.applicant?.profile?.resume}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         {item?.applicant?.profile?.resumeOriginalName}
                       </a>
                     </td>

@@ -148,26 +148,15 @@ const updateProfile = async (req, res) => {
     const userId = req.id; // middleware authentication
     const { fullName, email, phoneNumber, bio, skills } = req.body;
     const file = req.file;
-    const fileUri = getDataUri(file);
-    const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
-    // const cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
-    //   resource_type: "auto", // handle non-image files
-    //   type: "upload", // make it publicly accessible
-    // });
 
     // check userid
     let user = await User.findById(userId);
-    // skils
-    if (skills) {
-      user.profile.skills = skills.split(",").map((s) => s.trim());
-    }
 
     if (!user) {
       return res
         .status(400)
         .json({ success: false, message: "User Not Found" });
     }
-
     // 🔥 Ensure profile exists
     if (!user.profile) {
       user.profile = {};
@@ -179,13 +168,34 @@ const updateProfile = async (req, res) => {
     if (email) user.email = email;
     if (phoneNumber) user.phoneNumber = phoneNumber;
     if (bio) user.profile.bio = bio;
+    // skils
+    if (skills) {
+      user.profile.skills = skills.split(",").map((s) => s.trim());
+    }
+    //  Upload resume to cloudinary
+    // Upload resume ONLY if file exists
+    if (file) {
+      // file type check
+      if (file.mimetype !== "application/pdf") {
+        return res.status(400).json({
+          success: false,
+          message: "Only PDF File Allowed",
+        });
+      }
 
-    //  cloudinary
-    if (cloudResponse) {
+      const fileUri = getDataUri(file);
+
+      const cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
+        resource_type: "auto", // ✅ correct
+        folder: "resumes",
+        access_mode: "public", // 🔥 IMPORTANT FIX
+      });
+
+      console.log("Cloudinary URL:", cloudResponse.secure_url);
+
       user.profile.resume = cloudResponse.secure_url;
       user.profile.resumeOriginalName = file.originalname;
     }
-
     await user.save();
 
     user = {

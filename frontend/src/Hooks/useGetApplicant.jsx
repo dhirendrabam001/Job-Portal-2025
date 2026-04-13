@@ -17,7 +17,9 @@ const useGetApplicant = (id) => {
           },
         );
         if (res.data.success) {
-          dispatch(setAllApplicant(res.data.jobs.application));
+          console.log("res data", res.data.application);
+
+          dispatch(setAllApplicant(res.data.application));
         }
       } catch (error) {
         console.error(error);

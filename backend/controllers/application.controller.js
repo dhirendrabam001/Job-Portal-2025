@@ -112,9 +112,11 @@ const getAdminApplicant = async (req, res) => {
         .json({ success: false, message: "Admin Jobs Are Not Founds" });
     }
 
-    return res
-      .status(200)
-      .json({ success: true, jobs, message: "All Admin Jobs Fetched" });
+    return res.status(200).json({
+      success: true,
+      application: jobs.application,
+      message: "All Admin Jobs Fetched",
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: "Server Error" });

@@ -29,12 +29,16 @@ const UpdateProfile = ({ open, setOpen }) => {
 
   const fileChangeHandler = (e) => {
     const file = e.target.files[0];
+    if (file && file.type !== "application/pdf") {
+      toast.error("Only PDF Can Allowed");
+      return;
+    }
     setInput({ ...input, file });
   };
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    // console.log("Submitting file:", input.file);
+    console.log("Submitting file:", input.file);
     dispatch(setLoading(true));
 
     const formData = new FormData();
