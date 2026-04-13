@@ -18,6 +18,7 @@ import CreateCompany from "./Components/CompanyPage/CreateCompany";
 import CompanySetup from "./Components/CompanyPage/CompanySetup";
 import AdminJobs from "./Components/CompanyPage/AdminJobs";
 import CreateCompanyJobs from "./Components/CompanyPage/CreateCompanyJobs";
+import AdminViewApplicant from "./Components/CompanyPage/AdminViewApplicant";
 
 function App() {
   return (
@@ -43,6 +44,10 @@ function App() {
         <Route
           path="/admin/jobs/create"
           element={<CreateCompanyJobs />}
+        ></Route>
+        <Route
+          path="/admin/jobs/:id/applicant"
+          element={<AdminViewApplicant />}
         ></Route>
       </Routes>
       {/* <Footer />

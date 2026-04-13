@@ -89,9 +89,11 @@ const AdminCompanyTable = () => {
                       </button>
                       <button
                         className="btn btn-sm btn-danger fw-bold mb-1"
-                        onClick={() => deleteHandler(job?._id)}
+                        onClick={() =>
+                          navigate(`/admin/jobs/${job?._id}/applicant`)
+                        }
                       >
-                        <MdEdit className="mb-1" /> Delete
+                        <MdEdit className="mb-1" /> View
                       </button>
                     </td>
                   </tr>
