@@ -24,7 +24,7 @@ const OneJob = ({ job }) => {
           </div>
           <div className="card-img d-flex gap-3">
             <div className="card-imges">
-              <img src="/Google.webp" alt="" />
+              <img src={job?.company?.logo} alt="" />
             </div>
 
             <div className="card-img-content text-white">

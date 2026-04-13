@@ -180,7 +180,7 @@ const CompanySetup = () => {
                 <div className="col-12">
                   <button
                     type="submit"
-                    className="btn btn-outline-success w-100 fw-bold text-white"
+                    className="btn btn-outline-primary w-100 fw-bold text-white"
                   >
                     Update
                   </button>

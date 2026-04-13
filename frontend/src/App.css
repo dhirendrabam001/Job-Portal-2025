@@ -1019,10 +1019,68 @@ body {
 
 /* hover effect */
 .company-form button:hover {
-  background: #198754;
+  /* background: #198754; */
   color: #fff;
 }
 .company-top {
   margin-top: 40px;
 }
+
+/* post jobs css */
+.adminjobs-main {
+  background: #383838;
+  padding: 40px;
+  border-radius: 10px;
+  width: 100%;
+  margin: auto;
+  max-width: 950px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  margin-top: 50px;
+}
+.company-setup-heading h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+.company-setup-btn button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+.company-form select {
+  background: #404040;
+  border: 1px solid #444;
+  color: #d6d1d1;
+  border-radius: 6px;
+  padding: 11px 12px;
+  width: 100%;
+  font-size: 16px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative;
+  margin-top: 16px;
+}
+.company-form select {
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23ffffff' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 30px;
+}
+.company-form select:focus {
+  background: #2d2d2d;
+  border-color: #4da3ff;
+  color: #d6d1d1;
+  box-shadow: 0 0 0 0.15rem rgba(77, 163, 255, 0.3);
+  outline: none;
+}
+.company-form select option {
+  background: #2d2d2d !important;
+  color: #c9c3c3 !important;
+  padding: 8px;
+}
+
 /* company home pagess admin css end */

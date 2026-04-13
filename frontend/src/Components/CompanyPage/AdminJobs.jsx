@@ -34,7 +34,7 @@ const AdminJobs = () => {
               <div className="d-flex align-items-center justify-content-end company-search">
                 <button
                   type="button"
-                  onClick={() => navigate("/admin/company/create")}
+                  onClick={() => navigate("/admin/jobs/create")}
                   className="btn btn-outline-primary text-white fw-bold"
                 >
                   Post Job
