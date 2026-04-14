@@ -6,8 +6,6 @@ const Navbar = () => {
     { name: "Home", url: "/" },
     { name: "Jobs", url: "/jobs" },
     { name: "Browsers", url: "/browsers" },
-    { name: "Upload Jobs", url: "/upload-jobs" },
-    { name: "About Us", url: "/about-us" },
   ];
 
   const recruiterRoutes = [
@@ -20,7 +18,7 @@ const Navbar = () => {
     user && user.role === "recruiter" ? recruiterRoutes : linkRoutes;
 
   return (
-    <ul className="navbar-nav mx-auto mb-2 mb-lg-0 gap-0 gap-md-4">
+    <ul className="navbar-nav ms-auto mb-2 mb-lg-0 gap-0 gap-md-4">
       {routes.map((items) => {
         const isActive = location.pathname === items.url;
 

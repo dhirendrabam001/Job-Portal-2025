@@ -1,32 +1,32 @@
 import axios from "axios";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
 import { APPLICATION_API_POINT } from "../utils/constantUrl";
-import { setAllApplicant } from "../redux/applicationSlice";
+import { useDispatch } from "react-redux";
+import { setGetAppliedJob } from "../redux/jobSlice";
 
-const useGetApplicant = (id) => {
+const useGetAllAppliedJob = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    const fetchApplicant = async () => {
+    const fetchAllAppliedJob = async () => {
       try {
         const res = await axios.get(
-          `${APPLICATION_API_POINT}/getApplicantAdmin/${id}`,
+          `${APPLICATION_API_POINT}/getAppliedJobInfo`,
           {
             withCredentials: true,
           },
         );
+
         if (res.data.success) {
-          dispatch(setAllApplicant(res.data.application));
+          dispatch(setGetAppliedJob(res.data.application));
         }
       } catch (error) {
         console.error(error);
         toast.error(error?.response?.data?.message);
-        console.error("backend error", error);
       }
     };
-    fetchApplicant();
-  }, [id, dispatch]);
+    fetchAllAppliedJob();
+  }, [dispatch]);
 };
 
-export default useGetApplicant;
+export default useGetAllAppliedJob;

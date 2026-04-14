@@ -6,8 +6,10 @@ import AppliedJobs from "./AppliedJobs";
 import { useState } from "react";
 import UpdateProfile from "./UpdateProfile";
 import { useSelector } from "react-redux";
+import useGetAllAppliedJob from "../Hooks/useGetAllAppliedJob";
 
 const Profile = () => {
+  useGetAllAppliedJob();
   const { user } = useSelector((store) => store.auth);
 
   const [open, setOpen] = useState(false);

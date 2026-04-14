@@ -1,42 +1,69 @@
+import { FaMapMarkerAlt, FaClock, FaBriefcase } from "react-icons/fa";
 const LatestJobs = ({ job }) => {
   return (
-    <>
-      <div className="container">
-        <div className="job-card">
-          {/* <div className="card shadow py-4">
-            <div className="card-img-content text-white">
-              <h5>Company Name</h5>
-              <p>Company Location</p>
+    <div className="container">
+      <div className="row">
+        <div className="col-12 col-md-6 col-lg-4">
+          <div className="latestjob-card">
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <div className="d-flex align-items-center gap-2">
+                <div className="logo-box">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
+                    alt="logo"
+                  />
+                </div>
+                <div>
+                  <h6 className="mb-0 fw-bold text-white">
+                    Dhirendra private Company
+                  </h6>
+                  <small>
+                    <FaMapMarkerAlt className="me-1" />
+                    New York, US
+                  </small>
+                </div>
+              </div>
+              <span className="text-success fw-bold">⚡</span>
             </div>
 
-            <div className="main-card-content">
-              <h4 className="text-white fw-bold fs-5">Company Title</h4>
-              <p className="text-white">Company Description</p>
-              <div className="badge-info d-flex align-items-center justify-content-between">
-                <span className="badge bg-primary">Position</span>
-                <span className="badge bg-secondary">Job Type</span>
-                <span className="badge bg-success">Job Salary</span>
+            <h5 className="fw-bold mb-2">UI / UX Designer fulltime</h5>
+
+            <div className="d-flex gap-4 small mb-2 align-items-center justify-content-between">
+              <div>
+                <span>
+                  <FaBriefcase className="me-1 mb-1" />
+                  Fulltime
+                </span>
+              </div>
+              <div>
+                <span>
+                  <FaClock className="me-1 mb-1" />4 minutes ago
+                </span>
               </div>
             </div>
-          </div> */}
-          <div className="card shadow py-4">
-            <div className="card-img-content text-white">
-              <h5>{job?.company?.companyName}</h5>
-              <p>{job?.locations}</p>
+
+            <p className="small">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Recusandae architecto eveniet.
+            </p>
+            <div className="mb-3">
+              <span className="badge me-2">Adobe XD</span>
+              <span className="badge me-2">Figma</span>
+              <span className="badge">Photoshop</span>
             </div>
-            <div className="main-card-content">
-              <h4 className="text-white fw-bold fs-5">{job?.title}</h4>
-              <p className="text-white">{job?.description}</p>
-              <div className="badge-info d-flex align-items-center justify-content-between">
-                <span className="badge bg-primary">{job?.position}</span>
-                <span className="badge bg-secondary">{job?.jobType}</span>
-                <span className="badge bg-success">{job?.salary}</span>
-              </div>
+            <div className="d-flex justify-content-between align-items-center">
+              <h5 className="salary mb-0">
+                $500 <small>/Hour</small>
+              </h5>
+
+              <button className="btn btn-outline-primary fw-bold text-white fs-6">
+                Apply Now
+              </button>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

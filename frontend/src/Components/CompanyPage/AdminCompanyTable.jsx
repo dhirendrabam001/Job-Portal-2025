@@ -80,15 +80,9 @@ const AdminCompanyTable = () => {
                     <td>{job?.company?.companyName}</td>
                     <td>{job?.title}</td>
                     <td>{job?.createdAt.split("T")[0]}</td>
-                    <td className="text-center d-flex align-items-center gap-3 custom-btn justify-content-center">
+                    <td className="text-center">
                       <button
                         className="btn btn-sm btn-primary fw-bold mb-1"
-                        onClick={() => navigate(`/admin/company/${job?._id}`)}
-                      >
-                        <MdEdit className="mb-1" /> Edit
-                      </button>
-                      <button
-                        className="btn btn-sm btn-danger fw-bold mb-1"
                         onClick={() =>
                           navigate(`/admin/jobs/${job?._id}/applicant`)
                         }

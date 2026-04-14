@@ -1,7 +1,7 @@
 import Header from "../Components/Auth/Header";
 import DreamJobs from "../LandingPage/DreamJobs";
 import CompanyDetails from "../LandingPage/Company";
-import JobCategory from "../LandingPage/JobCategory";
+// import JobCategory from "../LandingPage/JobCategory";
 import Work from "../LandingPage/Work";
 import Testimonials from "../LandingPage/Testimonials";
 import Subscriber from "../LandingPage/Subscriber";
@@ -11,6 +11,7 @@ import useGetAllJobs from "../Hooks/useGetAllJobs";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import LatestJobs from "../Pages/LatestJobs";
 
 const HomePages = () => {
   useGetAllJobs();
@@ -26,7 +27,8 @@ const HomePages = () => {
       <Header />
       <DreamJobs />
       <CompanyDetails />
-      <JobCategory />
+      <LatestJobs />
+      {/* <JobCategory /> */}
       <Work />
       <Testimonials />
       <Subscriber />

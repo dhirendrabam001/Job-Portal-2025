@@ -1,4 +1,6 @@
+import { useSelector } from "react-redux";
 const AppliedJobs = () => {
+  const { getAppliedJob } = useSelector((store) => store.jobs);
   return (
     <>
       <div className="applied-job py-3">
@@ -14,26 +16,30 @@ const AppliedJobs = () => {
             </thead>
 
             <tbody>
-              <tr>
-                <td>04/11/2025</td>
-                <td>Frontend Developer</td>
-                <td>Google</td>
-                <td className="status selected">Selected</td>
-              </tr>
-
-              <tr>
-                <td>12/12/2025</td>
-                <td>Backend Developer</td>
-                <td>Microsoft</td>
-                <td className="status selected">Selected</td>
-              </tr>
-
-              <tr>
-                <td>22/12/2025</td>
-                <td>Full Stack Developer</td>
-                <td>Apple</td>
-                <td className="status selected">Selected</td>
-              </tr>
+              {getAppliedJob.length <= 0 ? (
+                <tr>
+                  <td colSpan="4">You do not have applied any jobs!</td>
+                </tr>
+              ) : (
+                getAppliedJob.map((item, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{item.createdAt.split("T")[0]}</td>
+                      <td>{item.job.title}</td>
+                      <td>{item.job.company.companyName}</td>
+                      <td>
+                        {item.status === "accepted" ? (
+                          <span className="status accepted">Accepted</span>
+                        ) : item.status === "rejected" ? (
+                          <span className="status rejected">Rejected</span>
+                        ) : (
+                          <span className="status pending">Pending</span>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
             </tbody>
           </table>
         </div>

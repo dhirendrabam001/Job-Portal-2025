@@ -147,29 +147,28 @@ body {
 
 /* status badge */
 .status {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
   font-weight: 600;
-  padding: 5px 10px;
-  border-radius: 6px;
   display: inline-block;
-}
-.status.selected {
-  background: #e6f9ed;
-  color: #16a34a;
-  padding: 10px;
-  margin: 10px 0px;
-}
-/* pending status */
-.status.pending {
-  background: #fff4e5;
-  color: #f59e0b;
+  text-align: center;
 }
 
-/* rejected status */
-.status.rejected {
-  background: #ffe5e5;
-  color: #dc2626;
+.accepted {
+  background-color: #e6f4ea;
+  color: #1e7e34;
 }
 
+.rejected {
+  background-color: #fdecea;
+  color: #c82333;
+}
+
+.pending {
+  background-color: #fff4e5;
+  color: #e0a800;
+}
 .resume-info span {
   color: white !important;
 }
@@ -1084,3 +1083,61 @@ body {
 }
 
 /* company home pagess admin css end */
+
+/* card card new css */
+.latestjob-card {
+  background: linear-gradient(145deg, #3a3a3a, #242424);
+  border-radius: 16px;
+  width: 100%;
+  padding: 20px 12px;
+  border: 1px solid #198754;
+
+  color: #fff;
+
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: all 0.4s ease;
+  box-shadow:
+    10px 10px 25px rgba(0, 0, 0, 0.6),
+    -5px -5px 15px rgba(255, 255, 255, 0.05);
+}
+
+/* Hover 3D lift */
+.latestjob-card:hover {
+  border: 1px solid #0d6efd;
+  transform: translateY(-10px) rotateX(5deg) rotateY(-5deg) scale(1.02);
+  box-shadow:
+    20px 20px 40px rgba(0, 0, 0, 0.8),
+    -10px -10px 20px rgba(255, 255, 255, 0.05);
+}
+.latestjob-card h6 {
+  font-size: 14px;
+}
+.logo-box {
+  border: 1px solid #0d6efd;
+  padding: 10px;
+  border-radius: 12px;
+}
+.logo-box img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
+
+.latestjob-card small,
+.latestjob-card p {
+  color: #b0b0b0;
+}
+
+.latestjob-card .badge {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ddd;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.salary {
+  color: #4e73ff;
+  font-weight: 700;
+}
