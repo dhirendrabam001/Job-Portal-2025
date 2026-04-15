@@ -24,13 +24,13 @@ const AppliedJobs = () => {
                 getAppliedJob.map((item, index) => {
                   return (
                     <tr key={index}>
-                      <td>{item.createdAt.split("T")[0]}</td>
-                      <td>{item.job.title}</td>
-                      <td>{item.job.company.companyName}</td>
+                      <td>{item?.createdAt.split("T")[0]}</td>
+                      <td>{item?.job?.title}</td>
+                      <td>{item?.job?.company?.companyName}</td>
                       <td>
                         {item.status === "accepted" ? (
                           <span className="status accepted">Accepted</span>
-                        ) : item.status === "rejected" ? (
+                        ) : item?.status === "rejected" ? (
                           <span className="status rejected">Rejected</span>
                         ) : (
                           <span className="status pending">Pending</span>

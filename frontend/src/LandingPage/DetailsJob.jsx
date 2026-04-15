@@ -90,7 +90,7 @@ const DetailsJob = () => {
               <button
                 disabled={isApplied}
                 onClick={applyJobHandler}
-                className="btn btn-outline-dark fw-bold"
+                className="btn btn-outline-primary text-white fw-bold"
               >
                 {isApplied ? "Already Applied" : "Apply Now"}
               </button>

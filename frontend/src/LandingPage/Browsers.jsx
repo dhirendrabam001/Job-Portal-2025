@@ -1,18 +1,36 @@
 import Header from "../Components/Auth/Header";
 import OneJob from "../Pages/OneJob";
-const randomJobs = [1, 2, 3, 4, 5, 6, 7];
+import { useSelector } from "react-redux";
 const Browsers = () => {
+  const { allJobs, searchQueryText } = useSelector((store) => store.jobs);
+  const filteredJob = allJobs.filter((job) => {
+    const searchTitle = searchQueryText.title?.toLowerCase().trim();
+    const searchLocation = searchQueryText.location?.toLowerCase().trim();
+    if (!searchTitle && !searchLocation) {
+      return false;
+    }
+    const titleMatch = searchTitle
+      ? job.title.toLowerCase().includes(searchTitle)
+      : false;
+
+    const locationMatch = searchLocation
+      ? job.locations.toLowerCase().includes(searchLocation)
+      : false;
+
+    return titleMatch || locationMatch;
+  });
+
   return (
     <div className="browser-jobs">
       <Header />
       <div className="container">
         <h1 className="fw-bold text-white fs-5">
-          Search Result ({randomJobs.length})
+          Search Result ({filteredJob.length})
         </h1>
-        <div className="row align-items-center g-3 my-4">
-          {randomJobs.map((items, index) => (
+        <div className="row align-items-center g-4 mt-4">
+          {filteredJob.map((items, index) => (
             <div className="col-12 col-md-4 col-lg-4" key={index}>
-              <OneJob items={items} />
+              <OneJob job={items} />
             </div>
           ))}
         </div>

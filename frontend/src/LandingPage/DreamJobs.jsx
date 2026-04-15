@@ -1,5 +1,17 @@
+import { useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
+import { useDispatch } from "react-redux";
+import { setSearchQueryText } from "../redux/jobSlice";
+import { useNavigate } from "react-router-dom";
 const DreamJobs = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [title, setTitle] = useState("");
+  const [location, setLocation] = useState("");
+  const seachEventHandler = () => {
+    dispatch(setSearchQueryText({ title, location }));
+    navigate("/browsers");
+  };
   return (
     <section className="dreamjob-main">
       <div className="container">
@@ -20,20 +32,22 @@ const DreamJobs = () => {
                   <label htmlFor="text">Job Title</label>
                   <input
                     type="text"
+                    onChange={(e) => setTitle(e.target.value)}
                     className="forminfo"
                     placeholder="Software Engineer"
                   />
                 </div>
                 <div className="search-box-one">
-                  <label htmlFor="text">Job Type</label>
+                  <label htmlFor="text">Location</label>
                   <input
                     type="text"
+                    onChange={(e) => setLocation(e.target.value)}
                     className="forminfo"
-                    placeholder="Fulltime"
+                    placeholder="Location"
                   />
                 </div>
                 <div>
-                  <button className="search-btn">
+                  <button className="search-btn" onClick={seachEventHandler}>
                     <IoSearchOutline className="search-icons" />
                   </button>
                 </div>

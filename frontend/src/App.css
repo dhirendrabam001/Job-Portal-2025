@@ -1141,3 +1141,90 @@ body {
   color: #4e73ff;
   font-weight: 700;
 }
+
+/* 🌙 Main Background */
+.details-job {
+  background-color: #2d2d2d;
+  min-height: 100vh;
+  color: #ffffff;
+}
+
+/* 📦 Card Container */
+.details-job .container {
+  background: #3a3a3a;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  transition: 0.3s ease;
+}
+
+/* ✨ Hover effect */
+.details-job .container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+}
+
+/* 🏷 Title */
+.details-job h4 {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* 🎯 Badges */
+.details-job .badge {
+  font-size: 13px;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+/* 🟦 Custom Badge Colors */
+.bg-primary {
+  background-color: #4f46e5 !important;
+}
+.bg-secondary {
+  background-color: #6b7280 !important;
+}
+.bg-success {
+  background-color: #22c55e !important;
+}
+
+/* 🔘 Apply Button */
+.details-job .btn {
+  border-radius: 10px;
+  padding: 10px 15px;
+  transition: 0.3s ease;
+}
+
+.details-job .btn:hover {
+  background-color: #4f46e5;
+  color: #fff;
+  border-color: #4f46e5;
+  transform: scale(1.05);
+}
+
+/* 📄 Section Heading */
+.details-job h2 {
+  color: #e5e5e5;
+}
+
+/* 📃 Job Details Text */
+.details-job .job-details h2 {
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+/* 📉 Divider */
+.details-job hr {
+  border-color: #555;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .details-job .container {
+    padding: 15px;
+  }
+
+  .details-job h4 {
+    font-size: 18px;
+  }
+}
