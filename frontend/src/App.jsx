@@ -20,6 +20,7 @@ import CompanySetup from "./Components/CompanyPage/CompanySetup";
 import AdminJobs from "./Components/CompanyPage/AdminJobs";
 import CreateCompanyJobs from "./Components/CompanyPage/CreateCompanyJobs";
 import AdminViewApplicant from "./Components/CompanyPage/AdminViewApplicant";
+import ProtectedAdminPage from "./Components/CompanyPage/ProtectedAdminPage";
 
 function App() {
   return (
@@ -50,17 +51,53 @@ function App() {
         <Route path="/profile" element={<Profile />}></Route>
 
         {/* company routes */}
-        <Route path="admin/company" element={<Company />}></Route>
-        <Route path="/admin/jobs" element={<AdminJobs />}></Route>
-        <Route path="/admin/company/create" element={<CreateCompany />}></Route>
-        <Route path="/admin/company/:id" element={<CompanySetup />}></Route>
+        <Route
+          path="admin/company"
+          element={
+            <ProtectedAdminPage>
+              <Company />
+            </ProtectedAdminPage>
+          }
+        ></Route>
+        <Route
+          path="/admin/jobs"
+          element={
+            <ProtectedAdminPage>
+              <AdminJobs />
+            </ProtectedAdminPage>
+          }
+        ></Route>
+        <Route
+          path="/admin/company/create"
+          element={
+            <ProtectedAdminPage>
+              <CreateCompany />
+            </ProtectedAdminPage>
+          }
+        ></Route>
+        <Route
+          path="/admin/company/:id"
+          element={
+            <ProtectedAdminPage>
+              <CompanySetup />
+            </ProtectedAdminPage>
+          }
+        ></Route>
         <Route
           path="/admin/jobs/create"
-          element={<CreateCompanyJobs />}
+          element={
+            <ProtectedAdminPage>
+              <CreateCompanyJobs />
+            </ProtectedAdminPage>
+          }
         ></Route>
         <Route
           path="/admin/jobs/:id/applicant"
-          element={<AdminViewApplicant />}
+          element={
+            <ProtectedAdminPage>
+              <AdminViewApplicant />
+            </ProtectedAdminPage>
+          }
         ></Route>
       </Routes>
       {/* <Footer />

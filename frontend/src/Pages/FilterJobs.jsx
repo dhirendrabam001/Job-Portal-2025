@@ -1,23 +1,34 @@
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setSearchQueryText } from "../redux/jobSlice";
+
+const filterArray = [
+  {
+    filterType: "Location",
+    array: ["Delhi", "Noida", "Chandigarh", "Mumbai", "Punjab"],
+  },
+  {
+    filterType: "Industry",
+    array: [
+      "Frontend Developer",
+      "Backend Developer",
+      "Full Stack Developer",
+      "Graphics Designer",
+    ],
+  },
+  {
+    filterType: "Salary",
+    array: ["0-50K", "50K-150K", "150K-250K", "250K-350K", "500K+"],
+  },
+];
 const FilterJobs = () => {
-  const filterArray = [
-    {
-      filterType: "Location",
-      array: ["Delhi", "Noida", "Chandigarh", "Mumbai", "Punjab"],
-    },
-    {
-      filterType: "Industry",
-      array: [
-        "Frontend Developer",
-        "Backend Developer",
-        "Full Stack Developer",
-        "Graphics Designer",
-      ],
-    },
-    {
-      filterType: "Salary",
-      array: ["0-50K", "50K-150K", "150K-250K", "250K-350K", "500K+"],
-    },
-  ];
+  const [selectedValue, setSelectedValue] = useState("");
+  const dispatch = useDispatch();
+
+  const changeHandler = (value) => {
+    setSelectedValue(value);
+    dispatch(setSearchQueryText(value)); // ✅ only one filter system
+  };
 
   return (
     <div className="filter-jobs">
@@ -30,7 +41,10 @@ const FilterJobs = () => {
           {items.array.map((item, i) => (
             <div className="form-check" key={i}>
               <input
+                onChange={() => changeHandler(item)}
+                value={item}
                 className="form-check-input"
+                checked={selectedValue === item}
                 type="radio"
                 name={items.filterType}
                 id={`${items.filterType}-${i}`}

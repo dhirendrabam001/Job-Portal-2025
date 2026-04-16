@@ -2,10 +2,30 @@ import { useSelector } from "react-redux";
 import Header from "../Components/Auth/Header";
 import FilterJobs from "../Pages/FilterJobs";
 import OneJob from "../Pages/OneJob";
-// const allJobs = [1, 2, 3, 4, 5, 6, 7, 8];
+import { useEffect, useState } from "react";
 const Jobs = () => {
-  const { allJobs } = useSelector((store) => store.jobs);
+  const { allJobs, searchQueryText } = useSelector((store) => store.jobs);
+  const [filterJob, setFilterJob] = useState([]); // ✅ start empty
+  useEffect(() => {
+    let updatedJobs = allJobs;
 
+    if (searchQueryText) {
+      updatedJobs = updatedJobs.filter((job) => {
+        return (
+          job?.title?.toLowerCase().includes(searchQueryText.toLowerCase()) ||
+          job?.locations
+            ?.toLowerCase()
+            .includes(searchQueryText.toLowerCase()) ||
+          job?.salary
+            ?.toString()
+            .toLowerCase()
+            .includes(searchQueryText.toLowerCase())
+        );
+      });
+    }
+
+    setFilterJob(updatedJobs);
+  }, [allJobs, searchQueryText]);
   return (
     <>
       <Header />
@@ -21,10 +41,10 @@ const Jobs = () => {
               {/* JOBS CARD START */}
               <div className="col-12 col-lg-10 col-md-10">
                 <div className="row align-items-center g-3">
-                  {allJobs.length <= 0 ? (
+                  {filterJob.length <= 0 ? (
                     <span>Jobs Does Not Found</span>
                   ) : (
-                    allJobs.map((job, index) => (
+                    filterJob.map((job, index) => (
                       <div className="col-12 col-md-4 col-lg-4" key={index}>
                         <OneJob key={job._id} job={job} />
                       </div>
