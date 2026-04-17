@@ -108,8 +108,8 @@ const login = async (req, res) => {
     res
       .cookie("token", token, {
         httpOnly: true,
-        sameSite: isProduction ? "none" : "lax",
-        secure: isProduction,
+        secure: true, // MUST for HTTPS (Render)
+        sameSite: "none", // MUST for cross-origin (Vercel → Render)
         maxAge: 24 * 60 * 60 * 1000,
         path: "/",
       })

@@ -1,5 +1,4 @@
 const BASE_URL = "https://backend-job-portal-66jc.onrender.com";
-const VITE_API_URL = "http://localhost:5173";
 
 export const USER_API_END_POINT = `${BASE_URL}/api/user`;
 export const JOBS_API_POINT = `${BASE_URL}/api/jobs`;
