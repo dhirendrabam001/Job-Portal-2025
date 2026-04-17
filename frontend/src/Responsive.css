@@ -36,7 +36,7 @@
     width: 80%;
     margin: auto;
   }
-  /* new */
+
   .profile-info {
     border: 1px double #999595;
     width: 100%;
@@ -47,6 +47,19 @@
   }
   .application-table {
     width: 100%;
+  }
+  /* new */
+  .company-table tbody td {
+    padding: 14px 6px;
+    font-size: 13px;
+  }
+  .custom-btn button {
+    width: 70px !important;
+    font-size: 12px;
+  }
+  .company-table button {
+    font-size: 12px !important;
+    width: 62px;
   }
 }
 
@@ -99,6 +112,18 @@
   }
   .application-table {
     width: 100%;
+  }
+  .company-table tbody td {
+    padding: 14px 6px;
+    font-size: 13px;
+  }
+  .custom-btn button {
+    width: 70px !important;
+    font-size: 12px;
+  }
+  .company-table button {
+    font-size: 12px !important;
+    width: 62px;
   }
 }
 

@@ -31,7 +31,7 @@ const AdminJobs = () => {
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-6">
-              <div className="d-flex align-items-center justify-content-end company-search">
+              <div className="d-flex align-items-center justify-content-start justify-content-sm-end company-search">
                 <button
                   type="button"
                   onClick={() => navigate("/admin/jobs/create")}

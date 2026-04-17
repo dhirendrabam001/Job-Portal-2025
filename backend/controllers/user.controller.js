@@ -186,14 +186,11 @@ const updateProfile = async (req, res) => {
       const fileUri = getDataUri(file);
 
       const cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
-        resource_type: "raw", // must be raw for PDFs
+        resource_type: "raw",
         folder: "resumes",
-        type: "upload", // 👈 ensures public access
-        access_mode: "public", // 👈 makes the file viewable without login
-        format: "pdf", // 👈 ensures served as PDF
+        public_id: `resume_${Date.now()}`,
+        format: "pdf", // 👈 important
       });
-
-      console.log("Cloudinary URL:", cloudResponse.secure_url);
 
       user.profile.resume = cloudResponse.secure_url;
       user.profile.resumeOriginalName = file.originalname;
