@@ -10,69 +10,77 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // LOGOUT HANDLER
   const handleLogOut = async () => {
     try {
-      const res = await axios.get(
-        "http://localhost:5000/api/user/logout",
+      const res = await axios.get("http://localhost:5000/api/user/logout", {
+        withCredentials: true,
+      });
 
-        { withCredentials: true },
-      );
       if (res.data.success) {
         dispatch(setUser(null));
         navigate("/");
-        toast.success(res.data.message || "Profile Logout Successfully");
+        toast.success(res.data.message || "Logout Successfully");
       }
     } catch (error) {
-      console.error(error);
       toast.error(
-        error?.response?.data?.message ||
-          "Logout Failed Please Try Again Later..",
+        error?.response?.data?.message || "Logout Failed. Try again later.",
       );
     }
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-info">
-      <div className="container-fluid mx-3">
-        <Link className="navbar-brand" to="/">
-          <img src="/output.webp" width="150" height="50" />
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="container-fluid px-3">
+        {/* LOGO */}
+        <Link className="navbar-brand fw-bold" to="/">
+          <img src="/output.webp" width="120" height="40" alt="logo" />
         </Link>
-        <div className="collapse navbar-collapse">
+
+        {/* ✅ TOGGLE BUTTON (IMPORTANT) */}
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarMain"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        {/* ✅ COLLAPSE AREA */}
+        <div className="collapse navbar-collapse" id="navbarMain">
           <Navbar />
+
           {!user ? (
-            <div className="d-flex gap-3">
+            <div className="d-flex flex-column flex-lg-row gap-2 gap-lg-3 mt-3 mt-lg-0">
               <Link to="/login">
-                <button className="btn btn-outline-light">Login</button>
+                <button className="btn btn-outline-light w-100">Login</button>
               </Link>
+
               <Link to="/signup">
-                <button className="btn btn-outline-primary text-white">
+                <button className="btn btn-outline-primary text-white w-100">
                   SignUp
                 </button>
               </Link>
             </div>
           ) : (
-            <div className="dropdown">
+            <div className="dropdown ms-lg-3 mt-3 mt-lg-0">
               <a
                 href="#"
                 className="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                id="dropdownUser1"
                 data-bs-toggle="dropdown"
-                aria-expanded="false"
               >
                 <img
                   src={user?.profile?.profilePhoto}
                   alt=""
-                  style={{ width: "32px", height: "32px" }}
+                  width="32"
+                  height="32"
                   className="rounded-circle me-2"
                 />
                 <strong>{user?.fullName}</strong>
               </a>
-              <ul
-                className="dropdown-menu dropdown-menu-dark text-small shadow"
-                aria-labelledby="dropdownUser1"
-              >
-                {user && user.role === "student" && (
+
+              <ul className="dropdown-menu dropdown-menu-dark shadow">
+                {user?.role === "student" && (
                   <li>
                     <Link to="/profile" className="dropdown-item">
                       View Profile
@@ -81,17 +89,17 @@ const Header = () => {
                 )}
 
                 <li>
-                  <a className="dropdown-item" href="#">
-                    Settings
-                  </a>
+                  <span className="dropdown-item">Settings</span>
                 </li>
+
                 <li>
                   <hr className="dropdown-divider" />
                 </li>
+
                 <li>
-                  <a className="dropdown-item" href="#" onClick={handleLogOut}>
+                  <button className="dropdown-item" onClick={handleLogOut}>
                     Sign out
-                  </a>
+                  </button>
                 </li>
               </ul>
             </div>

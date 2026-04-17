@@ -18,7 +18,7 @@ const Navbar = () => {
     user && user.role === "recruiter" ? recruiterRoutes : linkRoutes;
 
   return (
-    <ul className="navbar-nav ms-auto mb-2 mb-lg-0 gap-0 gap-md-4">
+    <ul className="navbar-nav ms-auto mb-2 mb-lg-0 gap-2 gap-lg-4 mt-3 mt-lg-0">
       {routes.map((items) => {
         const isActive = location.pathname === items.url;
 

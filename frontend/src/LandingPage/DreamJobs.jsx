@@ -16,7 +16,7 @@ const DreamJobs = () => {
     <section className="dreamjob-main">
       <div className="container">
         <div className="row align-items-center justify-content-center text-white">
-          <div className="col-12 col-md-6 col-lg-6">
+          <div className="col-12 col-md-12 col-lg-6">
             <div className="mb-2 content-left">
               <h5>5000+ Jobs Listed</h5>
               <h1 className="fw-bold">
@@ -54,7 +54,7 @@ const DreamJobs = () => {
               </div>
             </div>
           </div>
-          <div className="col-12 col-md-6 col-lg-6">
+          <div className="col-12 col-md-12 col-lg-6">
             <div className="content-right position-relative img-section">
               <img src="/Boy.webp" className="img-fluid" alt="images" />
               <div className="content-card position-absolute">

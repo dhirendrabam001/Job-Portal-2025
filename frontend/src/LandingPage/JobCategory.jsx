@@ -15,7 +15,6 @@ import { useSelector } from "react-redux";
 
 const JobCategory = () => {
   const { allJobs } = useSelector((store) => store.jobs);
-  console.log(allJobs);
 
   return (
     <div className="job-category py-4 mt-3 mt-md-0">

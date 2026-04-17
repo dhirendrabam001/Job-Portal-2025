@@ -70,13 +70,22 @@ const postJobs = async (req, res) => {
 
 const getAllJobPost = async (req, res) => {
   try {
-    const keyword = req.query.keyword || "";
-    const query = {
-      $or: [
-        { title: { $regex: keyword, $options: "i" } },
-        { description: { $regex: keyword, $options: "i" } },
-      ],
-    };
+    const keyword = req.query.keyword?.trim();
+
+    let query = {};
+
+    if (keyword) {
+      const words = keyword.split(" "); // ["Graphics", "Designer"]
+
+      query = {
+        $or: words.flatMap((word) => [
+          { title: { $regex: word, $options: "i" } },
+          { description: { $regex: word, $options: "i" } },
+          { locations: { $regex: word, $options: "i" } },
+          { jobType: { $regex: word, $options: "i" } },
+        ]),
+      };
+    }
 
     // find by query
     const jobs = await Jobs.find(query).populate({ path: "company" });

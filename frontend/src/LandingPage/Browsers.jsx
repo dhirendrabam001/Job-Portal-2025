@@ -7,7 +7,7 @@ const Browsers = () => {
     const searchTitle = searchQueryText.title?.toLowerCase().trim();
     const searchLocation = searchQueryText.location?.toLowerCase().trim();
     if (!searchTitle && !searchLocation) {
-      return false;
+      return true;
     }
     const titleMatch = searchTitle
       ? job.title.toLowerCase().includes(searchTitle)
@@ -29,7 +29,7 @@ const Browsers = () => {
         </h1>
         <div className="row align-items-center g-4 mt-4">
           {filteredJob.map((items, index) => (
-            <div className="col-12 col-md-4 col-lg-4" key={index}>
+            <div className="col-12 col-md-6 col-lg-4" key={index}>
               <OneJob job={items} />
             </div>
           ))}

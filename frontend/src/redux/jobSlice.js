@@ -9,10 +9,11 @@ const jobSlice = createSlice({
     singleJob: null,
     searchJobByText: "",
     getAppliedJob: [],
-    searchQueryText:  {
+
+    searchQueryText: {
       title: "",
-      location: ""
-    }
+      location: "",
+    },
   },
   reducers: {
     setAllJob: (state, action) => {

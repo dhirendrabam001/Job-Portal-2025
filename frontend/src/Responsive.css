@@ -1,195 +1,172 @@
-/* 992 */
-@media (min-width: 992px) {
-  .dreamjob-main {
-    margin-left: 50px;
-    margin-top: 40px;
-  }
-
-  .navbar img {
-    width: 100px;
-    margin-left: 32px;
-  }
-  .search-box-one {
-    width: 45%;
-  }
-
-  .search-box .forminfo {
-    width: 140px;
-  }
-  .avtar-content {
-    margin-left: -15%;
-    padding: 20px;
-  }
-  .search-btn {
-    border-radius: 10px;
-    width: 60px;
-    height: 60px;
-  }
-  .company-info h2 {
-    margin-top: 40px;
-  }
-  .swiper-pagination {
-    margin-top: 20px;
-    position: relative !important;
-  }
-  .containerInfo {
-    width: 60%;
-  }
-}
-
-/* 768 -991 */
-
-@media (min-width: 768px) and (max-width: 991px) {
-  .navbar {
-    background: navy;
-  }
-  button.navbar-toggler {
-    background: white;
-    color: black;
-  }
+@media (max-width: 575.98px) {
   .navbar-toggler:focus {
     text-decoration: none;
     outline: 0;
-    box-shadow: none !important;
+    box-shadow: 0 0 0 0px !important;
   }
-  .dreamjob-main {
-    padding: 10px 0px;
-    margin-top: 20px;
+  .navbar-toggler {
+    border: 2px solid rgba(223, 223, 223, 0.1) !important;
+  }
+  .content-left {
+    padding: 30px 20px !important;
   }
   .content-left h1 {
-    font-size: 40px;
+    font-size: 34px;
+    margin-top: 15px;
   }
-  .content-right img {
+  .search-box-one {
+    padding: 10px 20px;
+    width: 40%;
+  }
+  .avtar-content {
+    left: 74%;
+  }
+  .latestjob-card h5 {
+    padding: 12px 0px !important;
+  }
+  .work-info {
+    padding-bottom: 0px !important;
+    margin-top: 0px !important;
+  }
+  .subscriber-bg h2 {
+    font-size: 30px !important;
+    text-align: center;
+  }
+  .containerInfo {
+    width: 80%;
+    margin: auto;
+  }
+  /* new */
+  .profile-info {
+    border: 1px double #999595;
+    width: 100%;
+    margin: auto;
+    margin-top: auto;
+    margin-top: 35px;
+    padding: 14px;
+  }
+  .application-table {
     width: 100%;
   }
+}
 
+/* 576px to 768px */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .navbar-toggler:focus {
+    text-decoration: none;
+    outline: 0;
+    box-shadow: 0 0 0 0px !important;
+  }
+  .navbar-toggler {
+    border: 2px solid rgba(223, 223, 223, 0.1) !important;
+  }
+  .content-left {
+    padding: 30px 20px !important;
+  }
+  .content-left h1 {
+    font-size: 34px;
+    margin-top: 15px;
+  }
+  .search-box-one {
+    padding: 10px 20px;
+    width: 40%;
+  }
+  .avtar-content {
+    left: 74%;
+  }
+  .latestjob-card h5 {
+    padding: 12px 0px !important;
+  }
+  .work-info {
+    padding-bottom: 0px !important;
+    margin-top: 0px !important;
+  }
+  .subscriber-bg h2 {
+    font-size: 30px !important;
+    text-align: center;
+  }
+  .containerInfo {
+    width: 80%;
+    margin: auto;
+  }
+  .profile-info {
+    border: 1px double #999595;
+    width: 100%;
+    margin: auto;
+    margin-top: auto;
+    margin-top: 35px;
+    padding: 14px;
+  }
+  .application-table {
+    width: 100%;
+  }
+}
+
+/* 768px 50 991px*/
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .navbar-toggler:focus {
+    text-decoration: none;
+    outline: 0;
+    box-shadow: 0 0 0 0px !important;
+  }
+  .navbar-toggler {
+    border: 2px solid rgba(223, 223, 223, 0.1) !important;
+  }
+  .content-left {
+    padding: 30px 0px !important;
+  }
+  .content-left h1 {
+    font-size: 45px;
+  }
   .search-box {
-    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
   }
 
   .search-box-one {
     width: 45%;
   }
 
-  .search-box .forminfo {
-    width: 140px;
-  }
-
-  .search-btn {
-    width: 60px;
-    height: 60px;
-  }
-
-  .swiper-pagination {
-    margin-top: 30px;
-    position: relative !important;
-  }
-  .content-card {
-    margin-top: -50px;
-  }
-  .content-card img {
-    width: 40px;
-  }
-  .avtar-content {
-    margin-left: -22%;
-  }
-  .containerInfo {
-    width: 70%;
-  }
-}
-
-/* for mobile device maxx-width:767px */
-@media (max-width: 767px) {
-  .navbar {
-    background: navy;
-  }
-  button.navbar-toggler {
-    background: white;
-    color: black;
-  }
-  .navbar-toggler:focus {
-    text-decoration: none;
-    outline: 0;
-    box-shadow: none !important;
-  }
-  .dreamjob-main {
-    margin-top: 15px;
-  }
-  .dreamjob-main h1 {
-    font-size: 38px;
-  }
-  .search-box-one .forminfo {
-    margin-left: -8px;
-  }
-  .search-box-one label {
-    margin-left: -5px;
-  }
-  .swiper-pagination {
-    margin-top: 30px;
-    position: relative !important;
-  }
-  .subscriber-info h2 {
-    font-size: 28px !important;
-  }
-  .footer-content {
-    margin-left: 5%;
-  }
-  .footer-content p {
-    text-align: center;
-  }
-  .footer-content img {
-    margin-left: 26%;
-  }
-  .social-media {
-    margin-left: 28%;
-  }
-  .containerInfo {
-    width: 70%;
-  }
-}
-
-/* 420 */
-@media (max-width: 420px) {
-  .search-box {
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 10px;
-  }
-
-  .search-box-one {
-    width: 50%;
-    padding: 10px 14px;
-  }
-
-  .search-box-one label {
-    font-size: 16px;
-  }
-
-  .search-box .forminfo {
+  .forminfo {
     width: 100%;
-    margin-left: -8px;
-    font-size: 16px;
   }
 
   .search-btn {
-    width: 184px;
-    border-radius: 12px;
+    width: 44%;
+    margin: 12px 33px;
   }
 
-  .search-icons {
-    font-size: 22px;
+  .search-box > div:last-child {
+    width: 100%;
   }
-  .content-card {
-    margin-left: 20%;
-    margin-top: 2%;
+  .subscriber-bg h2 {
+    font-size: 25px !important;
+  }
+  .application-table {
+    width: 100%;
+  }
+}
+
+/* 992px to 1192 */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .content-left {
+    padding: 30px 0px !important;
+  }
+  .content-left h1 {
+    font-size: 45px;
+  }
+  .search-box-one {
+    padding: 10px 20px;
+    width: 45%;
   }
   .avtar-content {
-    margin-left: -59%;
-    width: 220px;
-    margin-top: 30px;
-    text-align: center;
+    left: 62%;
   }
-  .avtar-content img {
-    margin-left: 10px;
+  .subscriber-bg h2 {
+    font-size: 25px !important;
+  }
+  .application-table {
+    width: 100%;
   }
 }

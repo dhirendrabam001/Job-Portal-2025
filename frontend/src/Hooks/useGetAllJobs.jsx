@@ -8,26 +8,24 @@ import {} from "react-redux";
 
 const useGetAllJobs = () => {
   const { searchQueryText } = useSelector((store) => store.jobs);
+
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchAllJobs = async () => {
       try {
-        const res = await axios.get(
-          `${JOBS_API_POINT}/getAllPostJobs?keyword=${searchQueryText}`,
-          {
-            withCredentials: true,
-          },
-        );
+        const res = await axios.get(`${JOBS_API_POINT}/getAllPostJobs`, {
+          withCredentials: true,
+        });
+
         if (res.data.success) {
           dispatch(setAllJob(res.data.jobs));
         }
       } catch (error) {
-        console.error(error);
         toast.error(error?.response?.data?.message);
       }
     };
     fetchAllJobs();
-  }, [dispatch]);
+  }, [dispatch, searchQueryText]);
 };
 
 export default useGetAllJobs;
