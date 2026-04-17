@@ -1,3 +1,21 @@
+@media (max-width: 360px) {
+  .search-box {
+    align-items: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .search-box-one {
+    width: 100%;
+  }
+  .search-btn {
+    width: 290px;
+  }
+  .avtar-content {
+    top: 64%;
+    left: 56% !important;
+  }
+}
 @media (max-width: 575.98px) {
   .navbar-toggler:focus {
     text-decoration: none;
