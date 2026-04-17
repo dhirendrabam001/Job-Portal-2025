@@ -196,7 +196,7 @@
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 480px) {
   .search-box {
     align-items: center;
     width: 100%;
