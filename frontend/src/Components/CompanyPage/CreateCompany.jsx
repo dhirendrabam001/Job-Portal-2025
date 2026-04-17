@@ -13,7 +13,7 @@ const CreateCompany = () => {
   const { loading } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [companyName, setCompanyName] = useState(); // get user input
+  const [companyName, setCompanyName] = useState(""); // get user input
 
   const registerNewCompany = async () => {
     try {
