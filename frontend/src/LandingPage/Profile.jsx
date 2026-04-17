@@ -58,14 +58,12 @@ const Profile = () => {
             <div className="skills-info my-2">
               <h4 className="fs-5">Skills</h4>
 
-              {user?.profile?.skills.length !== 0 ? (
-                user?.profile?.skills[0].split(" ").map((item, index) => {
-                  return (
-                    <span key={index} className="badge bg-primary me-2">
-                      {item}
-                    </span>
-                  );
-                })
+              {user?.profile?.skills?.length > 0 ? (
+                (user.profile.skills[0] || "").split(" ").map((item, index) => (
+                  <span key={index} className="badge bg-primary me-2">
+                    {item}
+                  </span>
+                ))
               ) : (
                 <span>NA</span>
               )}
