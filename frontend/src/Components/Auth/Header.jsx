@@ -13,7 +13,7 @@ const Header = () => {
 
   const handleLogOut = async () => {
     try {
-      const res = await axios.get(`${USER_API_END_POINT}/api/user/logout`, {
+      const res = await axios.get(`${USER_API_END_POINT}/logout`, {
         withCredentials: true,
       });
 
