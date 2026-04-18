@@ -43,7 +43,7 @@ const getCompany = async (req, res) => {
     const userId = req.id; // logged in user id
 
     // check company available or not
-    const company = await Company.find({ userId });
+    const company = await Company.find({ userId: req.id });
     if (!company) {
       return res
         .status(401)
