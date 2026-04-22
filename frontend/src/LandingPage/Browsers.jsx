@@ -2,10 +2,14 @@ import Header from "../Components/Auth/Header";
 import OneJob from "../Pages/OneJob";
 import { useSelector } from "react-redux";
 const Browsers = () => {
-  const { allJobs, searchQueryText } = useSelector((store) => store.jobs);
+  const { allJobs = [], searchQueryText = {} } = useSelector(
+    (store) => store.jobs,
+  );
   const filteredJob = allJobs.filter((job) => {
-    const searchTitle = searchQueryText.title?.toLowerCase().trim();
-    const searchLocation = searchQueryText.location?.toLowerCase().trim();
+    const searchTitle = searchQueryText?.title?.toLowerCase().trim();
+    console.log("title", searchTitle);
+
+    const searchLocation = searchQueryText?.location?.toLowerCase().trim();
     if (!searchTitle && !searchLocation) {
       return true;
     }

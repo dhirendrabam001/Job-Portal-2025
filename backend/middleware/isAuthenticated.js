@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const isAuthenticates = async (req, res, next) => {
   try {
     const token = req.cookies.token;
-    log;
 
     if (!token) {
       return res.status(401).json({
@@ -30,6 +29,10 @@ const isAuthenticates = async (req, res, next) => {
     next();
   } catch (error) {
     console.error(error);
+    return res.status(401).json({
+      success: false,
+      message: "Authentication Failed",
+    });
   }
 };
 

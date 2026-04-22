@@ -21,8 +21,16 @@ import AdminJobs from "./Components/CompanyPage/AdminJobs";
 import CreateCompanyJobs from "./Components/CompanyPage/CreateCompanyJobs";
 import AdminViewApplicant from "./Components/CompanyPage/AdminViewApplicant";
 import ProtectedAdminPage from "./Components/CompanyPage/ProtectedAdminPage";
+import { useDispatch } from "react-redux";
+// import { useEffect } from "react";
+// import { setLoading } from "./redux/authSlice";
 
 function App() {
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(setLoading(false)); // ✅ always stop loading on app start
+  // }, []);
   return (
     <BrowserRouter>
       <Routes>

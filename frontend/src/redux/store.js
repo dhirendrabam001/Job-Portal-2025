@@ -26,10 +26,24 @@ const rootReducer = combineReducers({
   application: applicationSlice,
 });
 
+// 🔥 CUSTOM TRANSFORM (REMOVE loading BEFORE SAVE)
 const persistConfig = {
   key: "root",
   version: 1,
   storage,
+  whitelist: ["auth"],
+  transforms: [
+    {
+      in: (state) => ({
+        ...state,
+        loading: false, // ❌ never save true
+      }),
+      out: (state) => ({
+        ...state,
+        loading: false, // ❌ always reset on load
+      }),
+    },
+  ],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -5,6 +5,14 @@ const cors = require("cors");
 const connectDB = require("./config/connection");
 const app = express();
 
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://hirehub-portal.vercel.app"],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -16,15 +24,6 @@ const companyRoute = require("./routes/company.routes");
 const postJobsRoute = require("./routes/jobs.routes");
 const applicationRoute = require("./routes/application.routes");
 
-app.use(
-  cors({
-    origin: ["http://localhost:5173", "https://hirehub-portal.vercel.app"],
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  }),
-);
-
 // Apis
 app.use("/api/user", userRoute);
 app.use("/api/company", companyRoute);
@@ -33,7 +32,7 @@ app.use("/api/application", applicationRoute);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  connectDB();
+app.listen(PORT, async () => {
+  await connectDB();
   console.log(`Server is running port number ${PORT}`);
 });

@@ -4,7 +4,9 @@ const cloudinary = require("../utils/cloudinary");
 
 const companyDataRegister = async (req, res) => {
   try {
+    console.log("API HIT"); // 1
     const { companyName } = req.body;
+    console.log("Body:", companyName); // 2
 
     // All field are required
     if (!companyName) {
@@ -15,6 +17,7 @@ const companyDataRegister = async (req, res) => {
 
     // check company exit or not
     let company = await Company.findOne({ companyName });
+    console.log("FindOne done"); // 3
     if (company) {
       return res
         .status(400)
@@ -34,6 +37,9 @@ const companyDataRegister = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal Server Error" });
   }
 };
 

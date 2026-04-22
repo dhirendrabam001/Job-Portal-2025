@@ -66,7 +66,6 @@ const SignUp = () => {
 
       <div className="loginInfo py-4">
         <div className="containerInfo">
-          {loading && <Loading />}
           <h2 className="fs-bold fs-3 mb-3">
             Sign<span className="text-danger">Up</span>
           </h2>
@@ -169,6 +168,7 @@ const SignUp = () => {
             </div>
             <div className="login-btn text-center py-3 mt-2">
               <button type="submit" className="btn btn-danger fw-bold w-100">
+                {/* {loading && <Loading />} */}
                 Register
               </button>
             </div>

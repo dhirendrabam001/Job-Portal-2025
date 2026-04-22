@@ -10,14 +10,14 @@ import { setLoading } from "../../redux/authSlice";
 import Loading from "../Loading";
 
 const CreateCompany = () => {
-  const { loading } = useSelector((store) => store.auth);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [companyName, setCompanyName] = useState(""); // get user input
 
   const registerNewCompany = async () => {
     try {
-      dispatch(setLoading(true));
+      setLoading(true);
       const res = await axios.post(
         `${COMPANY_API_POINT}/companyInfo`,
         { companyName },
@@ -32,13 +32,13 @@ const CreateCompany = () => {
         dispatch(setSingleCompany(res.data.company));
         toast.success("Company Register Successfully");
         const companyId = res?.data?.company?._id;
+        setLoading(false); // ✅ stop before navigate
         navigate(`/admin/company/${companyId}`);
       }
     } catch (error) {
       console.error(error);
       toast.error(error.response?.data?.message || "Something went wrong");
-    } finally {
-      dispatch(setLoading(false));
+      setLoading(false); // ✅ stop before navigate
     }
   };
   return (
