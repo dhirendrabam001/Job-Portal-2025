@@ -2,16 +2,14 @@ const jwt = require("jsonwebtoken");
 
 const isAuthenticates = (req, res, next) => {
   try {
-    const authHeader = req.headers.authorization;
+    const token = req.cookies.token; // ✅ get from cookie
 
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    if (!token) {
       return res.status(401).json({
         success: false,
         message: "Unauthorized - No Token",
       });
     }
-
-    const token = authHeader.split(" ")[1];
 
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
 

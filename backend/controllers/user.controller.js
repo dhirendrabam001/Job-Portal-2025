@@ -90,55 +90,25 @@ const login = async (req, res) => {
       { expiresIn: "1d" },
     );
 
-    // ✅ send token in response
+    // ✅ 🔥 SEND TOKEN IN COOKIE (MAIN FIX)
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true, // required for HTTPS
+      sameSite: "None", // required for mobile & cross-origin
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+
     return res.status(200).json({
       success: true,
       user,
-      token,
       message: `Welcome Back ${user.fullName}`,
     });
-
-    // // Token generated
-    // const generateToken = {
-    //   userId: user._id,
-    //   role: user.role,
-    // };
-    // const token = jwt.sign(generateToken, process.env.SECRET_KEY, {
-    //   expiresIn: "1d",
-    // });
-
-    // // Send Back user frontend
-    // user = {
-    //   _id: user._id,
-    //   fullName: user.fullName,
-    //   email: user.email,
-    //   phoneNumber: user.phoneNumber,
-    //   role: user.role,
-    //   profile: user.profile,
-    // };
-
-    // const isProduction = process.env.NODE_ENV === "production";
-    // res
-    //   .cookie("token", token, {
-    //     httpOnly: true,
-    //     secure: true, // 🔥 ALWAYS TRUE for Render (HTTPS)
-    //     sameSite: "None", // 🔥 MUST be "None" (capital N)
-    //     maxAge: 24 * 60 * 60 * 1000,
-    //     path: "/",
-    //   })
-    //   .json({ success: true, user, message: `Welcome Back ${user.fullName}` });
-
-    // res
-    //   .cookie("token", token, {
-    //     httpOnly: true,
-    //     secure: true, // MUST for HTTPS (Render)
-    //     sameSite: "none", // MUST for cross-origin (Vercel → Render)
-    //     maxAge: 24 * 60 * 60 * 1000,
-    //     path: "/",
-    //   })
-    //   .json({ success: true, user, message: `Welcome Back ${user.fullName}` });
   } catch (error) {
     console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Server Error",
+    });
   }
 };
 
