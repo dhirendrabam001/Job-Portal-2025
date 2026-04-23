@@ -95,6 +95,7 @@ const login = async (req, res) => {
       httpOnly: true,
       secure: true, // required for HTTPS
       sameSite: "None", // required for mobile & cross-origin
+      path: "/", // 🔥 VERY IMPORTANT (fix for iPhone)
       maxAge: 24 * 60 * 60 * 1000,
     });
 
