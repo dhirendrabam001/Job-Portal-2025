@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setSingleCompany } from "../../redux/companySlice";
-import { setLoading } from "../../redux/authSlice";
+// import { setLoading } from "../../redux/authSlice";
 import Loading from "../Loading";
 
 const CreateCompany = () => {
@@ -38,6 +38,7 @@ const CreateCompany = () => {
     } catch (error) {
       console.error(error);
       toast.error(error.response?.data?.message || "Something went wrong");
+    } finally {
       setLoading(false); // ✅ stop before navigate
     }
   };

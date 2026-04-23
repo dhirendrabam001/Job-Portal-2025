@@ -103,26 +103,25 @@ const login = async (req, res) => {
       role: user.role,
       profile: user.profile,
     };
-    const isProduction = process.env.NODE_ENV === "production";
 
+    const isProduction = process.env.NODE_ENV === "production";
     res
       .cookie("token", token, {
         httpOnly: true,
-        secure: true, // MUST for HTTPS (Render)
-        sameSite: "none", // MUST for cross-origin (Vercel → Render)
+        secure: true, // 🔥 ALWAYS TRUE for Render (HTTPS)
+        sameSite: "None", // 🔥 MUST be "None" (capital N)
         maxAge: 24 * 60 * 60 * 1000,
         path: "/",
       })
       .json({ success: true, user, message: `Welcome Back ${user.fullName}` });
 
-    // return res
-    //   .status(200)
+    // res
     //   .cookie("token", token, {
-    //     maxAge: 24 * 60 * 60 * 1000,
     //     httpOnly: true,
-    //     sameSite: "none",
+    //     secure: true, // MUST for HTTPS (Render)
+    //     sameSite: "none", // MUST for cross-origin (Vercel → Render)
+    //     maxAge: 24 * 60 * 60 * 1000,
     //     path: "/",
-    //     secure: true,
     //   })
     //   .json({ success: true, user, message: `Welcome Back ${user.fullName}` });
   } catch (error) {
