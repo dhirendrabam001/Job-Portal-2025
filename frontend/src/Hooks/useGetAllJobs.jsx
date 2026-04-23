@@ -7,7 +7,7 @@ import { setAllJob } from "../redux/jobSlice";
 import {} from "react-redux";
 
 const useGetAllJobs = () => {
-  const { searchQueryText } = useSelector((store) => store.jobs);
+  const { searchQueryText, allJobs } = useSelector((store) => store.jobs);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -18,7 +18,7 @@ const useGetAllJobs = () => {
         });
 
         if (res.data.success) {
-          dispatch(setAllJob(res.data.jobs));
+          dispatch(setAllJob(res.data.jobs || res.data.allJobs));
         }
       } catch (error) {
         toast.error(error?.response?.data?.message);
