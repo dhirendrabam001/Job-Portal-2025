@@ -40,3 +40,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+const inputHandler = () => {
+  console.log("hello");
+};
