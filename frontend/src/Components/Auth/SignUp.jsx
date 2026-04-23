@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import toast from "react-hot-toast";
 import Header from "./Header";
 import { useState } from "react";
@@ -7,6 +7,7 @@ import { USER_API_END_POINT } from "../../utils/constantUrl";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../../redux/authSlice";
 import Loading from "../Loading";
+import axios from "../utils/axiosInstance";
 
 const SignUp = () => {
   const dispatch = useDispatch();

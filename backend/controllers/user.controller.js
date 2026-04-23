@@ -84,36 +84,49 @@ const login = async (req, res) => {
         .status(400)
         .json({ success: false, message: "Does Not Exits Current Role" });
     }
+    const token = jwt.sign(
+      { userId: user._id, role: user.role },
+      process.env.SECRET_KEY,
+      { expiresIn: "1d" },
+    );
 
-    // Token generated
-    const generateToken = {
-      userId: user._id,
-      role: user.role,
-    };
-    const token = jwt.sign(generateToken, process.env.SECRET_KEY, {
-      expiresIn: "1d",
+    // ✅ send token in response
+    return res.status(200).json({
+      success: true,
+      user,
+      token,
+      message: `Welcome Back ${user.fullName}`,
     });
 
-    // Send Back user frontend
-    user = {
-      _id: user._id,
-      fullName: user.fullName,
-      email: user.email,
-      phoneNumber: user.phoneNumber,
-      role: user.role,
-      profile: user.profile,
-    };
+    // // Token generated
+    // const generateToken = {
+    //   userId: user._id,
+    //   role: user.role,
+    // };
+    // const token = jwt.sign(generateToken, process.env.SECRET_KEY, {
+    //   expiresIn: "1d",
+    // });
 
-    const isProduction = process.env.NODE_ENV === "production";
-    res
-      .cookie("token", token, {
-        httpOnly: true,
-        secure: true, // 🔥 ALWAYS TRUE for Render (HTTPS)
-        sameSite: "None", // 🔥 MUST be "None" (capital N)
-        maxAge: 24 * 60 * 60 * 1000,
-        path: "/",
-      })
-      .json({ success: true, user, message: `Welcome Back ${user.fullName}` });
+    // // Send Back user frontend
+    // user = {
+    //   _id: user._id,
+    //   fullName: user.fullName,
+    //   email: user.email,
+    //   phoneNumber: user.phoneNumber,
+    //   role: user.role,
+    //   profile: user.profile,
+    // };
+
+    // const isProduction = process.env.NODE_ENV === "production";
+    // res
+    //   .cookie("token", token, {
+    //     httpOnly: true,
+    //     secure: true, // 🔥 ALWAYS TRUE for Render (HTTPS)
+    //     sameSite: "None", // 🔥 MUST be "None" (capital N)
+    //     maxAge: 24 * 60 * 60 * 1000,
+    //     path: "/",
+    //   })
+    //   .json({ success: true, user, message: `Welcome Back ${user.fullName}` });
 
     // res
     //   .cookie("token", token, {

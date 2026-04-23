@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Header from "./Header";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../utils/axiosInstance";
 import toast from "react-hot-toast";
 import { USER_API_END_POINT } from "../../utils/constantUrl";
 import { useDispatch, useSelector } from "react-redux";

@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { APPLICATION_API_POINT, JOBS_API_POINT } from "../utils/constantUrl";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+import axios from "../utils/axiosInstance";
 import { getSingleJob } from "../redux/jobSlice";
 import toast from "react-hot-toast";
 import { useEffect } from "react";

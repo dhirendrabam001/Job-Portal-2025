@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../utils/axiosInstance";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { JOBS_API_POINT } from "../utils/constantUrl";
