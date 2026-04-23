@@ -7,7 +7,7 @@ import { USER_API_END_POINT } from "../../utils/constantUrl";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../../redux/authSlice";
 import Loading from "../Loading";
-import axios from "../utils/axiosInstance";
+import axios from "../../utils/axiosInstance";
 
 const SignUp = () => {
   const dispatch = useDispatch();
