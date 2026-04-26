@@ -4,7 +4,11 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const connectDB = require("./config/connection");
 const app = express();
-// ,
+
+// 🔥 VERY IMPORTANT (FIX FOR COOKIES ON RENDER/VERCEL)
+app.set("trust proxy", 1);
+
+// cors
 const allowedOrigins = [
   "http://localhost:5173",
   "https://hirehub-portal.vercel.app",

@@ -38,7 +38,7 @@ const UpdateProfile = ({ open, setOpen }) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log("Submitting file:", input.file);
+
     dispatch(setLoading(true));
 
     const formData = new FormData();

@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://backend-job-portal-66jc.onrender.com/api/$1"
+    }
+  ]
+}
