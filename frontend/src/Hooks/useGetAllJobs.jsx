@@ -1,10 +1,11 @@
-import axios from "../utils/axiosInstance";
+// import axios from "../utils/axiosInstance";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { JOBS_API_POINT } from "../utils/constantUrl";
 import { useDispatch, useSelector } from "react-redux";
 import { setAllJob } from "../redux/jobSlice";
 import {} from "react-redux";
+import axios from "axios";
 
 const useGetAllJobs = () => {
   const { searchQueryText, allJobs } = useSelector((store) => store.jobs);

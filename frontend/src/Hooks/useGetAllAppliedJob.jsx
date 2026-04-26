@@ -1,9 +1,10 @@
-import axios from "../utils/axiosInstance";
+// import axios from "../utils/axiosInstance";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { APPLICATION_API_POINT } from "../utils/constantUrl";
 import { useDispatch } from "react-redux";
 import { setGetAppliedJob } from "../redux/jobSlice";
+import axios from "axios";
 
 const useGetAllAppliedJob = () => {
   const dispatch = useDispatch();

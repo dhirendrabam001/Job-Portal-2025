@@ -1,9 +1,10 @@
-import axios from "../utils/axiosInstance";
+// import axios from "../utils/axiosInstance";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { COMPANY_API_POINT } from "../utils/constantUrl";
 import { useDispatch } from "react-redux";
 import { setSingleCompany } from "../redux/companySlice";
+import axios from "axios";
 // import { useParams } from "react-router-dom";
 
 const useGetCompanyByID = (userId) => {

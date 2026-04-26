@@ -1,12 +1,13 @@
 import { useState } from "react";
 import Header from "./Header";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "../../utils/axiosInstance";
+// import axios from "../../utils/axiosInstance";
 import toast from "react-hot-toast";
 import { USER_API_END_POINT } from "../../utils/constantUrl";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setUser } from "../../redux/authSlice";
 import Loading from "../Loading";
+import axios from "axios";
 
 const Login = () => {
   const dispatch = useDispatch();

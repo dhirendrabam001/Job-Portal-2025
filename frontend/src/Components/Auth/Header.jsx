@@ -1,10 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
-import axios from "../../utils/axiosInstance";
+// import axios from "../../utils/axiosInstance";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/authSlice";
 import Navbar from "./Navbar";
 import { USER_API_END_POINT } from "../../utils/constantUrl";
+import axios from "axios";
 
 const Header = () => {
   const { user } = useSelector((store) => store.auth);

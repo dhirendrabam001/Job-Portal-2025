@@ -1,9 +1,10 @@
-import axios from "../utils/axiosInstance";
+// import axios from "../utils/axiosInstance";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { APPLICATION_API_POINT } from "../utils/constantUrl";
 import { setAllApplicant } from "../redux/applicationSlice";
+import axios from "axios";
 
 const useGetApplicant = (id) => {
   const dispatch = useDispatch();
