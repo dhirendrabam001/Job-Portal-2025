@@ -8,8 +8,9 @@ const DreamJobs = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
-  const seachEventHandler = () => {
-    dispatch(setSearchQueryText({ title, location }));
+  const searchEventHandler = () => {
+    const query = `${title} ${location}`.trim(); // combine both
+    dispatch(setSearchQueryText(query));
     navigate("/browsers");
   };
   return (
@@ -47,7 +48,7 @@ const DreamJobs = () => {
                   />
                 </div>
                 <div>
-                  <button className="search-btn" onClick={seachEventHandler}>
+                  <button className="search-btn" onClick={searchEventHandler}>
                     <IoSearchOutline className="search-icons" />
                   </button>
                 </div>

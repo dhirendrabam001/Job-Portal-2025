@@ -1,5 +1,5 @@
-import axios from "../utils/axiosInstance";
-axios.defaults.withCredentials = true;
+// import axios from "../utils/axiosInstance";
+import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { USER_API_END_POINT } from "../utils/constantUrl";

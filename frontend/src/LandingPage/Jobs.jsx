@@ -1,64 +1,66 @@
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import Header from "../Components/Auth/Header";
 import FilterJobs from "../Pages/FilterJobs";
 import OneJob from "../Pages/OneJob";
-import { useEffect, useState } from "react";
+
 const Jobs = () => {
   const { allJobs, searchQueryText } = useSelector((store) => store.jobs);
   const [filterJob, setFilterJob] = useState([]);
 
+  // ✅ Sync jobs when data comes
   useEffect(() => {
-    let updatedJobs = [...allJobs];
+    setFilterJob(allJobs);
+  }, [allJobs]);
 
-    const title = searchQueryText?.title?.toLowerCase() || "";
-    const location = searchQueryText?.location?.toLowerCase() || "";
-
-    // ✅ If no search → show all jobs
-    if (!title && !location) {
+  // ✅ Filter logic
+  useEffect(() => {
+    if (!searchQueryText) {
       setFilterJob(allJobs);
       return;
     }
 
-    // ✅ Filtering logic
-    updatedJobs = updatedJobs.filter((job) => {
+    const query = searchQueryText.toLowerCase().trim();
+
+    const filtered = allJobs.filter((job) => {
       return (
-        job?.title?.toLowerCase().includes(title) &&
-        job?.location?.toLowerCase().includes(location)
+        job.title?.toLowerCase().includes(query) ||
+        job.location?.toLowerCase().includes(query)
       );
     });
 
-    setFilterJob(updatedJobs);
-  }, [allJobs, searchQueryText]);
+    setFilterJob(filtered);
+  }, [searchQueryText, allJobs]);
 
   return (
     <>
       <Header />
+
       <section className="jobs-container">
         <div className="container">
-          <div className="jobs-section">
-            <div className="row">
-              <div className="col-12 col-lg-2 col-md-4">
-                {/* FILTER JOBS START*/}
-                <FilterJobs />
-                {/* FILTER JOBS END */}
-              </div>
-              {/* JOBS CARD START */}
-              <div className="col-12 col-lg-10 col-md-8">
-                <div className="row align-items-center g-3">
-                  {filterJob.length <= 0 ? (
-                    <span>Jobs Does Not Found</span>
-                  ) : (
-                    filterJob.map((job, index) => (
-                      <div className="col-12 col-md-12 col-lg-4" key={index}>
-                        <OneJob key={job._id} job={job} />
-                      </div>
-                    ))
-                  )}
-                </div>
-              </div>
+          <div className="row">
+            {/* FILTER */}
+            <div className="col-12 col-lg-2 col-md-4">
+              <FilterJobs />
             </div>
 
-            {/* JOBS CARD START END */}
+            {/* JOB LIST */}
+            <div className="col-12 col-lg-10 col-md-8">
+              <div className="row g-3">
+                {/* ✅ Loading state */}
+                {allJobs.length === 0 ? (
+                  <span>Loading jobs...</span>
+                ) : filterJob.length === 0 ? (
+                  <span>Jobs Not Found</span>
+                ) : (
+                  filterJob.map((job) => (
+                    <div className="col-12 col-lg-4" key={job._id}>
+                      <OneJob job={job} />
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </section>

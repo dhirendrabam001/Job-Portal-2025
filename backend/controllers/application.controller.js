@@ -67,7 +67,7 @@ const applicationData = async (req, res) => {
 const getAppliedJobs = async (req, res) => {
   try {
     // const userId = req.body;
-    const userId = req.user._id;
+    const userId = req.id;
     const application = await Application.find({ applicant: userId })
       .sort({ createdAt: -1 })
       .populate({
@@ -80,7 +80,7 @@ const getAppliedJobs = async (req, res) => {
     if (!application) {
       return res
         .status(400)
-        .json({ success: flase, message: "Appied Jobs Can Not Found" });
+        .json({ success: false, message: "Appied Jobs Can Not Found" });
     }
 
     return res.status(200).json({
